@@ -1,5 +1,5 @@
 """
-*azcam.tools.console_tools* contains the `ConsoleTools` base tool class.
+*azcam_console.tools.console_tools* contains the `ConsoleTools` base tool class.
 """
 
 from typing import Any, Optional
@@ -209,12 +209,11 @@ def create_console_tools() -> None:
     Creates the console tools.
     """
 
-    from azcam.tools.controller import ControllerConsole
-    from azcam.tools.exposure import ExposureConsole
-    from azcam.tools.instrument import InstrumentConsole
-    from azcam.tools.telescope import TelescopeConsole
-    from azcam.tools.tempcon import TempconConsole
-    from azcam.tools.observe.observe import ObserveConsole
+    from azcam_console.tools.controller import ControllerConsole
+    from azcam_console.tools.exposure import ExposureConsole
+    from azcam_console.tools.instrument import InstrumentConsole
+    from azcam_console.tools.telescope import TelescopeConsole
+    from azcam_console.tools.tempcon import TempconConsole
 
     server = ServerConnection()
     exposure = ExposureConsole()
@@ -222,6 +221,5 @@ def create_console_tools() -> None:
     instrument = InstrumentConsole()
     tempcon = TempconConsole()
     telescope = TelescopeConsole()
-    observe = ObserveConsole()
 
     return

@@ -3,7 +3,7 @@ Contains the ControllerConsole classe.
 """
 
 import azcam
-from azcam.tools.console_tools import ConsoleTools
+from azcam_console.tools.console_tools import ConsoleTools
 
 
 class ControllerConsole(ConsoleTools):

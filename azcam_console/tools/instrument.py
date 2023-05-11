@@ -5,7 +5,8 @@ Contains the InstrumentConsole class.
 from typing import Any, List, Optional
 
 import azcam
-from azcam.tools.console_tools import ConsoleTools
+from azcam_console.tools.console_tools import ConsoleTools
+
 
 class InstrumentConsole(ConsoleTools):
     """

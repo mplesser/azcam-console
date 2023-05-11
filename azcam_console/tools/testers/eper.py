@@ -1,7 +1,7 @@
 import numpy
 
 import azcam
-from azcam.tools.testers.basetester import Tester
+from azcam_console.tools.testers.basetester import Tester
 from astropy.io import fits as pyfits
 
 
@@ -11,7 +11,6 @@ class Eper(Tester):
     """
 
     def __init__(self):
-
         super().__init__("eper")
 
         self.grade_vcte = "UNDEFINED"
@@ -44,9 +43,7 @@ class Eper(Tester):
         Not supported, use superflat image set
         """
 
-        raise azcam.AzcamError(
-            "EPER acquire not supported - use superflat to acquire data"
-        )
+        raise azcam.AzcamError("EPER acquire not supported - use superflat to acquire data")
 
     def analyze(self):
         """
@@ -80,7 +77,6 @@ class Eper(Tester):
         self.darkbufs = []
 
         for chan, ext in enumerate(range(first_ext, last_ext)):
-
             # get this image section size (all zero based)
             hdr = eperim[ext].header
             ncols = hdr["NAXIS1"]
@@ -90,9 +86,7 @@ class Eper(Tester):
                 filename, "BIASSEC", chan + 1
             )
 
-            _, LastDataCol, _, LastDataRow = azcam.fits.get_section(
-                filename, "DATASEC", chan + 1
-            )
+            _, LastDataCol, _, LastDataRow = azcam.fits.get_section(filename, "DATASEC", chan + 1)
 
             # BIASSEC keyword does not contain overscan row info
             FirstBiasRow = LastDataRow + 1
@@ -135,9 +129,7 @@ class Eper(Tester):
 
             # sumhdata=imbuf[:,LastDataCol].sum()
             sumhdata = imbuf[0:LastBiasRow, LastDataCol].sum()
-            meanhdata = sumhdata / len(
-                imbuf[0:LastBiasRow, LastDataCol]
-            )  # mean per pixel
+            meanhdata = sumhdata / len(imbuf[0:LastBiasRow, LastDataCol])  # mean per pixel
 
             # sumhbias=imbuf[:,FirstBiasCol:FirstBiasCol+self.number_bias_cols+1].sum()
             sumhbias = imbuf[

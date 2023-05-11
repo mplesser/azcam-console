@@ -8,10 +8,10 @@ import sys
 import azcam
 from azcam.image import Image
 from azcam.functions.utils import beep
+import azcam_console.plot
 
 
 def plot_images(folder="."):
-
     FreqYES = 2000  # Set Frequency
     DurYES = 500  # Set Duration
 
@@ -27,7 +27,6 @@ def plot_images(folder="."):
     QUIT = 0
     count = 0
     for root, topfolders, filenames in os.walk("."):
-
         if QUIT:
             break
 
@@ -54,11 +53,11 @@ def plot_images(folder="."):
             )
             images[filename].assemble(1)
             # m = images[filename].buffer.mean()
-            implot = azcam.plot.plt.imshow(images[filename].buffer)
+            implot = azcam_console.plot.plt.imshow(images[filename].buffer)
             implot.set_cmap("gray")
-            azcam.plot.update()
+            azcam_console.plot.update()
             # newfilename = filename.replace(".fits", ".png")
-            # azcam.plot.save_figure(1, newfilename)
+            # azcam_console.plot.save_figure(1, newfilename)
             count += 1
 
             # debug

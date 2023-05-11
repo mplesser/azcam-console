@@ -1,7 +1,7 @@
 """
-*azcam.cli* is used to bring commands into the current namespace.
+Used to bring commands into the current namespace.
 
-Usage:  `from azcam.cli import *`
+Usage:  `from azcam_console.cli import *`
 
 `azcam`, `db.tools`, and `db.shortcuts` are loaded into CLI namespace.
 """
@@ -22,3 +22,4 @@ __all__ = (
     [x for x in azcam.db.tools] + [x for x in azcam.db.shortcuts] + [x for x in azcam.db.scripts]
 )
 __all__.append("azcam")
+__all__.append("db")

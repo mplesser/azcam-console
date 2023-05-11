@@ -6,7 +6,8 @@ import numpy
 
 import azcam
 from azcam.image import Image
-from azcam.tools.testers.basetester import Tester
+from azcam_console.tools.testers.basetester import Tester
+import azcam_console.plot
 
 
 class Qe(Tester):
@@ -15,7 +16,6 @@ class Qe(Tester):
     """
 
     def __init__(self):
-
         super().__init__("qe")
 
         self.diode_cal_file = "diode_cal.txt"
@@ -106,14 +106,10 @@ class Qe(Tester):
             raise azcam.AzcamError("Could not determine exposure times")
 
         azcam.db.parameters.set_par("imageroot", "qe.")  # for automatic data analysis
-        azcam.db.parameters.set_par(
-            "imageincludesequencenumber", 1
-        )  # use sequence numbers
+        azcam.db.parameters.set_par("imageincludesequencenumber", 1)  # use sequence numbers
         azcam.db.parameters.set_par("imagesequencenumber", 1)  # start at sequence number 1
         azcam.db.parameters.set_par("imageautoname", 0)  # manually set name
-        azcam.db.parameters.set_par(
-            "imageautoincrementsequencenumber", 1
-        )  # inc sequence numbers
+        azcam.db.parameters.set_par("imageautoincrementsequencenumber", 1)  # inc sequence numbers
         azcam.db.parameters.set_par("imagetest", 0)  # turn off TestImage
 
         # binning
@@ -292,7 +288,6 @@ class Qe(Tester):
         self.fluxes = []
         self.means = []
         while os.path.exists(nextfile):
-
             if self.include_dark_images:
                 darkfilename = rootname + "%04d" % (SequenceNumber)
                 darkfilename = os.path.join(curfolder, darkfilename) + ".fits"
@@ -518,9 +513,9 @@ class Qe(Tester):
         hspace = 0.2
 
         # make figure
-        fig = azcam.plot.plt.figure()
+        fig = azcam_console.plot.plt.figure()
         fignum = fig.number
-        azcam.plot.move_window(fignum)
+        azcam_console.plot.move_window(fignum)
         if self.plot_title == "":
             fig.text(
                 0.55,
@@ -545,15 +540,15 @@ class Qe(Tester):
             wspace=wspace,
             hspace=hspace,
         )
-        ax = azcam.plot.plt.gca()
+        ax = azcam_console.plot.plt.gca()
         ax.grid(1)
-        azcam.plot.plt.xlabel("Wavelength [nm]", fontsize=bigfont)
-        azcam.plot.plt.ylabel("Measured QE", fontsize=bigfont)
+        azcam_console.plot.plt.xlabel("Wavelength [nm]", fontsize=bigfont)
+        azcam_console.plot.plt.ylabel("Measured QE", fontsize=bigfont)
 
-        ax.yaxis.set_major_locator(azcam.plot.plt.MaxNLocator(11))
+        ax.yaxis.set_major_locator(azcam_console.plot.plt.MaxNLocator(11))
         x = 2 * max(self.wavelengths) - min(self.wavelengths) + 1
         x = int(x / 100.0)
-        ax.xaxis.set_major_locator(azcam.plot.plt.MaxNLocator(x))
+        ax.xaxis.set_major_locator(azcam_console.plot.plt.MaxNLocator(x))
 
         if self.mean_temp != -999:
             labels = [f"Mean Temp = {self.mean_temp:.0f} C"]
@@ -570,13 +565,15 @@ class Qe(Tester):
         qevals = []
         for w in waves:
             qevals.append(self.qe[w])
-        azcam.plot.plt.errorbar(waves, [x * 100.0 for x in qevals], yerr=3.0, marker="o", ls="")
+        azcam_console.plot.plt.errorbar(
+            waves, [x * 100.0 for x in qevals], yerr=3.0, marker="o", ls=""
+        )
 
         if len(self.plot_limits) == 2:
-            azcam.plot.plt.xlim(self.plot_limits[0][0], self.plot_limits[0][1])
-            azcam.plot.plt.ylim(self.plot_limits[1][0], self.plot_limits[1][1])
+            azcam_console.plot.plt.xlim(self.plot_limits[0][0], self.plot_limits[0][1])
+            azcam_console.plot.plt.ylim(self.plot_limits[1][0], self.plot_limits[1][1])
         elif len(self.plot_limits) == 1:
-            azcam.plot.plt.xlim(self.plot_limits[0][0], self.plot_limits[0][1])
+            azcam_console.plot.plt.xlim(self.plot_limits[0][0], self.plot_limits[0][1])
         else:
             pass
 
@@ -586,11 +583,11 @@ class Qe(Tester):
                 if self.qe_specs[wave] > 0:
                     x = wave
                     y = self.qe_specs[wave] * 100.0
-                    azcam.plot.plt.plot(x, y, ls="", marker="_", markersize=5, color="red")
+                    azcam_console.plot.plt.plot(x, y, ls="", marker="_", markersize=5, color="red")
 
         # save figure
-        azcam.plot.plt.show()
-        azcam.plot.save_figure(fignum, "qe.png")
+        azcam_console.plot.plt.show()
+        azcam_console.plot.save_figure(fignum, "qe.png")
 
         return
 

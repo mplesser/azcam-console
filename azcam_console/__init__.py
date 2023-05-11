@@ -13,24 +13,8 @@ __version_info__ = tuple(int(i) for i in __version__.split(".") if i.isdigit())
 import typing
 from typing import List, Dict
 
-# import here so future importing is not required
-from azcam.functions import fits
-from azcam.functions import utils
-from azcam.functions import plot
-from azcam.exceptions import AzcamError, AzcamWarning
-from azcam.logger import Logger
-
-# logger object
-logger: Logger = Logger()
-"""logger object"""
-
 # initially azcam.log() is print(), will usually be overwritten
 log: typing.Callable = print
-
-import azcam_console.database_console
-
-db = azcam_console.database_console.AzcamConsoleDatabase()
-"""database"""
 
 mode = "unknown"
 """azcam mode, usually server or console"""
@@ -142,3 +126,6 @@ exposureflags: Dict[str, int] = {
 # clean namespace
 del metadata
 del typing
+
+
+import azcam_console.console

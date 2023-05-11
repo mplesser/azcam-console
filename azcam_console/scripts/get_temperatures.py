@@ -3,6 +3,7 @@ import sys
 import time
 
 import azcam
+import azcam_console.plot
 
 
 def get_temperatures(delay=10.0, logfile="get_temperatures.log", plottemps=1):
@@ -48,22 +49,21 @@ def get_temperatures(delay=10.0, logfile="get_temperatures.log", plottemps=1):
     timestart = datetime.datetime.now()
 
     if plottemps:
-        fig = azcam.plot.plt.figure()
+        fig = azcam_console.plot.plt.figure()
         fignum = fig.number
-        azcam.plot.move_window(fignum)
-        sub = azcam.plot.plt.subplot(111)
+        azcam_console.plot.move_window(fignum)
+        sub = azcam_console.plot.plt.subplot(111)
         sub.grid(1)
-        azcam.plot.plt.title("System Temperatures")
-        azcam.plot.plt.ylabel("Temperature [C]")
-        azcam.plot.plt.xlabel("Time [secs]")
+        azcam_console.plot.plt.title("System Temperatures")
+        azcam_console.plot.plt.ylabel("Temperature [C]")
+        azcam_console.plot.plt.xlabel("Time [secs]")
         sub.set_ylim(plot_range[0], plot_range[1])
-        azcam.plot.update()
+        azcam_console.plot.update()
 
     times = []
     temps = []
 
     while 1:
-
         key = azcam.utils.check_keyboard()
         if key == "q":
             break
@@ -93,14 +93,16 @@ def get_temperatures(delay=10.0, logfile="get_temperatures.log", plottemps=1):
         # plot data
         if plottemps:
             for tnum in range(ntemps):
-                azcam.plot.plt.plot(times, [t[tnum] for t in temps], azcam.plot.style_lines[tnum])
-            azcam.plot.update()
+                azcam_console.plot.plt.plot(
+                    times, [t[tnum] for t in temps], azcam_console.plot.style_lines[tnum]
+                )
+            azcam_console.plot.update()
 
         # delay
-        azcam.plot.delay(delay)
+        azcam_console.plot.delay(delay)
 
     if plottemps:
-        azcam.plot.save_figure(fignum, "get_temperatures.png")
+        azcam_console.plot.save_figure(fignum, "get_temperatures.png")
 
     # close
     if logfile.lower() != "n":

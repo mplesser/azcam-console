@@ -7,7 +7,7 @@ from typing import List
 import azcam
 from azcam.header import Header, ObjectHeaderMethods
 from azcam.tools.tools import Tools
-from azcam.tools.console_tools import ConsoleTools
+from azcam_console.tools.console_tools import ConsoleTools
 from typing import Union, List, Optional
 
 
@@ -255,6 +255,7 @@ class TempCon(Tools, ObjectHeaderMethods):
         t = self.header.typestrings[keyword]
 
         return [temp, self.header.comments[keyword], t]
+
 
 class TempconConsole(ConsoleTools):
     """

@@ -4,6 +4,7 @@ import time
 from statistics import mean
 
 import azcam
+import azcam_console.plot
 
 
 def get_pressures(delay=1.0, logfile="get_pressures.log", plot_type=1):
@@ -18,11 +19,11 @@ def get_pressures(delay=1.0, logfile="get_pressures.log", plot_type=1):
 
     # setup plot
     if plot_type:
-        sub = azcam.plot.plt.subplot(111)
+        sub = azcam_console.plot.plt.subplot(111)
         sub.grid(1)
-        azcam.plot.plt.title("Measured Pressure")
-        azcam.plot.plt.ylabel("Pressure [Torr]")
-        azcam.plot.plt.xlabel("Time [secs]")
+        azcam_console.plot.plt.title("Measured Pressure")
+        azcam_console.plot.plt.ylabel("Pressure [Torr]")
+        azcam_console.plot.plt.xlabel("Time [secs]")
         # sub.set_ylim(1.e-7, 1.e-2)
 
     times = []
@@ -39,7 +40,6 @@ def get_pressures(delay=1.0, logfile="get_pressures.log", plot_type=1):
         loop = 1
         print("Secs\t\tPressure")
         while loop:
-
             timenow = datetime.datetime.now()
             s = str(timenow)
             secs = timenow - timestart
@@ -62,15 +62,15 @@ def get_pressures(delay=1.0, logfile="get_pressures.log", plot_type=1):
             datafile.write(s + "\n")
 
             if plot_type == 1:
-                azcam.plot.plt.plot(times, pressures, "b.")
+                azcam_console.plot.plt.plot(times, pressures, "b.")
             elif plot_type == 2:
-                azcam.plot.plt.semilogy(times, pressures, "b.-")
-            azcam.plot.update()
+                azcam_console.plot.plt.semilogy(times, pressures, "b.-")
+            azcam_console.plot.update()
 
             if azcam.utils.check_keyboard() == "q":
                 break
 
-            azcam.plot.delay(delay)
+            azcam_console.plot.delay(delay)
 
     return pressures, times
 

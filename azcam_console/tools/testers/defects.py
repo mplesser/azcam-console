@@ -5,7 +5,8 @@ import numpy
 
 import azcam
 from azcam.image import Image
-from azcam.tools.testers.basetester import Tester
+from azcam_console.tools.testers.basetester import Tester
+import azcam_console.plot
 
 
 class Defects(Tester):
@@ -14,7 +15,6 @@ class Defects(Tester):
     """
 
     def __init__(self):
-
         super().__init__("defects")
 
         # edge mask
@@ -185,15 +185,15 @@ class Defects(Tester):
                 azcam.log(s)
 
         # save dark mask
-        fig = azcam.plot.plt.figure()
+        fig = azcam_console.plot.plt.figure()
         fignum = fig.number
-        azcam.plot.move_window(fignum)
-        azcam.plot.plt.title("Dark Pixel Rejection Mask")
+        azcam_console.plot.move_window(fignum)
+        azcam_console.plot.plt.title("Dark Pixel Rejection Mask")
         self.dark_mask = numpy.ma.getmask(self.dark_masked_image).astype("uint8")
-        implot = azcam.plot.plt.imshow(self.dark_mask)
+        implot = azcam_console.plot.plt.imshow(self.dark_mask)
         implot.set_cmap("gray")
-        azcam.plot.plt.show()
-        azcam.plot.save_figure(fignum, "DarkPixelRejectionMask")
+        azcam_console.plot.plt.show()
+        azcam_console.plot.save_figure(fignum, "DarkPixelRejectionMask")
 
         # write mask as FITS
         maskfile = Image(superflatimagename)
@@ -275,15 +275,15 @@ class Defects(Tester):
             self.total_bright_pixels = self.actual_bright_pixels
 
         # save dark mask
-        fig = azcam.plot.plt.figure()
+        fig = azcam_console.plot.plt.figure()
         fignum = fig.number
-        azcam.plot.move_window(fignum)
-        azcam.plot.plt.title("Bright Pixel Rejection Mask")
+        azcam_console.plot.move_window(fignum)
+        azcam_console.plot.plt.title("Bright Pixel Rejection Mask")
         self.bright_mask = numpy.ma.getmask(self.bright_masked_image).astype("uint8")
-        implot = azcam.plot.plt.imshow(self.bright_mask)
+        implot = azcam_console.plot.plt.imshow(self.bright_mask)
         implot.set_cmap("gray")
-        azcam.plot.plt.show()
-        azcam.plot.save_figure(fignum, "BrightPixelRejectionMask")
+        azcam_console.plot.plt.show()
+        azcam_console.plot.save_figure(fignum, "BrightPixelRejectionMask")
 
         # write mask as FITS
         maskfile = Image(darkfilename)
@@ -381,14 +381,14 @@ class Defects(Tester):
         temp = numpy.logical_or(self.bright_mask, self.dark_mask)
         self.defects_mask = numpy.logical_and(temp, self.edge_mask)
 
-        fig = azcam.plot.plt.figure()
+        fig = azcam_console.plot.plt.figure()
         fignum = fig.number
-        azcam.plot.move_window(fignum)
-        azcam.plot.plt.title("Pixel Rejection Mask")
-        implot = azcam.plot.plt.imshow(self.defects_mask.astype("uint8"))
+        azcam_console.plot.move_window(fignum)
+        azcam_console.plot.plt.title("Pixel Rejection Mask")
+        implot = azcam_console.plot.plt.imshow(self.defects_mask.astype("uint8"))
         implot.set_cmap("gray")
-        azcam.plot.plt.show()
-        azcam.plot.save_figure(fignum, "PixelRejectionMask")
+        azcam_console.plot.plt.show()
+        azcam_console.plot.save_figure(fignum, "PixelRejectionMask")
 
         # write mask as FITS
         defectsmask = Image(self.template)  # just a template
@@ -502,14 +502,14 @@ class Defects(Tester):
         Plot the defective pixel mask.
         """
 
-        fig = azcam.plot.plt.figure()
+        fig = azcam_console.plot.plt.figure()
         fignum = fig.number
-        azcam.plot.move_window(fignum)
-        azcam.plot.plt.title("Pixel Rejection Mask")
-        implot = azcam.plot.plt.imshow(self.defects_mask.astype("uint8"))
+        azcam_console.plot.move_window(fignum)
+        azcam_console.plot.plt.title("Pixel Rejection Mask")
+        implot = azcam_console.plot.plt.imshow(self.defects_mask.astype("uint8"))
         implot.set_cmap("gray")
-        azcam.plot.plt.show()
-        azcam.plot.save_figure(fignum, "PixelRejectionMask")
+        azcam_console.plot.plt.show()
+        azcam_console.plot.save_figure(fignum, "PixelRejectionMask")
 
         return
 

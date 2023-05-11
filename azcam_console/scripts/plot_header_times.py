@@ -5,6 +5,7 @@ Read and plot image header times.
 import sys
 
 import azcam
+import azcam_console.plot
 
 
 def plot_header_times(fileroot="itl.", starting_sequence=1, keyword="UT"):
@@ -46,32 +47,32 @@ def plot_header_times(fileroot="itl.", starting_sequence=1, keyword="UT"):
         i = i + 1
 
     # plot
-    fig, ax = azcam.plot.plt.subplots(constrained_layout=True)
+    fig, ax = azcam_console.plot.plt.subplots(constrained_layout=True)
     fignum = fig.number
-    azcam.plot.move_window(fignum)
-    azcam.plot.plt.title("%s in Header" % keyword)
-    azcam.plot.plt.xlabel("Image Number")
-    azcam.plot.plt.ylabel("Relative Time (sec)")
+    azcam_console.plot.move_window(fignum)
+    azcam_console.plot.plt.title("%s in Header" % keyword)
+    azcam_console.plot.plt.xlabel("Image Number")
+    azcam_console.plot.plt.ylabel("Relative Time (sec)")
     ax.grid(1)
-    azcam.plot.plt.plot(times)
-    azcam.plot.save_figure(fignum, "%s_relative.png" % keyword)
+    azcam_console.plot.plt.plot(times)
+    azcam_console.plot.save_figure(fignum, "%s_relative.png" % keyword)
 
     # make differences
     for j in range(0, len(times) - 1):
         times[j] = times[j + 1] - times[j]
     times = times[:-1]
-    fig, ax = azcam.plot.plt.subplots(constrained_layout=True)
+    fig, ax = azcam_console.plot.plt.subplots(constrained_layout=True)
     fignum = fig.number
-    azcam.plot.move_window(fignum)
-    azcam.plot.plt.title("%s Difference" % keyword)
-    azcam.plot.plt.xlabel("Image Number")
-    azcam.plot.plt.ylabel("Relative Time (sec)")
+    azcam_console.plot.move_window(fignum)
+    azcam_console.plot.plt.title("%s Difference" % keyword)
+    azcam_console.plot.plt.xlabel("Image Number")
+    azcam_console.plot.plt.ylabel("Relative Time (sec)")
     ax.grid(1)
-    azcam.plot.plt.plot(times)
-    azcam.plot.update()
-    azcam.plot.save_figure(fignum, "%s_difference.png" % keyword)
+    azcam_console.plot.plt.plot(times)
+    azcam_console.plot.update()
+    azcam_console.plot.save_figure(fignum, "%s_difference.png" % keyword)
 
-    azcam.plot.plt.show()
+    azcam_console.plot.plt.show()
 
     return
 

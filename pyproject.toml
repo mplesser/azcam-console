@@ -7,16 +7,9 @@ readme = "README.md"
 keywords=["ccd", "imaging", "astronomy", "sensors"]
 authors = [{name="Michael Lesser"},{email = "mlesser@arizona.edu"}]
 dependencies = [
-    "loguru",
     "numpy",
     "matplotlib",
     "astropy",
-    "scipy",
-    "pywin32; sys_platform == 'win32'",
-    "fastapi",
-    "uvicorn",
-    "jinja2",
-    "requests",
     "pdfkit",
     "markdown",
     "pypdf2",

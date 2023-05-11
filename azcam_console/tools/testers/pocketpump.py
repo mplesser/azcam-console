@@ -1,7 +1,7 @@
 import os
 
 import azcam
-from azcam.tools.testers.basetester import Tester
+from azcam_console.tools.testers.basetester import Tester
 
 
 class PocketPump(Tester):
@@ -10,7 +10,6 @@ class PocketPump(Tester):
     """
 
     def __init__(self):
-
         super().__init__("pocketpump")
 
         self.exposure_type = "flat"
@@ -48,16 +47,10 @@ class PocketPump(Tester):
         impars = {}
         azcam.utils.save_imagepars(impars)
 
-        azcam.db.parameters.set_par(
-            "imageroot", "pocketpump."
-        )  # for automatic data analysis
-        azcam.db.parameters.set_par(
-            "imageincludesequencenumber", 1
-        )  # use sequence numbers
+        azcam.db.parameters.set_par("imageroot", "pocketpump.")  # for automatic data analysis
+        azcam.db.parameters.set_par("imageincludesequencenumber", 1)  # use sequence numbers
         azcam.db.parameters.set_par("imageautoname", 0)  # manually set name
-        azcam.db.parameters.set_par(
-            "imageautoincrementsequencenumber", 1
-        )  # inc sequence numbers
+        azcam.db.parameters.set_par("imageautoincrementsequencenumber", 1)  # inc sequence numbers
         azcam.db.parameters.set_par("imagetest", 0)
 
         # create and move to new subfolder
@@ -157,16 +150,10 @@ class PocketPump(Tester):
         impars = {}
         azcam.utils.save_imagepars(impars)
 
-        azcam.db.parameters.set_par(
-            "imageroot", "pocketpump."
-        )  # for automatic data analysis
-        azcam.db.parameters.set_par(
-            "imageincludesequencenumber", 1
-        )  # use sequence numbers
+        azcam.db.parameters.set_par("imageroot", "pocketpump.")  # for automatic data analysis
+        azcam.db.parameters.set_par("imageincludesequencenumber", 1)  # use sequence numbers
         azcam.db.parameters.set_par("imageautoname", 0)  # manually set name
-        azcam.db.parameters.set_par(
-            "imageautoincrementsequencenumber", 1
-        )  # inc sequence numbers
+        azcam.db.parameters.set_par("imageautoincrementsequencenumber", 1)  # inc sequence numbers
         azcam.db.parameters.set_par("imagetest", 0)
 
         # create and move to new subfolder

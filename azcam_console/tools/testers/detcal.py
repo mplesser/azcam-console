@@ -5,7 +5,7 @@ import time
 import numpy
 
 import azcam
-from azcam.tools.testers.basetester import Tester
+from azcam_console.tools.testers.basetester import Tester
 
 
 class DetCal(Tester):
@@ -18,7 +18,6 @@ class DetCal(Tester):
     """
 
     def __init__(self):
-
         super().__init__("detcal")
 
         self.mean_count_goal = 10000
@@ -59,9 +58,7 @@ class DetCal(Tester):
         azcam.db.parameters.set_par("imagefolder", subfolder)
         azcam.utils.curdir(subfolder)
 
-        azcam.db.parameters.set_par(
-            "imageincludesequencenumber", 1
-        )  # don't use sequence numbers
+        azcam.db.parameters.set_par("imageincludesequencenumber", 1)  # don't use sequence numbers
         azcam.db.parameters.set_par("imageautoname", 0)  # manually set name
         azcam.db.parameters.set_par("imagetest", 0)  # turn off TestImage
         azcam.db.parameters.set_par("imageoverwrite", 1)
@@ -83,7 +80,6 @@ class DetCal(Tester):
 
         # get flat at each wavelength
         for wave in wavelengths:
-
             # set wavelength
             wave = int(wave)
             wave1 = azcam.db.tools["instrument"].get_wavelength()

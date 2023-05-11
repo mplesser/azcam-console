@@ -5,7 +5,7 @@ import shutil
 import numpy
 
 import azcam
-from azcam.tools.testers.basetester import Tester
+from azcam_console.tools.testers.basetester import Tester
 from astropy.io import fits as pyfits
 
 
@@ -15,7 +15,6 @@ class Gain(Tester):
     """
 
     def __init__(self):
-
         super().__init__("gain")
 
         self.exposure_type = "flat"
@@ -123,7 +122,6 @@ class Gain(Tester):
 
         azcam.db.parameters.set_par("imageroot", "ptc.")
         for loop in range(self.number_pairs):
-
             if self.number_pairs > 1:
                 azcam.log(f"Starting gain sequence {loop + 1}/{self.number_pairs}")
 

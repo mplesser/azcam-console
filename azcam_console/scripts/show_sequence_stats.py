@@ -7,6 +7,7 @@ import sys
 from matplotlib.ticker import MaxNLocator
 
 import azcam
+import azcam_console.plot
 
 
 def show_sequence_stats(file_root="itl.", starting_sequence=1):
@@ -64,44 +65,44 @@ def show_sequence_stats(file_root="itl.", starting_sequence=1):
     if i == SequenceNumber:
         return "no files analyzed"
 
-    fig, ax = azcam.plot.plt.subplots(constrained_layout=True)
+    fig, ax = azcam_console.plot.plt.subplots(constrained_layout=True)
     fignum = fig.number
-    azcam.plot.move_window(fignum)
-    azcam.plot.plt.title("Mean")
-    azcam.plot.plt.xlabel("Image Number")
-    azcam.plot.plt.ylabel("Mean [DN]")
+    azcam_console.plot.move_window(fignum)
+    azcam_console.plot.plt.title("Mean")
+    azcam_console.plot.plt.xlabel("Image Number")
+    azcam_console.plot.plt.ylabel("Mean [DN]")
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
     ax.grid(1)
-    azcam.plot.plt.plot(image_numbers, means)
-    azcam.plot.save_figure(fignum, "means.png")
+    azcam_console.plot.plt.plot(image_numbers, means)
+    azcam_console.plot.save_figure(fignum, "means.png")
 
-    fig, ax = azcam.plot.plt.subplots(constrained_layout=True)
+    fig, ax = azcam_console.plot.plt.subplots(constrained_layout=True)
     fignum = fig.number
-    azcam.plot.move_window(fignum)
-    azcam.plot.plt.title("Standard Deviation")
-    azcam.plot.plt.xlabel("Image Number")
-    azcam.plot.plt.ylabel("Sigma [DN]")
+    azcam_console.plot.move_window(fignum)
+    azcam_console.plot.plt.title("Standard Deviation")
+    azcam_console.plot.plt.xlabel("Image Number")
+    azcam_console.plot.plt.ylabel("Sigma [DN]")
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
     ax.grid(1)
-    azcam.plot.plt.plot(image_numbers, sigmas)
-    azcam.plot.save_figure(fignum, "sigmas.png")
+    azcam_console.plot.plt.plot(image_numbers, sigmas)
+    azcam_console.plot.save_figure(fignum, "sigmas.png")
 
     # make differences
     means_delta = []
     for j in range(0, len(means) - 1):
         means_delta.append(means[j + 1] - means[j])
-    fig, ax = azcam.plot.plt.subplots(constrained_layout=True)
+    fig, ax = azcam_console.plot.plt.subplots(constrained_layout=True)
     fignum = fig.number
-    azcam.plot.move_window(fignum)
-    azcam.plot.plt.title("Mean Differences")
-    azcam.plot.plt.xlabel("Image Number")
-    azcam.plot.plt.ylabel("Mean [DN]")
+    azcam_console.plot.move_window(fignum)
+    azcam_console.plot.plt.title("Mean Differences")
+    azcam_console.plot.plt.xlabel("Image Number")
+    azcam_console.plot.plt.ylabel("Mean [DN]")
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
     ax.grid(1)
-    azcam.plot.plt.plot(image_numbers[:-1], means_delta, "bs")
-    azcam.plot.save_figure(fignum, "differences.png")
+    azcam_console.plot.plt.plot(image_numbers[:-1], means_delta, "bs")
+    azcam_console.plot.save_figure(fignum, "differences.png")
 
-    azcam.plot.update()
+    azcam_console.plot.update()
     data = means, sigmas, means_delta
 
     return data

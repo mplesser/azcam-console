@@ -15,6 +15,7 @@ from scipy.stats import norm
 import azcam
 from astropy.io import fits as pyfits
 from azcam.image import Image
+import azcam_console.plot
 
 
 def centroids(filename: str = ".", threshold: float = 500.0) -> None:
@@ -117,27 +118,26 @@ def centroids(filename: str = ".", threshold: float = 500.0) -> None:
 
     # plot the events
     if 0:
-        azcam.plot.plt.figure()
-        azcam.plot.plt.plot(xint, yint, "r.")
-        azcam.plot.update()
+        azcam_console.plot.plt.figure()
+        azcam_console.plot.plt.plot(xint, yint, "r.")
+        azcam_console.plot.update()
 
     # plot a histogram of values
     if 0:
-        azcam.plot.plt.figure()
+        azcam_console.plot.plt.figure()
         rng = int((max(values) + 1) / 100.0)
-        azcam.plot.plt.hist(values, bins=rng)
-        azcam.plot.plt.ylim(0)
-        azcam.plot.plt.xlim(0)
+        azcam_console.plot.plt.hist(values, bins=rng)
+        azcam_console.plot.plt.ylim(0)
+        azcam_console.plot.plt.xlim(0)
 
     # plot image
     if 0:
-        azcam.plot.plt.figure()
-        azcam.plot.plt.imshow(data, cmap="gray", origin="lower", vmin=0, vmax=threshold)
+        azcam_console.plot.plt.figure()
+        azcam_console.plot.plt.imshow(data, cmap="gray", origin="lower", vmin=0, vmax=threshold)
 
     FWHM_array = []
     print("Finding FWHM...")
     for i in range(numevents):
-
         row = yint[i]
 
         # ignore edges
@@ -153,10 +153,10 @@ def centroids(filename: str = ".", threshold: float = 500.0) -> None:
 
         if 0:
             databox = data[row - boxsize : row + boxsize, col - boxsize : col + boxsize]
-            azcam.plot.plt.figure(4)
+            azcam_console.plot.plt.figure(4)
             z1 = databox.min()
             z2 = databox.max()
-            imgplot = azcam.plot.plt.imshow(databox, vmin=z1, vmax=z2)
+            imgplot = azcam_console.plot.plt.imshow(databox, vmin=z1, vmax=z2)
             imgplot.set_cmap("Blues")  # Blues gray hot
             imgplot.set_interpolation("nearest")  # bicubic
 
@@ -165,9 +165,9 @@ def centroids(filename: str = ".", threshold: float = 500.0) -> None:
             dataslice = data[row + irow, col - boxsize : col + boxsize]  # 1D strip along a row
             indices = list(range(0, boxsize * 2))  # make an array of y values, same length as x
             if 0:
-                azcam.plot.plt.plot(indices, dataslice)
-                azcam.plot.plt.show()
-                azcam.plot.update()
+                azcam_console.plot.plt.plot(indices, dataslice)
+                azcam_console.plot.plt.show()
+                azcam_console.plot.update()
 
             # mean1,sigma1 = norm.fit(dataslice)
             # yfit = mlab.normpdf(dataslice,mean1,sigma1)*dataslice.max()   # normalized probability
@@ -186,32 +186,32 @@ def centroids(filename: str = ".", threshold: float = 500.0) -> None:
             # print("%d of %d: FWHM = %.3f, Max = %.1f" % (i, len(yint), fitfwhm, fitmean))
 
             if 0:
-                azcam.plot.plt.plot(indices, gaussian(coeffs, indices), "ro")
-                azcam.plot.update()
+                azcam_console.plot.plt.plot(indices, gaussian(coeffs, indices), "ro")
+                azcam_console.plot.update()
 
             if 0:
                 coeffs = numpy.polyfit(indices, dataslice, 3)
                 yfit = numpy.polyval(coeffs, indices)
-                azcam.plot.plt.plot(indices, yfit, "r--", linewidth=2)
-                azcam.plot.plt.errorbar(indices, slice, yerr=numpy.sqrt(slice), fmt="ro")
-                azcam.plot.update()
+                azcam_console.plot.plt.plot(indices, yfit, "r--", linewidth=2)
+                azcam_console.plot.plt.errorbar(indices, slice, yerr=numpy.sqrt(slice), fmt="ro")
+                azcam_console.plot.update()
 
     FWHM_mean = sum(FWHM_array) / len(FWHM_array)
     print("Mean FWHM = %.2f, Mean Sigma = %.1f" % (FWHM_mean, FWHM_mean / 2.355))
 
     if 0:
-        azcam.plot.plt.figure(6)
+        azcam_console.plot.plt.figure(6)
         rng = len(FWHM_array) + 1
-        azcam.plot.plt.hist(values, bins=rng)
-        azcam.plot.plt.ylim(
+        azcam_console.plot.plt.hist(values, bins=rng)
+        azcam_console.plot.plt.ylim(
             0,
         )
-        azcam.plot.plt.xlim(
+        azcam_console.plot.plt.xlim(
             0,
         )
 
     # show plots
-    azcam.plot.plt.show()
+    azcam_console.plot.plt.show()
 
     # finish
     fe55im.close()

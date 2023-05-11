@@ -8,6 +8,7 @@ import numpy
 
 import azcam
 from azcam.image import Image
+import azcam_console.plot
 
 
 def show_histogram(filename: str) -> None:
@@ -28,17 +29,17 @@ def show_histogram(filename: str) -> None:
     centers = (HistX[:-1] + HistX[1:]) / 2
 
     # plot
-    fig, ax = azcam.plot.plt.subplots(constrained_layout=False)
-    azcam.plot.plt.semilogy([int(x) for x in centers], HistY)
+    fig, ax = azcam_console.plot.plt.subplots(constrained_layout=False)
+    azcam_console.plot.plt.semilogy([int(x) for x in centers], HistY)
     xlabel = "Pixel Value"
     ylabel = "Number of Events"
     title = "Image Histogram"
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
     ax.set_title(title)
-    azcam.plot.plt.ylim(1)
+    azcam_console.plot.plt.ylim(1)
     ax.grid(True)
-    azcam.plot.plt.show()
+    azcam_console.plot.plt.show()
 
     return
 

@@ -4,18 +4,14 @@
 
 import azcam
 from azcam.logger import Logger
-from azcam.parameters import Parameters
+from azcam_console.parameters_console import ParametersConsole
+from azcam_console.database_console import AzcamDatabaseConsole
 
-import azcam.database_console as database
-
-azcam.db = database.AzcamConsoleDatabase()  # overwrite server database
-
-# console mode
-azcam.mode = "console"
+azcam.db = AzcamDatabaseConsole()  # overwrite azcamdatabase
 
 # parameters
-parameters = Parameters("azcamconsole")
+azcam.db.parameters = ParametersConsole()
 
 # logging
-azcam.logger = Logger()
-azcam.log = azcam.logger.log  # to allow azcam.log()
+azcam.db.logger = Logger()
+azcam.log = azcam.db.logger.log  # to allow azcam.log()

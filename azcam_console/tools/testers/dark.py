@@ -6,7 +6,8 @@ import numpy
 
 import azcam
 from azcam.image import Image
-from azcam.tools.testers.basetester import Tester
+from azcam_console.tools.testers.basetester import Tester
+import azcam_console.plot
 
 
 class Dark(Tester):
@@ -15,7 +16,6 @@ class Dark(Tester):
     """
 
     def __init__(self):
-
         super().__init__("dark")
 
         # acquisition
@@ -90,18 +90,13 @@ class Dark(Tester):
         exposure.test(0)
 
         azcam.db.parameters.set_par("imageroot", "dark.")  # for automatic data analysis
-        azcam.db.parameters.set_par(
-            "imageincludesequencenumber", 1
-        )  # use sequence numbers
+        azcam.db.parameters.set_par("imageincludesequencenumber", 1)  # use sequence numbers
         azcam.db.parameters.set_par("imageautoname", 0)  # manually set name
-        azcam.db.parameters.set_par(
-            "imageautoincrementsequencenumber", 1
-        )  # inc sequence numbers
+        azcam.db.parameters.set_par("imageautoincrementsequencenumber", 1)  # inc sequence numbers
         azcam.db.parameters.set_par("imagetest", 0)  # turn off TestImage
 
         # loop through images
         for imgnum in range(self.number_images_acquire):
-
             # pre-dark bias
             azcam.db.parameters.set_par("imagetype", "dark")  # for GetFilename
             filename = os.path.basename(exposure.get_filename())
@@ -358,67 +353,67 @@ class Dark(Tester):
         """
 
         # plot dark image
-        fig = azcam.plot.plt.figure()
+        fig = azcam_console.plot.plt.figure()
         fignum = fig.number
-        azcam.plot.move_window(fignum)
-        azcam.plot.plot_image(self.darkimage)
-        azcam.plot.plt.title("Combined Dark Image")
-        azcam.plot.plt.show()
-        azcam.plot.save_figure(fignum, self.darkimage_plot)
+        azcam_console.plot.move_window(fignum)
+        azcam_console.plot.plot_image(self.darkimage)
+        azcam_console.plot.plt.title("Combined Dark Image")
+        azcam_console.plot.plt.show()
+        azcam_console.plot.save_figure(fignum, self.darkimage_plot)
 
         # plot cummulative histogram
-        fig = azcam.plot.plt.figure()
+        fig = azcam_console.plot.plt.figure()
         fignum = fig.number
-        azcam.plot.move_window(fignum)
-        azcam.plot.plt.hist(
+        azcam_console.plot.move_window(fignum)
+        azcam_console.plot.plt.hist(
             (self.validdata * self.units_scale),
             bins="auto",
             density=1,
             histtype="step",
             cumulative=True,
         )
-        ax = azcam.plot.plt.gca()
+        ax = azcam_console.plot.plt.gca()
         ax.set_xlabel(f"Dark Signal [{self.units_text}]")
         ax.set_ylabel("Pixel Fraction")
-        # azcam.plot.plt.ylim(0.0, 1.0)
+        # azcam_console.plot.plt.ylim(0.0, 1.0)
         # ax.set_yticks([0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95, 1.00])
-        azcam.plot.plt.xlim(0.0, self.mean_dark_signal * self.units_scale * 5.0)
+        azcam_console.plot.plt.xlim(0.0, self.mean_dark_signal * self.units_scale * 5.0)
 
         if self.mean_dark_spec != -1:
-            azcam.plot.plt.axvline(
+            azcam_console.plot.plt.axvline(
                 x=self.mean_dark_signal * self.units_scale,
                 linestyle="-",
                 color="green",
                 label="Mean",
             )
-            azcam.plot.plt.axvline(
+            azcam_console.plot.plt.axvline(
                 x=self.mean_dark_spec * self.units_scale,
                 linestyle="--",
                 color="red",
                 label="Mean spec",
             )
         if self.median_dark_signal != -1:
-            azcam.plot.plt.axvline(
+            azcam_console.plot.plt.axvline(
                 x=self.median_dark_signal * self.units_scale,
                 linestyle="--",
                 color="black",
                 label="Median",
             )
         if self.dark_limit != -1:
-            azcam.plot.plt.axhline(
+            azcam_console.plot.plt.axhline(
                 y=self.dark_fraction, linestyle="--", color="red", label="Fraction"
             )
-            azcam.plot.plt.axvline(
+            azcam_console.plot.plt.axvline(
                 x=self.dark_limit * self.units_scale,
                 linestyle="--",
                 color="blue",
                 label="Limit",
             )
-        azcam.plot.plt.legend(loc="lower right")
+        azcam_console.plot.plt.legend(loc="lower right")
 
-        azcam.plot.plt.title("Dark Signal Histogram")
-        azcam.plot.plt.show()
-        azcam.plot.save_figure(fignum, self.cumm_hist_plot)
+        azcam_console.plot.plt.title("Dark Signal Histogram")
+        azcam_console.plot.plt.show()
+        azcam_console.plot.save_figure(fignum, self.cumm_hist_plot)
 
         return
 

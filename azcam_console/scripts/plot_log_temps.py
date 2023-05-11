@@ -5,6 +5,7 @@ Plot temperatures from logfile when tempcon.log_temps=1.
 import sys
 
 import azcam
+import azcam_console.plot
 
 
 def plot_log_temps(samplestep=1, tickstep=1):
@@ -16,11 +17,11 @@ def plot_log_temps(samplestep=1, tickstep=1):
     tickstep = int(tickstep)
 
     # setup plot
-    fig, ax = azcam.plot.plt.subplots(constrained_layout=True)
+    fig, ax = azcam_console.plot.plt.subplots(constrained_layout=True)
     ax.grid(1)
-    azcam.plot.plt.title("Temperatures")
-    azcam.plot.plt.ylabel("Temperature [C]")
-    azcam.plot.plt.xlabel("Time")
+    azcam_console.plot.plt.title("Temperatures")
+    azcam_console.plot.plt.ylabel("Temperature [C]")
+    azcam_console.plot.plt.xlabel("Time")
 
     with open("/data/DESI/logs/server.log", "r") as logfile:
         lines = logfile.readlines()
@@ -51,10 +52,10 @@ def plot_log_temps(samplestep=1, tickstep=1):
 
         print(f"{timestamp}\t{camtemp:.1f}\t{dewtemp:.1f}")
 
-        azcam.plot.plt.plot(times, camtemps, azcam.plot.style_lines[0])
-        azcam.plot.plt.plot(times, dewtemps, azcam.plot.style_lines[1])
+        azcam_console.plot.plt.plot(times, camtemps, azcam_console.plot.style_lines[0])
+        azcam_console.plot.plt.plot(times, dewtemps, azcam_console.plot.style_lines[1])
 
-    azcam.plot.plt.xticks(times[::tickstep], rotation=90)  # adjust step size as needed
+    azcam_console.plot.plt.xticks(times[::tickstep], rotation=90)  # adjust step size as needed
 
     return
 

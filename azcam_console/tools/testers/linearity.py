@@ -5,7 +5,8 @@ import shutil
 import numpy
 
 import azcam
-from azcam.tools.testers.basetester import Tester
+from azcam_console.tools.testers.basetester import Tester
+import azcam_console.plot
 
 
 class Linearity(Tester):
@@ -14,7 +15,6 @@ class Linearity(Tester):
     """
 
     def __init__(self):
-
         super().__init__("linearity")
 
         self.exposure_type = "flat"
@@ -81,16 +81,10 @@ class Linearity(Tester):
         azcam.log(f"Linearity folder is {newfolder}")
         azcam.db.parameters.set_par("imagefolder", newfolder)
 
-        azcam.db.parameters.set_par(
-            "imageroot", "linearity."
-        )  # for automatic data analysis
-        azcam.db.parameters.set_par(
-            "imageincludesequencenumber", 1
-        )  # use sequence numbers
+        azcam.db.parameters.set_par("imageroot", "linearity.")  # for automatic data analysis
+        azcam.db.parameters.set_par("imageincludesequencenumber", 1)  # use sequence numbers
         azcam.db.parameters.set_par("imageautoname", 0)  # manually set name
-        azcam.db.parameters.set_par(
-            "imageautoincrementsequencenumber", 1
-        )  # inc sequence numbers
+        azcam.db.parameters.set_par("imageautoincrementsequencenumber", 1)  # inc sequence numbers
         azcam.db.parameters.set_par("imagetest", 0)  # turn off TestImage
 
         # bias image
@@ -143,7 +137,6 @@ class Linearity(Tester):
         NumberExposures = len(self.exposure_times)
         azcam.log("Exposure times will be:", self.exposure_times)
         for exp, exptime in enumerate(self.exposure_times):
-
             azcam.log(
                 "Taking linearity %d of %d image for %.3f seconds: %s"
                 % (
@@ -202,7 +195,6 @@ class Linearity(Tester):
             filelist = []
             azcam.log("Overscan correct images")
             while os.path.exists(nextfile):
-
                 filelist.append(nextfile)
 
                 # Overscan correct each image
@@ -225,7 +217,6 @@ class Linearity(Tester):
             nextfile = os.path.join(currentfolder, rootname + "%04d" % SequenceNumber) + ".fits"
             loop = 0
             while os.path.exists(nextfile):
-
                 azcam.fits.sub(nextfile, debiased, biassub)
                 os.remove(nextfile)
                 os.rename(biassub, nextfile)
@@ -247,7 +238,6 @@ class Linearity(Tester):
         self.means = []  # list of list of means - [ExpTime][Channel] CORRECT!!!
         SequenceNumber = StartingSequence + 1
         while os.path.exists(nextfile):
-
             flatfilename = rootname + "%04d" % SequenceNumber
             flatfilename = azcam.utils.make_image_filename(flatfilename)
             # flatfilename=os.path.join(currentfolder,flatfilename)+'.fits'
@@ -456,28 +446,28 @@ class Linearity(Tester):
 
         """
 
-        plotstyle = azcam.plot.style_dot
+        plotstyle = azcam_console.plot.style_dot
 
-        fig = azcam.plot.plt.figure()
+        fig = azcam_console.plot.plt.figure()
         fignum = fig.number
-        azcam.plot.move_window(fignum)
+        azcam_console.plot.move_window(fignum)
 
         # ax1 is linearity
         if self.plot_residuals:
             linplotnum = 211
         else:
             linplotnum = 111
-        ax1 = azcam.plot.plt.subplot(linplotnum)
+        ax1 = azcam_console.plot.plt.subplot(linplotnum)
         s = "Linearity"
-        azcam.plot.plt.title(s, fontsize=self.large_font)
-        azcam.plot.plt.ylabel("Mean [DN]", fontsize=self.small_font)
+        azcam_console.plot.plt.title(s, fontsize=self.large_font)
+        azcam_console.plot.plt.ylabel("Mean [DN]", fontsize=self.small_font)
 
         # ax2 is residuals
         if self.plot_residuals:
-            ax2 = azcam.plot.plt.subplot(212)
-            azcam.plot.plt.subplots_adjust(left=0.20, hspace=0.6)
+            ax2 = azcam_console.plot.plt.subplot(212)
+            azcam_console.plot.plt.subplots_adjust(left=0.20, hspace=0.6)
             s = "Linearity Residuals"
-            azcam.plot.plt.title(s, fontsize=self.large_font)
+            azcam_console.plot.plt.title(s, fontsize=self.large_font)
 
         nps = len(plotstyle)
 
@@ -486,13 +476,13 @@ class Linearity(Tester):
                 continue
 
             # plot linearity
-            # azcam.plot.plt.subplot(linplotnum)
+            # azcam_console.plot.plt.subplot(linplotnum)
             m = []
             for means in self.means:  # exp times
                 m.append(means[chan])
             ax1.plot(self.exptimes[MinPoint : MaxPoint + 1], m[MinPoint : MaxPoint + 1], "k+")
-            azcam.plot.plt.xlabel("Exposure Time [secs]", fontsize=self.small_font)
-            # azcam.plot.plt.ylim(0)
+            azcam_console.plot.plt.xlabel("Exposure Time [secs]", fontsize=self.small_font)
+            # azcam_console.plot.plt.ylim(0)
             ax1.grid(1)
 
             # plot fit
@@ -505,17 +495,17 @@ class Linearity(Tester):
 
             # plot residuals
             if self.plot_residuals:
-                # azcam.plot.plt.subplot(212)
+                # azcam_console.plot.plt.subplot(212)
                 residuals = self.residuals[chan]
                 ax2.plot(
                     self.exptimes[MinPoint : MaxPoint + 1],
                     residuals[MinPoint : MaxPoint + 1],
                     plotstyle[chan % nps],
                 )
-                azcam.plot.plt.xlabel("Exposure Time [secs]", fontsize=self.small_font)
-                azcam.plot.plt.ylabel("Residual [%]", fontsize=self.small_font)
+                azcam_console.plot.plt.xlabel("Exposure Time [secs]", fontsize=self.small_font)
+                azcam_console.plot.plt.ylabel("Residual [%]", fontsize=self.small_font)
                 if self.plot_limits != []:
-                    azcam.plot.plt.ylim(self.plot_limits[0], self.plot_limits[1])
+                    azcam_console.plot.plt.ylim(self.plot_limits[0], self.plot_limits[1])
                 ax2.grid(1)
 
         # plot specs (one time) on residuals axis
@@ -535,8 +525,8 @@ class Linearity(Tester):
                 ax2.plot([left, right], [lower, lower], "b--", linewidth=0.7)
 
         # show and save plot
-        azcam.plot.plt.show()
-        azcam.plot.save_figure(fignum, self.linearity_plot)
+        azcam_console.plot.plt.show()
+        azcam_console.plot.save_figure(fignum, self.linearity_plot)
 
         return
 

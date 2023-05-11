@@ -6,7 +6,7 @@ import numpy
 
 import azcam
 from azcam.image import Image
-from azcam.tools.testers.basetester import Tester
+from azcam_console.tools.testers.basetester import Tester
 
 
 class Prnu(Tester):
@@ -15,7 +15,6 @@ class Prnu(Tester):
     """
 
     def __init__(self):
-
         super().__init__("prnu")
 
         self.exposure_type = "flat"
@@ -61,13 +60,9 @@ class Prnu(Tester):
         azcam.db.tools["exposure"].test(0)
 
         azcam.db.parameters.set_par("imageroot", "prnu.")  # for automatic data analysis
-        azcam.db.parameters.set_par(
-            "imageincludesequencenumber", 1
-        )  # use sequence numbers
+        azcam.db.parameters.set_par("imageincludesequencenumber", 1)  # use sequence numbers
         azcam.db.parameters.set_par("imageautoname", 0)  # manually set name
-        azcam.db.parameters.set_par(
-            "imageautoincrementsequencenumber", 1
-        )  # inc sequence numbers
+        azcam.db.parameters.set_par("imageautoincrementsequencenumber", 1)  # inc sequence numbers
         azcam.db.parameters.set_par("imagetest", 0)  # turn off TestImage
 
         # bias image

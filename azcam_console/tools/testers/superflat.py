@@ -6,7 +6,8 @@ import numpy
 
 import azcam
 from azcam.image import Image
-from azcam.tools.testers.basetester import Tester
+from azcam_console.tools.testers.basetester import Tester
+import azcam_console.plot
 
 
 class Superflat(Tester):
@@ -15,7 +16,6 @@ class Superflat(Tester):
     """
 
     def __init__(self):
-
         super().__init__("superflat")
 
         # acquire
@@ -75,13 +75,8 @@ class Superflat(Tester):
             raise azcam.AzcamError("could not determine exposure times")
 
         for setnum, exposuretime in enumerate(self.exposure_times):
-
-            azcam.db.parameters.set_par(
-                "imageroot", "superflat."
-            )  # for automatic data analysis
-            azcam.db.parameters.set_par(
-                "imageincludesequencenumber", 1
-            )  # use sequence numbers
+            azcam.db.parameters.set_par("imageroot", "superflat.")  # for automatic data analysis
+            azcam.db.parameters.set_par("imageincludesequencenumber", 1)  # use sequence numbers
             azcam.db.parameters.set_par("imageautoname", 0)  # manually set name
             azcam.db.parameters.set_par(
                 "imageautoincrementsequencenumber", 1
@@ -150,7 +145,6 @@ class Superflat(Tester):
         loop = 0
         filelist = []
         while os.path.exists(nextfile):
-
             azcam.log("Processing %s" % os.path.basename(nextfile))
             filelist.append(nextfile)
 
@@ -186,13 +180,13 @@ class Superflat(Tester):
         else:
             superflat_image.set_scaling(self.system_gain, gain.zero_mean)
         superflat_image.assemble(1)
-        fig = azcam.plot.plt.figure()
+        fig = azcam_console.plot.plt.figure()
         fignum = fig.number
-        azcam.plot.move_window(fignum)
-        azcam.plot.plot_image(superflat_image)
-        azcam.plot.plt.title("Superflat Combined Image")
-        azcam.plot.plt.show()
-        azcam.plot.save_figure(fignum, "superflatimage")
+        azcam_console.plot.move_window(fignum)
+        azcam_console.plot.plot_image(superflat_image)
+        azcam_console.plot.plt.title("Superflat Combined Image")
+        azcam_console.plot.plt.show()
+        azcam_console.plot.save_figure(fignum, "superflatimage")
         superflat_image.overwrite = 1
         superflat_image.save_data_format = -32  # could be >16 bits with scaling
         superflat_image.write_file(self.scaled_superflat_filename, 6)

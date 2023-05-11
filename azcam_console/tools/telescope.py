@@ -3,7 +3,8 @@ Contains the base Telescope class.
 """
 
 import azcam
-from azcam.tools.console_tools import ConsoleTools
+from azcam_console.tools.console_tools import ConsoleTools
+
 
 class TelescopeConsole(ConsoleTools):
     """

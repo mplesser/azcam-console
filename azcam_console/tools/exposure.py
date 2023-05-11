@@ -5,7 +5,8 @@ Contains the ExposureConsole class.
 from typing import Union, List, Optional
 
 import azcam
-from azcam.tools.console_tools import ConsoleTools
+from azcam_console.tools.console_tools import ConsoleTools
+
 
 class ExposureConsole(ConsoleTools):
     """
@@ -60,7 +61,6 @@ class ExposureConsole(ConsoleTools):
         return azcam.db.tools["server"].command(f"{self.objname}.reset")
 
     def test(self, exposure_time: float = -1, shutter_state: int = 0) -> Optional[str]:
-
         return azcam.db.tools["server"].command(
             f"{self.objname}.test {exposure_time} {shutter_state}"
         )
@@ -457,7 +457,6 @@ class ExposureConsole(ConsoleTools):
         )
 
     def get_exposureflag(self):
-
         return azcam.db.tools["server"].command(f"{self.objname}.get_exposureflag")
 
     def get_status(self):

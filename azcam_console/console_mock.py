@@ -14,12 +14,11 @@ import threading
 from runpy import run_path
 
 import azcam
-import azcam.console
-import azcam.shortcuts
-import azcam.tools.console_tools
-import azcam.tools.testers
-import azcam.scripts
-import azcam.shortcuts
+import azcam_console
+import azcam_console.tools.console_tools
+import azcam_console.tools.testers
+import azcam_console.scripts
+import azcam_console.shortcuts
 
 from azcam.tools.ds9display import Ds9Display
 
@@ -60,31 +59,36 @@ if datafolder is None:
 else:
     azcam.db.datafolder = os.path.realpath(datafolder)
 
+# ****************************************************************
+# parameter file
+# ****************************************************************
 parfile = os.path.join(azcam.db.datafolder, "parameters", f"parameters_console_mock.ini")
+azcam.db.parameters.read_parfile(parfile)
+azcam.db.parameters.update_pars(0, "azcamconsole")
 
 # logging
 logfile = os.path.join(azcam.db.datafolder, "logs", "console.log")
-azcam.logger.start_logging(logfile=logfile)
+azcam.db.logger.start_logging(logfile=logfile)
 azcam.log(f"Configuring console for {azcam.db.systemname}")
 
 # display
 display = Ds9Display()
 
 # console tools
-from azcam.tools import create_console_tools
+from azcam_console.tools import create_console_tools
 
 create_console_tools()
 
 # ****************************************************************
 # testers
 # ****************************************************************
-azcam.tools.testers.load()
+azcam_console.tools.testers.load()
 
 # ****************************************************************
 # scripts
 # ****************************************************************
 azcam.log("Loading scripts")
-azcam.scripts.load("console")
+azcam_console.scripts.load()
 
 # ****************************************************************
 # observe
@@ -102,8 +106,7 @@ else:
 
 # system-specific
 if azcam.db.systemname == "azcam_mock":
-    from azcam_itl.detchars.detchar_DESI import detchar
-    import azcam.tools.arc.console_arc
+    pass
 
     if azcam.db.wd is None:
         azcam.db.wd = "/data/test1"
@@ -116,7 +119,7 @@ azcam.db.parameters.read_parfile(parfile)
 azcam.db.parameters.update_pars(0, "azcamconsole")
 
 # cli commands
-from azcam.cli import *
+from azcam_console.cli import *
 
 # try to change window title
 try:

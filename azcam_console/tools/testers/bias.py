@@ -3,7 +3,7 @@ import shutil
 import time
 
 import azcam
-from azcam.tools.testers.basetester import Tester
+from azcam_console.tools.testers.basetester import Tester
 
 
 class Bias(Tester):
@@ -12,7 +12,6 @@ class Bias(Tester):
     """
 
     def __init__(self):
-
         super().__init__("bias")
 
         #: combination method
@@ -57,13 +56,9 @@ class Bias(Tester):
         azcam.db.tools["exposure"].test(0)
 
         azcam.db.parameters.set_par("imageroot", "bias.")  # for automatic data analysis
-        azcam.db.parameters.set_par(
-            "imageincludesequencenumber", 1
-        )  # use sequence numbers
+        azcam.db.parameters.set_par("imageincludesequencenumber", 1)  # use sequence numbers
         azcam.db.parameters.set_par("imageautoname", 0)  # manually set name
-        azcam.db.parameters.set_par(
-            "imageautoincrementsequencenumber", 1
-        )  # inc sequence numbers
+        azcam.db.parameters.set_par("imageautoincrementsequencenumber", 1)  # inc sequence numbers
         azcam.db.parameters.set_par("imagetest", 0)  # turn off TestImage
 
         # take bias images
@@ -120,7 +115,6 @@ class Bias(Tester):
 
         # find the names, means, sdevs of all images
         while os.path.exists(nextfile):
-
             self.imagelist.append(nextfile)
 
             mean, sdev, _ = azcam.fits.stat(nextfile, self.roi[0])  # use first ROI not overscan
