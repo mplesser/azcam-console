@@ -33,7 +33,7 @@ and data reduction requirements.</p>
 <dl>
 <dt><code class="name"><a title="azcam_console.cli" href="cli.html">azcam_console.cli</a></code></dt>
 <dd>
-<div class="desc"><p><em>azcam.cli</em> is used to bring commands into the current namespace …</p></div>
+<div class="desc"><p>Used to bring commands into the current namespace …</p></div>
 </dd>
 <dt><code class="name"><a title="azcam_console.console" href="console.html">azcam_console.console</a></code></dt>
 <dd>
@@ -43,41 +43,17 @@ and data reduction requirements.</p>
 <dd>
 <div class="desc"><p>azcam console script for a mock system …</p></div>
 </dd>
-<dt><code class="name"><a title="azcam_console.database" href="database.html">azcam_console.database</a></code></dt>
-<dd>
-<div class="desc"><p>Contains the main azcam database class …</p></div>
-</dd>
 <dt><code class="name"><a title="azcam_console.database_console" href="database_console.html">azcam_console.database_console</a></code></dt>
 <dd>
-<div class="desc"><p><em>azcam.database</em> contains the main azcam database class …</p></div>
+<div class="desc"><p>Contains the azcam database class for azcamconsole …</p></div>
 </dd>
-<dt><code class="name"><a title="azcam_console.exceptions" href="exceptions.html">azcam_console.exceptions</a></code></dt>
+<dt><code class="name"><a title="azcam_console.parameters_console" href="parameters_console.html">azcam_console.parameters_console</a></code></dt>
 <dd>
-<div class="desc"><p>Contains custom exceptions and warnings used throughout azcam.</p></div>
+<div class="desc"><p>Parameter handling tool for azcam-console.</p></div>
 </dd>
-<dt><code class="name"><a title="azcam_console.functions" href="functions/index.html">azcam_console.functions</a></code></dt>
+<dt><code class="name"><a title="azcam_console.plot" href="plot.html">azcam_console.plot</a></code></dt>
 <dd>
-<div class="desc"><p>General functions used throughout azcam.</p></div>
-</dd>
-<dt><code class="name"><a title="azcam_console.header" href="header.html">azcam_console.header</a></code></dt>
-<dd>
-<div class="desc"><p>Contains the Header class.</p></div>
-</dd>
-<dt><code class="name"><a title="azcam_console.image" href="image.html">azcam_console.image</a></code></dt>
-<dd>
-<div class="desc"><p>Contains the Image class.</p></div>
-</dd>
-<dt><code class="name"><a title="azcam_console.image_focalplane" href="image_focalplane.html">azcam_console.image_focalplane</a></code></dt>
-<dd>
-<div class="desc"><p>Contains the FocalPlane and WCS classes.</p></div>
-</dd>
-<dt><code class="name"><a title="azcam_console.logging_server_tcp" href="logging_server_tcp.html">azcam_console.logging_server_tcp</a></code></dt>
-<dd>
-<div class="desc"><p>Example logging server which receives and prints azcam logrecords.</p></div>
-</dd>
-<dt><code class="name"><a title="azcam_console.parameters" href="parameters.html">azcam_console.parameters</a></code></dt>
-<dd>
-<div class="desc"><p>Parameter handling tool for azcam.</p></div>
+<div class="desc"><p>Contains plotting support for azcam …</p></div>
 </dd>
 <dt><code class="name"><a title="azcam_console.scripts" href="scripts/index.html">azcam_console.scripts</a></code></dt>
 <dd>
@@ -85,35 +61,21 @@ and data reduction requirements.</p>
 </dd>
 <dt><code class="name"><a title="azcam_console.shortcuts" href="shortcuts.html">azcam_console.shortcuts</a></code></dt>
 <dd>
-<div class="desc"><p><em>azcam.shortcuts</em> contains keyboard (CLI) shortcuts.</p></div>
-</dd>
-<dt><code class="name"><a title="azcam_console.sockets" href="sockets.html">azcam_console.sockets</a></code></dt>
-<dd>
-<div class="desc"><p><em>azcam.sockets</em> contains azcam's <code>SocketInterface</code> class used by many interfaces.</p></div>
+<div class="desc"><p>CLI shortcuts for azcam-console.</p></div>
 </dd>
 <dt><code class="name"><a title="azcam_console.start" href="start.html">azcam_console.start</a></code></dt>
 <dd>
 <div class="desc"><p>Startup script for azcam …</p></div>
 </dd>
-<dt><code class="name"><a title="azcam_console.system" href="system.html">azcam_console.system</a></code></dt>
-<dd>
-<div class="desc"><p>Contains the base System object.
-The System class contains custom code for a specific system,
-including "system header" commands.</p></div>
-</dd>
 <dt><code class="name"><a title="azcam_console.tools" href="tools/index.html">azcam_console.tools</a></code></dt>
 <dd>
-<div class="desc"><p><em>azcam.tools</em> contains the modules which define the base azcam tools.</p></div>
+<div class="desc"></div>
 </dd>
 </dl>
 </section>
 <section>
 <h2 class="section-title" id="header-variables">Global variables</h2>
 <dl>
-<dt id="azcam_console.db"><code class="name">var <span class="ident">db</span></code></dt>
-<dd>
-<div class="desc"><p>database</p></div>
-</dd>
 <dt id="azcam_console.exposureflags"><code class="name">var <span class="ident">exposureflags</span> : Dict[str, int]</code></dt>
 <dd>
 <div class="desc"><p>exposure flags</p></div>
@@ -121,10 +83,6 @@ including "system header" commands.</p></div>
 <dt id="azcam_console.imageparnames"><code class="name">var <span class="ident">imageparnames</span> : List[str]</code></dt>
 <dd>
 <div class="desc"><p>image parameters</p></div>
-</dd>
-<dt id="azcam_console.logger"><code class="name">var <span class="ident">logger</span> : azcam.logger.Logger</code></dt>
-<dd>
-<div class="desc"><p>logger object</p></div>
 </dd>
 <dt id="azcam_console.mode"><code class="name">var <span class="ident">mode</span></code></dt>
 <dd>
@@ -152,29 +110,19 @@ including "system header" commands.</p></div>
 <li><code><a title="azcam_console.cli" href="cli.html">azcam_console.cli</a></code></li>
 <li><code><a title="azcam_console.console" href="console.html">azcam_console.console</a></code></li>
 <li><code><a title="azcam_console.console_mock" href="console_mock.html">azcam_console.console_mock</a></code></li>
-<li><code><a title="azcam_console.database" href="database.html">azcam_console.database</a></code></li>
 <li><code><a title="azcam_console.database_console" href="database_console.html">azcam_console.database_console</a></code></li>
-<li><code><a title="azcam_console.exceptions" href="exceptions.html">azcam_console.exceptions</a></code></li>
-<li><code><a title="azcam_console.functions" href="functions/index.html">azcam_console.functions</a></code></li>
-<li><code><a title="azcam_console.header" href="header.html">azcam_console.header</a></code></li>
-<li><code><a title="azcam_console.image" href="image.html">azcam_console.image</a></code></li>
-<li><code><a title="azcam_console.image_focalplane" href="image_focalplane.html">azcam_console.image_focalplane</a></code></li>
-<li><code><a title="azcam_console.logging_server_tcp" href="logging_server_tcp.html">azcam_console.logging_server_tcp</a></code></li>
-<li><code><a title="azcam_console.parameters" href="parameters.html">azcam_console.parameters</a></code></li>
+<li><code><a title="azcam_console.parameters_console" href="parameters_console.html">azcam_console.parameters_console</a></code></li>
+<li><code><a title="azcam_console.plot" href="plot.html">azcam_console.plot</a></code></li>
 <li><code><a title="azcam_console.scripts" href="scripts/index.html">azcam_console.scripts</a></code></li>
 <li><code><a title="azcam_console.shortcuts" href="shortcuts.html">azcam_console.shortcuts</a></code></li>
-<li><code><a title="azcam_console.sockets" href="sockets.html">azcam_console.sockets</a></code></li>
 <li><code><a title="azcam_console.start" href="start.html">azcam_console.start</a></code></li>
-<li><code><a title="azcam_console.system" href="system.html">azcam_console.system</a></code></li>
 <li><code><a title="azcam_console.tools" href="tools/index.html">azcam_console.tools</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-variables">Global variables</a></h3>
-<ul class="two-column">
-<li><code><a title="azcam_console.db" href="#azcam_console.db">db</a></code></li>
+<ul class="">
 <li><code><a title="azcam_console.exposureflags" href="#azcam_console.exposureflags">exposureflags</a></code></li>
 <li><code><a title="azcam_console.imageparnames" href="#azcam_console.imageparnames">imageparnames</a></code></li>
-<li><code><a title="azcam_console.logger" href="#azcam_console.logger">logger</a></code></li>
 <li><code><a title="azcam_console.mode" href="#azcam_console.mode">mode</a></code></li>
 <li><code><a title="azcam_console.pardict" href="#azcam_console.pardict">pardict</a></code></li>
 </ul>

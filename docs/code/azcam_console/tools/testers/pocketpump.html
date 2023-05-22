@@ -46,10 +46,29 @@
 </dl></div>
 <h3>Ancestors</h3>
 <ul class="hlist">
-<li>azcam.tools.testers.basetester.Tester</li>
-<li>azcam.tools.tools.Tools</li>
-<li>azcam.tools.testers.report.Report</li>
+<li><a title="azcam_console.tools.testers.basetester.Tester" href="basetester.html#azcam_console.tools.testers.basetester.Tester">Tester</a></li>
+<li>azcam.tools.Tools</li>
+<li><a title="azcam_console.tools.testers.report.Report" href="report.html#azcam_console.tools.testers.report.Report">Report</a></li>
 </ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="azcam_console.tools.testers.pocketpump.PocketPump.data_file"><code class="name">var <span class="ident">data_file</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.testers.basetester.Tester" href="basetester.html#azcam_console.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam_console.tools.testers.basetester.Tester.data_file" href="basetester.html#azcam_console.tools.testers.basetester.Tester.data_file">data_file</a></code>
+</p>
+<div class="desc inherited"><p>output data file</p></div>
+</dd>
+<dt id="azcam_console.tools.testers.pocketpump.PocketPump.report_file"><code class="name">var <span class="ident">report_file</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.testers.basetester.Tester" href="basetester.html#azcam_console.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam_console.tools.testers.basetester.Tester.report_file" href="basetester.html#azcam_console.tools.testers.basetester.Tester.report_file">report_file</a></code>
+</p>
+<div class="desc inherited"><p>output report file</p></div>
+</dd>
+</dl>
 <h3>Methods</h3>
 <dl>
 <dt id="azcam_console.tools.testers.pocketpump.PocketPump.acquire"><code class="name flex">
@@ -77,6 +96,110 @@
 <div class="desc"><p>Analys a pocket pump image sequence.
 Not yet supported.</p></div>
 </dd>
+<dt id="azcam_console.tools.testers.pocketpump.PocketPump.make_mdfile"><code class="name flex">
+<span>def <span class="ident">make_mdfile</span></span>(<span>self, md_file, lines=[])</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.testers.basetester.Tester" href="basetester.html#azcam_console.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam_console.tools.testers.basetester.Tester.make_mdfile" href="report.html#azcam_console.tools.testers.basetester.Tester.make_mdfile">make_mdfile</a></code>
+</p>
+<div class="desc inherited"><p>Create a markdown file from lines.</p></div>
+</dd>
+<dt id="azcam_console.tools.testers.pocketpump.PocketPump.make_rstfile"><code class="name flex">
+<span>def <span class="ident">make_rstfile</span></span>(<span>self, rst_file, lines=[])</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.testers.basetester.Tester" href="basetester.html#azcam_console.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam_console.tools.testers.basetester.Tester.make_rstfile" href="report.html#azcam_console.tools.testers.basetester.Tester.make_rstfile">make_rstfile</a></code>
+</p>
+<div class="desc inherited"><p>Create an RST file from lines.</p></div>
+</dd>
+<dt id="azcam_console.tools.testers.pocketpump.PocketPump.md2pdf"><code class="name flex">
+<span>def <span class="ident">md2pdf</span></span>(<span>self, filename, options=[], create_html=False)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.testers.basetester.Tester" href="basetester.html#azcam_console.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam_console.tools.testers.basetester.Tester.md2pdf" href="report.html#azcam_console.tools.testers.basetester.Tester.md2pdf">md2pdf</a></code>
+</p>
+<div class="desc inherited"><p>Create a PDF from a markdown file.
+Filename extension is optional.
+Optionally also create an html file.</p></div>
+</dd>
+<dt id="azcam_console.tools.testers.pocketpump.PocketPump.merge_pdf"><code class="name flex">
+<span>def <span class="ident">merge_pdf</span></span>(<span>self, input_files=[], output_file='combined.pdf')</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.testers.basetester.Tester" href="basetester.html#azcam_console.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam_console.tools.testers.basetester.Tester.merge_pdf" href="report.html#azcam_console.tools.testers.basetester.Tester.merge_pdf">merge_pdf</a></code>
+</p>
+<div class="desc inherited"><p>Merge multiple PDF files into one.</p></div>
+</dd>
+<dt id="azcam_console.tools.testers.pocketpump.PocketPump.parse_files"><code class="name flex">
+<span>def <span class="ident">parse_files</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.testers.basetester.Tester" href="basetester.html#azcam_console.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam_console.tools.testers.basetester.Tester.parse_files" href="basetester.html#azcam_console.tools.testers.basetester.Tester.parse_files">parse_files</a></code>
+</p>
+<div class="desc inherited"><p>Parse image set to create file information dict.</p></div>
+</dd>
+<dt id="azcam_console.tools.testers.pocketpump.PocketPump.read_datafile"><code class="name flex">
+<span>def <span class="ident">read_datafile</span></span>(<span>self, filename='default')</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.testers.basetester.Tester" href="basetester.html#azcam_console.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam_console.tools.testers.basetester.Tester.read_datafile" href="basetester.html#azcam_console.tools.testers.basetester.Tester.read_datafile">read_datafile</a></code>
+</p>
+<div class="desc inherited"><p>Read data file and set tool as valid.</p></div>
+</dd>
+<dt id="azcam_console.tools.testers.pocketpump.PocketPump.report"><code class="name flex">
+<span>def <span class="ident">report</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.testers.basetester.Tester" href="basetester.html#azcam_console.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam_console.tools.testers.basetester.Tester.report" href="basetester.html#azcam_console.tools.testers.basetester.Tester.report">report</a></code>
+</p>
+<div class="desc inherited"><p>Generate a report.</p></div>
+</dd>
+<dt id="azcam_console.tools.testers.pocketpump.PocketPump.rst2pdf"><code class="name flex">
+<span>def <span class="ident">rst2pdf</span></span>(<span>self, filename, options=[])</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.testers.basetester.Tester" href="basetester.html#azcam_console.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam_console.tools.testers.basetester.Tester.rst2pdf" href="report.html#azcam_console.tools.testers.basetester.Tester.rst2pdf">rst2pdf</a></code>
+</p>
+<div class="desc inherited"><p>Create a PDF from an RST file.
+Filename extension is optional.
+Also create an html file (currently required).</p></div>
+</dd>
+<dt id="azcam_console.tools.testers.pocketpump.PocketPump.write_datafile"><code class="name flex">
+<span>def <span class="ident">write_datafile</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.testers.basetester.Tester" href="basetester.html#azcam_console.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam_console.tools.testers.basetester.Tester.write_datafile" href="basetester.html#azcam_console.tools.testers.basetester.Tester.write_datafile">write_datafile</a></code>
+</p>
+<div class="desc inherited"><p>Write data file as a json dump …</p></div>
+</dd>
+<dt id="azcam_console.tools.testers.pocketpump.PocketPump.write_report"><code class="name flex">
+<span>def <span class="ident">write_report</span></span>(<span>self, report_file, lines=[])</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.testers.basetester.Tester" href="basetester.html#azcam_console.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam_console.tools.testers.basetester.Tester.write_report" href="basetester.html#azcam_console.tools.testers.basetester.Tester.write_report">write_report</a></code>
+</p>
+<div class="desc inherited"><p>Create report file.</p></div>
+</dd>
 </dl>
 </dd>
 </dl>
@@ -97,11 +220,23 @@ Not yet supported.</p></div>
 <ul>
 <li>
 <h4><code><a title="azcam_console.tools.testers.pocketpump.PocketPump" href="#azcam_console.tools.testers.pocketpump.PocketPump">PocketPump</a></code></h4>
-<ul class="">
+<ul class="two-column">
 <li><code><a title="azcam_console.tools.testers.pocketpump.PocketPump.acquire" href="#azcam_console.tools.testers.pocketpump.PocketPump.acquire">acquire</a></code></li>
 <li><code><a title="azcam_console.tools.testers.pocketpump.PocketPump.acquire_arc" href="#azcam_console.tools.testers.pocketpump.PocketPump.acquire_arc">acquire_arc</a></code></li>
 <li><code><a title="azcam_console.tools.testers.pocketpump.PocketPump.acquire_archon" href="#azcam_console.tools.testers.pocketpump.PocketPump.acquire_archon">acquire_archon</a></code></li>
 <li><code><a title="azcam_console.tools.testers.pocketpump.PocketPump.analyze" href="#azcam_console.tools.testers.pocketpump.PocketPump.analyze">analyze</a></code></li>
+<li><code><a title="azcam_console.tools.testers.pocketpump.PocketPump.data_file" href="basetester.html#azcam_console.tools.testers.pocketpump.PocketPump.data_file">data_file</a></code></li>
+<li><code><a title="azcam_console.tools.testers.pocketpump.PocketPump.make_mdfile" href="report.html#azcam_console.tools.testers.pocketpump.PocketPump.make_mdfile">make_mdfile</a></code></li>
+<li><code><a title="azcam_console.tools.testers.pocketpump.PocketPump.make_rstfile" href="report.html#azcam_console.tools.testers.pocketpump.PocketPump.make_rstfile">make_rstfile</a></code></li>
+<li><code><a title="azcam_console.tools.testers.pocketpump.PocketPump.md2pdf" href="report.html#azcam_console.tools.testers.pocketpump.PocketPump.md2pdf">md2pdf</a></code></li>
+<li><code><a title="azcam_console.tools.testers.pocketpump.PocketPump.merge_pdf" href="report.html#azcam_console.tools.testers.pocketpump.PocketPump.merge_pdf">merge_pdf</a></code></li>
+<li><code><a title="azcam_console.tools.testers.pocketpump.PocketPump.parse_files" href="basetester.html#azcam_console.tools.testers.pocketpump.PocketPump.parse_files">parse_files</a></code></li>
+<li><code><a title="azcam_console.tools.testers.pocketpump.PocketPump.read_datafile" href="basetester.html#azcam_console.tools.testers.pocketpump.PocketPump.read_datafile">read_datafile</a></code></li>
+<li><code><a title="azcam_console.tools.testers.pocketpump.PocketPump.report" href="basetester.html#azcam_console.tools.testers.pocketpump.PocketPump.report">report</a></code></li>
+<li><code><a title="azcam_console.tools.testers.pocketpump.PocketPump.report_file" href="basetester.html#azcam_console.tools.testers.pocketpump.PocketPump.report_file">report_file</a></code></li>
+<li><code><a title="azcam_console.tools.testers.pocketpump.PocketPump.rst2pdf" href="report.html#azcam_console.tools.testers.pocketpump.PocketPump.rst2pdf">rst2pdf</a></code></li>
+<li><code><a title="azcam_console.tools.testers.pocketpump.PocketPump.write_datafile" href="basetester.html#azcam_console.tools.testers.pocketpump.PocketPump.write_datafile">write_datafile</a></code></li>
+<li><code><a title="azcam_console.tools.testers.pocketpump.PocketPump.write_report" href="basetester.html#azcam_console.tools.testers.pocketpump.PocketPump.write_report">write_report</a></code></li>
 </ul>
 </li>
 </ul>

@@ -5,7 +5,7 @@ This tool is often implemented both by server and console.
 
 import azcam
 from azcam.header import Header, ObjectHeaderMethods
-from azcam.tools.tools import Tools
+from azcam.tools import Tools
 
 
 class Display(Tools, ObjectHeaderMethods):
@@ -15,7 +15,6 @@ class Display(Tools, ObjectHeaderMethods):
     """
 
     def __init__(self, tool_id="display", description=None):
-
         Tools.__init__(self, tool_id, description)
 
         # create the display Header object

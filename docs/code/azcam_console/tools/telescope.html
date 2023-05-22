@@ -46,10 +46,31 @@ Usually implemented as the "telescope" tool.</p>
 </dl></div>
 <h3>Ancestors</h3>
 <ul class="hlist">
-<li>azcam.tools.console_tools.ConsoleTools</li>
+<li><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></li>
 </ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="azcam_console.tools.telescope.TelescopeConsole.verbosity"><code class="name">var <span class="ident">verbosity</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></code>.<code><a title="azcam_console.tools.console_tools.ConsoleTools.verbosity" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools.verbosity">verbosity</a></code>
+</p>
+<div class="desc inherited"><p>verbosity for debug, &gt; 0 is more verbose</p></div>
+</dd>
+</dl>
 <h3>Methods</h3>
 <dl>
+<dt id="azcam_console.tools.telescope.TelescopeConsole.delete_keyword"><code class="name flex">
+<span>def <span class="ident">delete_keyword</span></span>(<span>self, keyword: str) ‑> Optional[str]</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></code>.<code><a title="azcam_console.tools.console_tools.ConsoleTools.delete_keyword" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools.delete_keyword">delete_keyword</a></code>
+</p>
+<div class="desc inherited"><p>Delete a keyword from a header …</p></div>
+</dd>
 <dt id="azcam_console.tools.telescope.TelescopeConsole.get_focus"><code class="name flex">
 <span>def <span class="ident">get_focus</span></span>(<span>self, focus_id: int = 0) ‑> float</span>
 </code></dt>
@@ -60,6 +81,67 @@ Usually implemented as the "telescope" tool.</p>
 <dt><strong><code>focus_id</code></strong></dt>
 <dd>focus sensor ID flag</dd>
 </dl></div>
+</dd>
+<dt id="azcam_console.tools.telescope.TelescopeConsole.get_keyword"><code class="name flex">
+<span>def <span class="ident">get_keyword</span></span>(<span>self, keyword: str) ‑> str</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></code>.<code><a title="azcam_console.tools.console_tools.ConsoleTools.get_keyword" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools.get_keyword">get_keyword</a></code>
+</p>
+<div class="desc inherited"><p>Return a keyword value, its comment string, and type.
+Comment always returned in double quotes, even if empty …</p></div>
+</dd>
+<dt id="azcam_console.tools.telescope.TelescopeConsole.get_keywords"><code class="name flex">
+<span>def <span class="ident">get_keywords</span></span>(<span>self) ‑> list</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></code>.<code><a title="azcam_console.tools.console_tools.ConsoleTools.get_keywords" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools.get_keywords">get_keywords</a></code>
+</p>
+<div class="desc inherited"><p>Return a list of all keyword names …</p></div>
+</dd>
+<dt id="azcam_console.tools.telescope.TelescopeConsole.get_string"><code class="name flex">
+<span>def <span class="ident">get_string</span></span>(<span>self) ‑> str</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></code>.<code><a title="azcam_console.tools.console_tools.ConsoleTools.get_string" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools.get_string">get_string</a></code>
+</p>
+<div class="desc inherited"><p>Returns the entire header as a formatted string …</p></div>
+</dd>
+<dt id="azcam_console.tools.telescope.TelescopeConsole.initialize"><code class="name flex">
+<span>def <span class="ident">initialize</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></code>.<code><a title="azcam_console.tools.console_tools.ConsoleTools.initialize" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools.initialize">initialize</a></code>
+</p>
+<div class="desc inherited"><p>Initialize this tool.</p></div>
+</dd>
+<dt id="azcam_console.tools.telescope.TelescopeConsole.read_header"><code class="name flex">
+<span>def <span class="ident">read_header</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></code>.<code><a title="azcam_console.tools.console_tools.ConsoleTools.read_header" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools.read_header">read_header</a></code>
+</p>
+<div class="desc inherited"><p>Returns the current header …</p></div>
+</dd>
+<dt id="azcam_console.tools.telescope.TelescopeConsole.reset"><code class="name flex">
+<span>def <span class="ident">reset</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></code>.<code><a title="azcam_console.tools.console_tools.ConsoleTools.reset" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools.reset">reset</a></code>
+</p>
+<div class="desc inherited"><p>Reset this tool.</p></div>
 </dd>
 <dt id="azcam_console.tools.telescope.TelescopeConsole.set_focus"><code class="name flex">
 <span>def <span class="ident">set_focus</span></span>(<span>self, focus_value: float, focus_id: int = 0, focus_type: str = 'absolute') ‑> None</span>
@@ -76,6 +158,38 @@ or a relative step if supported by hardware.</p>
 <dt><strong><code>focus_type</code></strong></dt>
 <dd>focus type (absolute or step)</dd>
 </dl></div>
+</dd>
+<dt id="azcam_console.tools.telescope.TelescopeConsole.set_keyword"><code class="name flex">
+<span>def <span class="ident">set_keyword</span></span>(<span>self, keyword: str, value: str, comment: str = 'none', typestring: str = 'none') ‑> Optional[str]</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></code>.<code><a title="azcam_console.tools.console_tools.ConsoleTools.set_keyword" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools.set_keyword">set_keyword</a></code>
+</p>
+<div class="desc inherited"><p>Set a keyword value, comment, and type.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>keyword</code></strong></dt>
+<dd>keyword</dd>
+<dt><strong><code>value</code></strong></dt>
+<dd>value of keyword</dd>
+<dt><strong><code>comment</code></strong></dt>
+<dd>comment string</dd>
+<dt><strong><code>typestring</code></strong></dt>
+<dd>one of …</dd>
+</dl></div>
+</dd>
+<dt id="azcam_console.tools.telescope.TelescopeConsole.update_header"><code class="name flex">
+<span>def <span class="ident">update_header</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></code>.<code><a title="azcam_console.tools.console_tools.ConsoleTools.update_header" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools.update_header">update_header</a></code>
+</p>
+<div class="desc inherited"><p>Update the header of a tool.
+This command usually reads hardware to get the lastest keyword values.</p></div>
 </dd>
 </dl>
 </dd>
@@ -97,9 +211,19 @@ or a relative step if supported by hardware.</p>
 <ul>
 <li>
 <h4><code><a title="azcam_console.tools.telescope.TelescopeConsole" href="#azcam_console.tools.telescope.TelescopeConsole">TelescopeConsole</a></code></h4>
-<ul class="">
+<ul class="two-column">
+<li><code><a title="azcam_console.tools.telescope.TelescopeConsole.delete_keyword" href="console_tools.html#azcam_console.tools.telescope.TelescopeConsole.delete_keyword">delete_keyword</a></code></li>
 <li><code><a title="azcam_console.tools.telescope.TelescopeConsole.get_focus" href="#azcam_console.tools.telescope.TelescopeConsole.get_focus">get_focus</a></code></li>
+<li><code><a title="azcam_console.tools.telescope.TelescopeConsole.get_keyword" href="console_tools.html#azcam_console.tools.telescope.TelescopeConsole.get_keyword">get_keyword</a></code></li>
+<li><code><a title="azcam_console.tools.telescope.TelescopeConsole.get_keywords" href="console_tools.html#azcam_console.tools.telescope.TelescopeConsole.get_keywords">get_keywords</a></code></li>
+<li><code><a title="azcam_console.tools.telescope.TelescopeConsole.get_string" href="console_tools.html#azcam_console.tools.telescope.TelescopeConsole.get_string">get_string</a></code></li>
+<li><code><a title="azcam_console.tools.telescope.TelescopeConsole.initialize" href="console_tools.html#azcam_console.tools.telescope.TelescopeConsole.initialize">initialize</a></code></li>
+<li><code><a title="azcam_console.tools.telescope.TelescopeConsole.read_header" href="console_tools.html#azcam_console.tools.telescope.TelescopeConsole.read_header">read_header</a></code></li>
+<li><code><a title="azcam_console.tools.telescope.TelescopeConsole.reset" href="console_tools.html#azcam_console.tools.telescope.TelescopeConsole.reset">reset</a></code></li>
 <li><code><a title="azcam_console.tools.telescope.TelescopeConsole.set_focus" href="#azcam_console.tools.telescope.TelescopeConsole.set_focus">set_focus</a></code></li>
+<li><code><a title="azcam_console.tools.telescope.TelescopeConsole.set_keyword" href="console_tools.html#azcam_console.tools.telescope.TelescopeConsole.set_keyword">set_keyword</a></code></li>
+<li><code><a title="azcam_console.tools.telescope.TelescopeConsole.update_header" href="console_tools.html#azcam_console.tools.telescope.TelescopeConsole.update_header">update_header</a></code></li>
+<li><code><a title="azcam_console.tools.telescope.TelescopeConsole.verbosity" href="console_tools.html#azcam_console.tools.telescope.TelescopeConsole.verbosity">verbosity</a></code></li>
 </ul>
 </li>
 </ul>

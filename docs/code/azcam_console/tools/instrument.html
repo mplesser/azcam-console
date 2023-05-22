@@ -46,8 +46,19 @@ Usually implemented as the "instrument" tool.</p>
 </dl></div>
 <h3>Ancestors</h3>
 <ul class="hlist">
-<li>azcam.tools.console_tools.ConsoleTools</li>
+<li><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></li>
 </ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="azcam_console.tools.instrument.InstrumentConsole.verbosity"><code class="name">var <span class="ident">verbosity</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></code>.<code><a title="azcam_console.tools.console_tools.ConsoleTools.verbosity" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools.verbosity">verbosity</a></code>
+</p>
+<div class="desc inherited"><p>verbosity for debug, &gt; 0 is more verbose</p></div>
+</dd>
+</dl>
 <h3>Methods</h3>
 <dl>
 <dt id="azcam_console.tools.instrument.InstrumentConsole.comps_off"><code class="name flex">
@@ -61,6 +72,16 @@ Usually implemented as the "instrument" tool.</p>
 </code></dt>
 <dd>
 <div class="desc"><p>Turn on active comparisons.</p></div>
+</dd>
+<dt id="azcam_console.tools.instrument.InstrumentConsole.delete_keyword"><code class="name flex">
+<span>def <span class="ident">delete_keyword</span></span>(<span>self, keyword: str) ‑> Optional[str]</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></code>.<code><a title="azcam_console.tools.console_tools.ConsoleTools.delete_keyword" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools.delete_keyword">delete_keyword</a></code>
+</p>
+<div class="desc inherited"><p>Delete a keyword from a header …</p></div>
 </dd>
 <dt id="azcam_console.tools.instrument.InstrumentConsole.get_all_comps"><code class="name flex">
 <span>def <span class="ident">get_all_comps</span></span>(<span>self)</span>
@@ -119,6 +140,27 @@ Useful for clients to determine which type of comparison exposures are supported
 <div class="desc"><p>Get the current focus position.</p>
 <p>:param focus_id: focus sensor ID flag</p></div>
 </dd>
+<dt id="azcam_console.tools.instrument.InstrumentConsole.get_keyword"><code class="name flex">
+<span>def <span class="ident">get_keyword</span></span>(<span>self, keyword: str) ‑> str</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></code>.<code><a title="azcam_console.tools.console_tools.ConsoleTools.get_keyword" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools.get_keyword">get_keyword</a></code>
+</p>
+<div class="desc inherited"><p>Return a keyword value, its comment string, and type.
+Comment always returned in double quotes, even if empty …</p></div>
+</dd>
+<dt id="azcam_console.tools.instrument.InstrumentConsole.get_keywords"><code class="name flex">
+<span>def <span class="ident">get_keywords</span></span>(<span>self) ‑> list</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></code>.<code><a title="azcam_console.tools.console_tools.ConsoleTools.get_keywords" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools.get_keywords">get_keywords</a></code>
+</p>
+<div class="desc inherited"><p>Return a list of all keyword names …</p></div>
+</dd>
 <dt id="azcam_console.tools.instrument.InstrumentConsole.get_power"><code class="name flex">
 <span>def <span class="ident">get_power</span></span>(<span>self, wavelength: float, power_id: int = 0) ‑> float</span>
 </code></dt>
@@ -143,6 +185,16 @@ Useful for clients to determine which type of comparison exposures are supported
 <dd>
 <div class="desc"><p>Return a list of all instrument pressures.</p></div>
 </dd>
+<dt id="azcam_console.tools.instrument.InstrumentConsole.get_string"><code class="name flex">
+<span>def <span class="ident">get_string</span></span>(<span>self) ‑> str</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></code>.<code><a title="azcam_console.tools.console_tools.ConsoleTools.get_string" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools.get_string">get_string</a></code>
+</p>
+<div class="desc inherited"><p>Returns the entire header as a formatted string …</p></div>
+</dd>
 <dt id="azcam_console.tools.instrument.InstrumentConsole.get_wavelength"><code class="name flex">
 <span>def <span class="ident">get_wavelength</span></span>(<span>self, wavelength_id: int = 0) ‑> float</span>
 </code></dt>
@@ -150,6 +202,36 @@ Useful for clients to determine which type of comparison exposures are supported
 <div class="desc"><p>Get instrument wavelength.</p>
 <p>:param wavelength_id: wavelength ID flag
 (use negative value for a list of all wavelengths)</p></div>
+</dd>
+<dt id="azcam_console.tools.instrument.InstrumentConsole.initialize"><code class="name flex">
+<span>def <span class="ident">initialize</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></code>.<code><a title="azcam_console.tools.console_tools.ConsoleTools.initialize" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools.initialize">initialize</a></code>
+</p>
+<div class="desc inherited"><p>Initialize this tool.</p></div>
+</dd>
+<dt id="azcam_console.tools.instrument.InstrumentConsole.read_header"><code class="name flex">
+<span>def <span class="ident">read_header</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></code>.<code><a title="azcam_console.tools.console_tools.ConsoleTools.read_header" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools.read_header">read_header</a></code>
+</p>
+<div class="desc inherited"><p>Returns the current header …</p></div>
+</dd>
+<dt id="azcam_console.tools.instrument.InstrumentConsole.reset"><code class="name flex">
+<span>def <span class="ident">reset</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></code>.<code><a title="azcam_console.tools.console_tools.ConsoleTools.reset" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools.reset">reset</a></code>
+</p>
+<div class="desc inherited"><p>Reset this tool.</p></div>
 </dd>
 <dt id="azcam_console.tools.instrument.InstrumentConsole.set_comps"><code class="name flex">
 <span>def <span class="ident">set_comps</span></span>(<span>self, comp_names=None)</span>
@@ -176,6 +258,27 @@ or a relative step if supported by hardware.</p>
 :param focus_id: focus sensor ID flag
 :param focus_type: focus type (absolute or step)</p></div>
 </dd>
+<dt id="azcam_console.tools.instrument.InstrumentConsole.set_keyword"><code class="name flex">
+<span>def <span class="ident">set_keyword</span></span>(<span>self, keyword: str, value: str, comment: str = 'none', typestring: str = 'none') ‑> Optional[str]</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></code>.<code><a title="azcam_console.tools.console_tools.ConsoleTools.set_keyword" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools.set_keyword">set_keyword</a></code>
+</p>
+<div class="desc inherited"><p>Set a keyword value, comment, and type.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>keyword</code></strong></dt>
+<dd>keyword</dd>
+<dt><strong><code>value</code></strong></dt>
+<dd>value of keyword</dd>
+<dt><strong><code>comment</code></strong></dt>
+<dd>comment string</dd>
+<dt><strong><code>typestring</code></strong></dt>
+<dd>one of …</dd>
+</dl></div>
+</dd>
 <dt id="azcam_console.tools.instrument.InstrumentConsole.set_shutter"><code class="name flex">
 <span>def <span class="ident">set_shutter</span></span>(<span>self, state: int = 0, shutter_id: int = 0) ‑> Optional[str]</span>
 </code></dt>
@@ -197,6 +300,17 @@ or a relative step if supported by hardware.</p>
 <p>:param wavelength: wavelength value, may be a string such as 'clear' or 'dark'
 :param wavelength_id: wavelength ID flag
 :param nd: neutral density value to set</p></div>
+</dd>
+<dt id="azcam_console.tools.instrument.InstrumentConsole.update_header"><code class="name flex">
+<span>def <span class="ident">update_header</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></code>.<code><a title="azcam_console.tools.console_tools.ConsoleTools.update_header" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools.update_header">update_header</a></code>
+</p>
+<div class="desc inherited"><p>Update the header of a tool.
+This command usually reads hardware to get the lastest keyword values.</p></div>
 </dd>
 </dl>
 </dd>
@@ -221,6 +335,7 @@ or a relative step if supported by hardware.</p>
 <ul class="two-column">
 <li><code><a title="azcam_console.tools.instrument.InstrumentConsole.comps_off" href="#azcam_console.tools.instrument.InstrumentConsole.comps_off">comps_off</a></code></li>
 <li><code><a title="azcam_console.tools.instrument.InstrumentConsole.comps_on" href="#azcam_console.tools.instrument.InstrumentConsole.comps_on">comps_on</a></code></li>
+<li><code><a title="azcam_console.tools.instrument.InstrumentConsole.delete_keyword" href="console_tools.html#azcam_console.tools.instrument.InstrumentConsole.delete_keyword">delete_keyword</a></code></li>
 <li><code><a title="azcam_console.tools.instrument.InstrumentConsole.get_all_comps" href="#azcam_console.tools.instrument.InstrumentConsole.get_all_comps">get_all_comps</a></code></li>
 <li><code><a title="azcam_console.tools.instrument.InstrumentConsole.get_comps" href="#azcam_console.tools.instrument.InstrumentConsole.get_comps">get_comps</a></code></li>
 <li><code><a title="azcam_console.tools.instrument.InstrumentConsole.get_current" href="#azcam_console.tools.instrument.InstrumentConsole.get_current">get_current</a></code></li>
@@ -228,14 +343,23 @@ or a relative step if supported by hardware.</p>
 <li><code><a title="azcam_console.tools.instrument.InstrumentConsole.get_filter" href="#azcam_console.tools.instrument.InstrumentConsole.get_filter">get_filter</a></code></li>
 <li><code><a title="azcam_console.tools.instrument.InstrumentConsole.get_filters" href="#azcam_console.tools.instrument.InstrumentConsole.get_filters">get_filters</a></code></li>
 <li><code><a title="azcam_console.tools.instrument.InstrumentConsole.get_focus" href="#azcam_console.tools.instrument.InstrumentConsole.get_focus">get_focus</a></code></li>
+<li><code><a title="azcam_console.tools.instrument.InstrumentConsole.get_keyword" href="console_tools.html#azcam_console.tools.instrument.InstrumentConsole.get_keyword">get_keyword</a></code></li>
+<li><code><a title="azcam_console.tools.instrument.InstrumentConsole.get_keywords" href="console_tools.html#azcam_console.tools.instrument.InstrumentConsole.get_keywords">get_keywords</a></code></li>
 <li><code><a title="azcam_console.tools.instrument.InstrumentConsole.get_power" href="#azcam_console.tools.instrument.InstrumentConsole.get_power">get_power</a></code></li>
 <li><code><a title="azcam_console.tools.instrument.InstrumentConsole.get_pressures" href="#azcam_console.tools.instrument.InstrumentConsole.get_pressures">get_pressures</a></code></li>
+<li><code><a title="azcam_console.tools.instrument.InstrumentConsole.get_string" href="console_tools.html#azcam_console.tools.instrument.InstrumentConsole.get_string">get_string</a></code></li>
 <li><code><a title="azcam_console.tools.instrument.InstrumentConsole.get_wavelength" href="#azcam_console.tools.instrument.InstrumentConsole.get_wavelength">get_wavelength</a></code></li>
+<li><code><a title="azcam_console.tools.instrument.InstrumentConsole.initialize" href="console_tools.html#azcam_console.tools.instrument.InstrumentConsole.initialize">initialize</a></code></li>
+<li><code><a title="azcam_console.tools.instrument.InstrumentConsole.read_header" href="console_tools.html#azcam_console.tools.instrument.InstrumentConsole.read_header">read_header</a></code></li>
+<li><code><a title="azcam_console.tools.instrument.InstrumentConsole.reset" href="console_tools.html#azcam_console.tools.instrument.InstrumentConsole.reset">reset</a></code></li>
 <li><code><a title="azcam_console.tools.instrument.InstrumentConsole.set_comps" href="#azcam_console.tools.instrument.InstrumentConsole.set_comps">set_comps</a></code></li>
 <li><code><a title="azcam_console.tools.instrument.InstrumentConsole.set_filter" href="#azcam_console.tools.instrument.InstrumentConsole.set_filter">set_filter</a></code></li>
 <li><code><a title="azcam_console.tools.instrument.InstrumentConsole.set_focus" href="#azcam_console.tools.instrument.InstrumentConsole.set_focus">set_focus</a></code></li>
+<li><code><a title="azcam_console.tools.instrument.InstrumentConsole.set_keyword" href="console_tools.html#azcam_console.tools.instrument.InstrumentConsole.set_keyword">set_keyword</a></code></li>
 <li><code><a title="azcam_console.tools.instrument.InstrumentConsole.set_shutter" href="#azcam_console.tools.instrument.InstrumentConsole.set_shutter">set_shutter</a></code></li>
 <li><code><a title="azcam_console.tools.instrument.InstrumentConsole.set_wavelength" href="#azcam_console.tools.instrument.InstrumentConsole.set_wavelength">set_wavelength</a></code></li>
+<li><code><a title="azcam_console.tools.instrument.InstrumentConsole.update_header" href="console_tools.html#azcam_console.tools.instrument.InstrumentConsole.update_header">update_header</a></code></li>
+<li><code><a title="azcam_console.tools.instrument.InstrumentConsole.verbosity" href="console_tools.html#azcam_console.tools.instrument.InstrumentConsole.verbosity">verbosity</a></code></li>
 </ul>
 </li>
 </ul>

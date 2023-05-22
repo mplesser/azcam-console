@@ -46,8 +46,19 @@ Usually implemented as the "exposure" tool.</p>
 </dl></div>
 <h3>Ancestors</h3>
 <ul class="hlist">
-<li>azcam.tools.console_tools.ConsoleTools</li>
+<li><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></li>
 </ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="azcam_console.tools.exposure.ExposureConsole.verbosity"><code class="name">var <span class="ident">verbosity</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></code>.<code><a title="azcam_console.tools.console_tools.ConsoleTools.verbosity" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools.verbosity">verbosity</a></code>
+</p>
+<div class="desc inherited"><p>verbosity for debug, &gt; 0 is more verbose</p></div>
+</dd>
+</dl>
 <h3>Methods</h3>
 <dl>
 <dt id="azcam_console.tools.exposure.ExposureConsole.abort"><code class="name flex">
@@ -65,6 +76,16 @@ This is an advanced function.</p>
 <p>:param exposure_time: the exposure time in seconds
 :param image_type: type of exposure ('zero', 'object', 'flat', &hellip;)
 :param image_title: image title, usually surrounded by double quotes</p></div>
+</dd>
+<dt id="azcam_console.tools.exposure.ExposureConsole.delete_keyword"><code class="name flex">
+<span>def <span class="ident">delete_keyword</span></span>(<span>self, keyword: str) ‑> Optional[str]</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></code>.<code><a title="azcam_console.tools.console_tools.ConsoleTools.delete_keyword" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools.delete_keyword">delete_keyword</a></code>
+</p>
+<div class="desc inherited"><p>Delete a keyword from a header …</p></div>
 </dd>
 <dt id="azcam_console.tools.exposure.ExposureConsole.end"><code class="name flex">
 <span>def <span class="ident">end</span></span>(<span>self) ‑> None</span>
@@ -149,6 +170,27 @@ number of times to flush the detector.</p></div>
 <dd>
 <div class="desc"><p>Return a list of valid image types.</p></div>
 </dd>
+<dt id="azcam_console.tools.exposure.ExposureConsole.get_keyword"><code class="name flex">
+<span>def <span class="ident">get_keyword</span></span>(<span>self, keyword: str) ‑> str</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></code>.<code><a title="azcam_console.tools.console_tools.ConsoleTools.get_keyword" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools.get_keyword">get_keyword</a></code>
+</p>
+<div class="desc inherited"><p>Return a keyword value, its comment string, and type.
+Comment always returned in double quotes, even if empty …</p></div>
+</dd>
+<dt id="azcam_console.tools.exposure.ExposureConsole.get_keywords"><code class="name flex">
+<span>def <span class="ident">get_keywords</span></span>(<span>self) ‑> list</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></code>.<code><a title="azcam_console.tools.console_tools.ConsoleTools.get_keywords" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools.get_keywords">get_keywords</a></code>
+</p>
+<div class="desc inherited"><p>Return a list of all keyword names …</p></div>
+</dd>
 <dt id="azcam_console.tools.exposure.ExposureConsole.get_pixels_remaining"><code class="name flex">
 <span>def <span class="ident">get_pixels_remaining</span></span>(<span>self) ‑> Union[str, int]</span>
 </code></dt>
@@ -166,6 +208,16 @@ number of times to flush the detector.</p></div>
 </code></dt>
 <dd>
 <div class="desc"><p>Return JSON dictionary of a variety of system status data in one dictionary.</p></div>
+</dd>
+<dt id="azcam_console.tools.exposure.ExposureConsole.get_string"><code class="name flex">
+<span>def <span class="ident">get_string</span></span>(<span>self) ‑> str</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></code>.<code><a title="azcam_console.tools.console_tools.ConsoleTools.get_string" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools.get_string">get_string</a></code>
+</p>
+<div class="desc inherited"><p>Returns the entire header as a formatted string …</p></div>
 </dd>
 <dt id="azcam_console.tools.exposure.ExposureConsole.guide"><code class="name flex">
 <span>def <span class="ident">guide</span></span>(<span>self, number_exposures: int = 1) ‑> Optional[str]</span>
@@ -207,6 +259,16 @@ This is an advanced function.</p></div>
 </code></dt>
 <dd>
 <div class="desc"><p>Pause an exposure in progress (integration only).</p></div>
+</dd>
+<dt id="azcam_console.tools.exposure.ExposureConsole.read_header"><code class="name flex">
+<span>def <span class="ident">read_header</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></code>.<code><a title="azcam_console.tools.console_tools.ConsoleTools.read_header" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools.read_header">read_header</a></code>
+</p>
+<div class="desc inherited"><p>Returns the current header …</p></div>
 </dd>
 <dt id="azcam_console.tools.exposure.ExposureConsole.readout"><code class="name flex">
 <span>def <span class="ident">readout</span></span>(<span>self) ‑> None</span>
@@ -323,6 +385,27 @@ Not fully functional.</p>
 <dd>
 <div class="desc"><p>Set the image title.</p></div>
 </dd>
+<dt id="azcam_console.tools.exposure.ExposureConsole.set_keyword"><code class="name flex">
+<span>def <span class="ident">set_keyword</span></span>(<span>self, keyword: str, value: str, comment: str = 'none', typestring: str = 'none') ‑> Optional[str]</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></code>.<code><a title="azcam_console.tools.console_tools.ConsoleTools.set_keyword" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools.set_keyword">set_keyword</a></code>
+</p>
+<div class="desc inherited"><p>Set a keyword value, comment, and type.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>keyword</code></strong></dt>
+<dd>keyword</dd>
+<dt><strong><code>value</code></strong></dt>
+<dd>value of keyword</dd>
+<dt><strong><code>comment</code></strong></dt>
+<dd>comment string</dd>
+<dt><strong><code>typestring</code></strong></dt>
+<dd>one of …</dd>
+</dl></div>
+</dd>
 <dt id="azcam_console.tools.exposure.ExposureConsole.set_roi"><code class="name flex">
 <span>def <span class="ident">set_roi</span></span>(<span>self, first_col: int = -1, last_col: int = -1, first_row: int = -1, last_row: int = -1, col_bin: int = -1, row_bin: int = -1, roi_number: int = 0)</span>
 </code></dt>
@@ -365,6 +448,17 @@ Returns immediately, not waiting for readout to finish.</p></div>
 :param exposure_time: exposure time in seconds
 :param image_type: image type</p></div>
 </dd>
+<dt id="azcam_console.tools.exposure.ExposureConsole.update_header"><code class="name flex">
+<span>def <span class="ident">update_header</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam_console.tools.console_tools.ConsoleTools" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools">ConsoleTools</a></code>.<code><a title="azcam_console.tools.console_tools.ConsoleTools.update_header" href="console_tools.html#azcam_console.tools.console_tools.ConsoleTools.update_header">update_header</a></code>
+</p>
+<div class="desc inherited"><p>Update the header of a tool.
+This command usually reads hardware to get the lastest keyword values.</p></div>
+</dd>
 </dl>
 </dd>
 </dl>
@@ -388,6 +482,7 @@ Returns immediately, not waiting for readout to finish.</p></div>
 <ul class="">
 <li><code><a title="azcam_console.tools.exposure.ExposureConsole.abort" href="#azcam_console.tools.exposure.ExposureConsole.abort">abort</a></code></li>
 <li><code><a title="azcam_console.tools.exposure.ExposureConsole.begin" href="#azcam_console.tools.exposure.ExposureConsole.begin">begin</a></code></li>
+<li><code><a title="azcam_console.tools.exposure.ExposureConsole.delete_keyword" href="console_tools.html#azcam_console.tools.exposure.ExposureConsole.delete_keyword">delete_keyword</a></code></li>
 <li><code><a title="azcam_console.tools.exposure.ExposureConsole.end" href="#azcam_console.tools.exposure.ExposureConsole.end">end</a></code></li>
 <li><code><a title="azcam_console.tools.exposure.ExposureConsole.expose" href="#azcam_console.tools.exposure.ExposureConsole.expose">expose</a></code></li>
 <li><code><a title="azcam_console.tools.exposure.ExposureConsole.expose1" href="#azcam_console.tools.exposure.ExposureConsole.expose1">expose1</a></code></li>
@@ -400,15 +495,19 @@ Returns immediately, not waiting for readout to finish.</p></div>
 <li><code><a title="azcam_console.tools.exposure.ExposureConsole.get_format" href="#azcam_console.tools.exposure.ExposureConsole.get_format">get_format</a></code></li>
 <li><code><a title="azcam_console.tools.exposure.ExposureConsole.get_image_title" href="#azcam_console.tools.exposure.ExposureConsole.get_image_title">get_image_title</a></code></li>
 <li><code><a title="azcam_console.tools.exposure.ExposureConsole.get_image_types" href="#azcam_console.tools.exposure.ExposureConsole.get_image_types">get_image_types</a></code></li>
+<li><code><a title="azcam_console.tools.exposure.ExposureConsole.get_keyword" href="console_tools.html#azcam_console.tools.exposure.ExposureConsole.get_keyword">get_keyword</a></code></li>
+<li><code><a title="azcam_console.tools.exposure.ExposureConsole.get_keywords" href="console_tools.html#azcam_console.tools.exposure.ExposureConsole.get_keywords">get_keywords</a></code></li>
 <li><code><a title="azcam_console.tools.exposure.ExposureConsole.get_pixels_remaining" href="#azcam_console.tools.exposure.ExposureConsole.get_pixels_remaining">get_pixels_remaining</a></code></li>
 <li><code><a title="azcam_console.tools.exposure.ExposureConsole.get_roi" href="#azcam_console.tools.exposure.ExposureConsole.get_roi">get_roi</a></code></li>
 <li><code><a title="azcam_console.tools.exposure.ExposureConsole.get_status" href="#azcam_console.tools.exposure.ExposureConsole.get_status">get_status</a></code></li>
+<li><code><a title="azcam_console.tools.exposure.ExposureConsole.get_string" href="console_tools.html#azcam_console.tools.exposure.ExposureConsole.get_string">get_string</a></code></li>
 <li><code><a title="azcam_console.tools.exposure.ExposureConsole.guide" href="#azcam_console.tools.exposure.ExposureConsole.guide">guide</a></code></li>
 <li><code><a title="azcam_console.tools.exposure.ExposureConsole.guide1" href="#azcam_console.tools.exposure.ExposureConsole.guide1">guide1</a></code></li>
 <li><code><a title="azcam_console.tools.exposure.ExposureConsole.initialize" href="#azcam_console.tools.exposure.ExposureConsole.initialize">initialize</a></code></li>
 <li><code><a title="azcam_console.tools.exposure.ExposureConsole.integrate" href="#azcam_console.tools.exposure.ExposureConsole.integrate">integrate</a></code></li>
 <li><code><a title="azcam_console.tools.exposure.ExposureConsole.parshift" href="#azcam_console.tools.exposure.ExposureConsole.parshift">parshift</a></code></li>
 <li><code><a title="azcam_console.tools.exposure.ExposureConsole.pause_exposure" href="#azcam_console.tools.exposure.ExposureConsole.pause_exposure">pause_exposure</a></code></li>
+<li><code><a title="azcam_console.tools.exposure.ExposureConsole.read_header" href="console_tools.html#azcam_console.tools.exposure.ExposureConsole.read_header">read_header</a></code></li>
 <li><code><a title="azcam_console.tools.exposure.ExposureConsole.readout" href="#azcam_console.tools.exposure.ExposureConsole.readout">readout</a></code></li>
 <li><code><a title="azcam_console.tools.exposure.ExposureConsole.reset" href="#azcam_console.tools.exposure.ExposureConsole.reset">reset</a></code></li>
 <li><code><a title="azcam_console.tools.exposure.ExposureConsole.resume_exposure" href="#azcam_console.tools.exposure.ExposureConsole.resume_exposure">resume_exposure</a></code></li>
@@ -420,11 +519,14 @@ Returns immediately, not waiting for readout to finish.</p></div>
 <li><code><a title="azcam_console.tools.exposure.ExposureConsole.set_format" href="#azcam_console.tools.exposure.ExposureConsole.set_format">set_format</a></code></li>
 <li><code><a title="azcam_console.tools.exposure.ExposureConsole.set_image_filename" href="#azcam_console.tools.exposure.ExposureConsole.set_image_filename">set_image_filename</a></code></li>
 <li><code><a title="azcam_console.tools.exposure.ExposureConsole.set_image_title" href="#azcam_console.tools.exposure.ExposureConsole.set_image_title">set_image_title</a></code></li>
+<li><code><a title="azcam_console.tools.exposure.ExposureConsole.set_keyword" href="console_tools.html#azcam_console.tools.exposure.ExposureConsole.set_keyword">set_keyword</a></code></li>
 <li><code><a title="azcam_console.tools.exposure.ExposureConsole.set_roi" href="#azcam_console.tools.exposure.ExposureConsole.set_roi">set_roi</a></code></li>
 <li><code><a title="azcam_console.tools.exposure.ExposureConsole.set_shutter" href="#azcam_console.tools.exposure.ExposureConsole.set_shutter">set_shutter</a></code></li>
 <li><code><a title="azcam_console.tools.exposure.ExposureConsole.start_readout" href="#azcam_console.tools.exposure.ExposureConsole.start_readout">start_readout</a></code></li>
 <li><code><a title="azcam_console.tools.exposure.ExposureConsole.test" href="#azcam_console.tools.exposure.ExposureConsole.test">test</a></code></li>
 <li><code><a title="azcam_console.tools.exposure.ExposureConsole.tests" href="#azcam_console.tools.exposure.ExposureConsole.tests">tests</a></code></li>
+<li><code><a title="azcam_console.tools.exposure.ExposureConsole.update_header" href="console_tools.html#azcam_console.tools.exposure.ExposureConsole.update_header">update_header</a></code></li>
+<li><code><a title="azcam_console.tools.exposure.ExposureConsole.verbosity" href="console_tools.html#azcam_console.tools.exposure.ExposureConsole.verbosity">verbosity</a></code></li>
 </ul>
 </li>
 </ul>

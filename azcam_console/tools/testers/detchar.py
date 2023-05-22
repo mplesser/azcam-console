@@ -2,7 +2,7 @@ import datetime
 import os
 
 import azcam
-from azcam.tools.tools import Tools
+from azcam.tools import Tools
 
 from .report import Report
 
@@ -13,7 +13,6 @@ class DetChar(Tools, Report):
     """
 
     def __init__(self):
-
         Tools.__init__(self, "detchar")
         Report.__init__(self)
 

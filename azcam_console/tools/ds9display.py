@@ -18,7 +18,7 @@ import numpy
 from astropy.io import fits as pyfits
 
 import azcam
-from azcam.tools.display import Display
+from azcam_console.tools.display import Display
 
 
 class Ds9Display(Display):

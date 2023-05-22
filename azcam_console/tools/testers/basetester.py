@@ -1,7 +1,7 @@
 import json
 
 import azcam
-from azcam.tools.tools import Tools
+from azcam.tools import Tools
 
 from .report import Report
 
@@ -12,7 +12,6 @@ class Tester(Tools, Report):
     """
 
     def __init__(self, tool_id, description=None):
-
         Tools.__init__(self, tool_id, description)
 
         Report.__init__(self)

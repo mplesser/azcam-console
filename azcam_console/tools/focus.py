@@ -6,7 +6,7 @@ This is a common version which may be used for server and console processes.
 import time
 
 import azcam
-from azcam.tools.tools import Tools
+from azcam.tools import Tools
 
 
 class Focus(Tools):
@@ -248,7 +248,6 @@ class Focus(Tools):
 
         nsteps = 0  # total number of focus steps
         while current_exposure <= self.number_exposures:
-
             # check for abort
             k = azcam.utils.check_keyboard(0)
             ab = azcam.db.abortflag
