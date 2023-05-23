@@ -1,6 +1,6 @@
 [project]
 name = "azcam-console"
-version = "23.0"
+version = "23.1"
 description = "Console application for the AzCam acquisition and analysis package"
 license = {file ="LICENSE"}
 readme = "README.md"
@@ -20,7 +20,7 @@ Documentation = "https://mplesser.github.io/azcam/"
 Repository = "https://github.com/mplesser/azcam/"
 
 [project.scripts]
-azcam = "azcam_console.start:start"
+azcamconsole = "azcam_console.start:start"
 
 [build-system]
 requires = ["flit_core >=3.2,<4"]

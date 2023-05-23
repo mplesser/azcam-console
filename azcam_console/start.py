@@ -1,7 +1,7 @@
 """
-Startup script for azcam.
+Startup script for azcamconsole.
 
-For installations, this is the "azcam" command.
+For installations, this is the "azcamconsole" command.
 """
 
 import os
@@ -12,14 +12,14 @@ import azcam
 
 def main():
     """
-    Method for the azcam command.
+    Method for the azcamconsole command.
     Required argument is a startup script name.
     Local optional arguments are:
       -venv path_to_ve_activation_script
       -python system_python_command (default is "ipython --profile azcam")
 
     Usage example:
-      azcam azcam_xxx.start -venv ve_activation_path -python python3
+      azcam azcam_itl.console -venv ve_activation_path -python python3
     """
 
     if len(sys.argv) >= 2:
@@ -40,7 +40,7 @@ def main():
         i2 = sys.argv.index("-python")
         pythoncmd = sys.argv[i2 + 1]
     else:
-        pythoncmd = "ipython --profile azcam"
+        pythoncmd = "ipython --profile azcamconsole"
         # Examples:
         # pythoncmd = "start ipython --profile azcam"
         # pythoncmd = "wt ipython --profile azcam"
