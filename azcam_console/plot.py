@@ -12,7 +12,7 @@ import matplotlib
 import numpy
 from matplotlib import pyplot as plt
 
-#: plot data - *azcam.functions.plot.plotdata*
+#: plot data - *azcam_console.plot.plotdata*
 plotdata = {
     "KeyPressed": "",
     "MouseButton": -1,
@@ -26,7 +26,7 @@ plotdata = {
 
 # can combine stypes like "bo-"
 
-#: list of markers with crosses  - *azcam.functions.plot.style_x*
+#: list of markers with crosses  - *azcam_console.plot.style_x*
 style_x = [
     "bx",
     "rx",
@@ -46,7 +46,7 @@ style_x = [
     "rx",
     "gx",
 ]
-#: list of markers with circles - *azcam.functions.plot.style_o*
+#: list of markers with circles - *azcam_console.plot.style_o*
 style_o = [
     "bo",
     "ro",
@@ -66,7 +66,7 @@ style_o = [
     "ro",
     "go",
 ]
-#: list of markers with dots - *azcam.functions.plot.style_dot*
+#: list of markers with dots - *azcam_console.plot.style_dot*
 style_dot = [
     "b.",
     "r.",
@@ -86,7 +86,7 @@ style_dot = [
     "r.",
     "g.",
 ]
-#: list of line styles - *azcam.functions.plot.style_lines*
+#: list of line styles - *azcam_console.plot.style_lines*
 style_lines = [
     "b-",
     "r-",

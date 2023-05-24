@@ -73,7 +73,7 @@ class ParametersConsole(Parameters):
         Return a parameter from the par_dict database, or prompt as needed.
         The new value is saved in the database.
 
-        :param str par_dict_id: Parameter dictionary name of in parameters.par_dict
+        :param str par_dict_id: Parameter dictionary name in par_dict
         :param str attribute: Name of attribute, used as dictionary key
         :param str value: "default" or "prompt" or a value
         :param str prompt: Prompt message
@@ -108,7 +108,7 @@ class ParametersConsole(Parameters):
         """
         Set a parameter from the par_dict database.
 
-        :param str par_dict_id: Parameter dictionary
+        :param str par_dict_id: Parameter dictionary name in par_dict
         :param str attribute: Name of attribute, used as dictionary key
         :param str value: "default" or "prompt" or a value
         :return:  None

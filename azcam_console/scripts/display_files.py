@@ -6,15 +6,13 @@ import os
 import sys
 
 import azcam
-from azcam.functions.utils import beep
+from azcam.utils import beep
 
 
 def display_files():
-
     # loop through files
     QUIT = 0
     for root, topfolders, filenames in os.walk("."):
-
         if QUIT:
             break
 

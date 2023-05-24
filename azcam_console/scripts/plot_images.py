@@ -7,7 +7,6 @@ import sys
 
 import azcam
 from azcam.image import Image
-from azcam.functions.utils import beep
 import azcam_console.plot
 
 
@@ -34,7 +33,7 @@ def plot_images(folder="."):
         for filename in filenames:
             if not filename.endswith(".fits"):
                 continue
-            beep(FreqYES, DurYES)
+            azcam.utils.beep(FreqYES, DurYES)
             f = os.path.join(root, filename)
 
             azcam.db.tools["display"].display(f)
