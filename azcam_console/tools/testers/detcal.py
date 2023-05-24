@@ -144,7 +144,8 @@ class DetCal(Tester):
         self.valid = True
 
         # finish
-        azcam.utils.restore_imagepars(impars, startingfolder)
+        azcam.utils.restore_imagepars(impars)
+        azcam.utils.curdir(startingfolder)
         azcam.log("detector calibration sequence finished")
 
         return

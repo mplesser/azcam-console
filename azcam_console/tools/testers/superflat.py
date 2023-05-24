@@ -99,7 +99,8 @@ class Superflat(Tester):
                 )
 
             # finish this set
-            azcam.utils.restore_imagepars(impars, currentfolder)
+            azcam.utils.restore_imagepars(impars)
+            azcam.utils.curdir(currentfolder)
 
         # finish
         azcam.log("Superflat sequence finished")

@@ -150,7 +150,8 @@ class Gain(Tester):
             azcam.log("Image 2 finished")
 
         # finish
-        azcam.utils.restore_imagepars(impars, currentfolder)
+        azcam.utils.restore_imagepars(impars)
+        azcam.utils.curdir(currentfolder)
         azcam.log("Gain sequence finished")
 
         return

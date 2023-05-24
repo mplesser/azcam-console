@@ -60,3 +60,66 @@ class ParametersConsole(Parameters):
         except azcam.AzcamError:
             return
         return None
+
+    def get_script_par(
+        self,
+        par_dict_id: typing.Dict,
+        attribute: typing.Any,
+        value: typing.Any = "default",
+        prompt_string: str = "",
+        default: typing.Any = None,
+    ) -> typing.Any:
+        """
+        Return a parameter from the par_dict database, or prompt as needed.
+        The new value is saved in the database.
+
+        :param str par_dict_id: Parameter dictionary name of in parameters.par_dict
+        :param str attribute: Name of attribute, used as dictionary key
+        :param str value: "default" or "prompt" or a value
+        :param str prompt: Prompt message
+        :param str default: Default value to be used
+        :return str:  parameter
+        """
+
+        par_dict = self.par_dict.get(par_dict_id)
+        if par_dict is None:
+            self.par_dict[par_dict_id] = {}
+            par_dict = self.par_dict[par_dict_id]
+
+        if par_dict.get(attribute):
+            default = par_dict.get(attribute)  # overides default value
+
+        if value == "prompt":
+            if prompt_string == "":
+                prompt_string = f"Enter value for {attribute}"
+            value = azcam.utils.prompt(prompt_string, default)
+            _, value = azcam.utils.get_datatype(value)
+        elif value == "default":
+            value = default
+        else:
+            pass  # value passsed is used
+
+        # save
+        self.set_script_par(par_dict_id, attribute, value)
+
+        return value
+
+    def set_script_par(self, par_dict_id, attribute, value) -> None:
+        """
+        Set a parameter from the par_dict database.
+
+        :param str par_dict_id: Parameter dictionary
+        :param str attribute: Name of attribute, used as dictionary key
+        :param str value: "default" or "prompt" or a value
+        :return:  None
+        """
+
+        par_dict = self.par_dict.get(par_dict_id)
+        if par_dict is None:
+            self.par_dict[par_dict_id] = {}
+            par_dict = self.par_dict[par_dict_id]
+
+        # get value
+        par_dict[attribute] = value
+
+        return

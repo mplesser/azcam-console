@@ -17,7 +17,7 @@ import azcam
 import azcam_console
 import azcam_console.tools.console_tools
 import azcam_console.tools.testers
-import azcam_console.scripts
+from azcam.scripts import loadscripts
 import azcam_console.shortcuts
 
 from azcam_console.tools.ds9display import Ds9Display
@@ -88,7 +88,7 @@ azcam_console.tools.testers.load()
 # scripts
 # ****************************************************************
 azcam.log("Loading scripts")
-azcam_console.scripts.load()
+loadscripts(["azcam_console.scripts"])
 
 # ****************************************************************
 # observe

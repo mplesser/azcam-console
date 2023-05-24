@@ -71,7 +71,9 @@ class Bias(Tester):
                 time.sleep(self.delay)
 
         # finish
-        azcam.utils.restore_imagepars(impars, currentfolder)
+        azcam.utils.restore_imagepars(impars)
+        azcam.utils.curdir(currentfolder)
+
         azcam.log("Bias sequence finished")
 
         return

@@ -90,7 +90,8 @@ class Prnu(Tester):
             )
 
         # finish
-        azcam.utils.restore_imagepars(impars, currentfolder)
+        azcam.utils.restore_imagepars(impars)
+        azcam.utils.curdir(currentfolder)
         azcam.log("PRNU sequence finished")
 
         return

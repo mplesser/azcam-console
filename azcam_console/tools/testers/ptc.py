@@ -173,7 +173,8 @@ class Ptc(Tester):
             instrument.delete_keyword("REFCUR")
         except Exception:
             pass
-        azcam.utils.restore_imagepars(impars, currentfolder)
+        azcam.utils.restore_imagepars(impars)
+        azcam.utils.curdir(currentfolder)
         azcam.log("PTC sequence finished")
 
         return

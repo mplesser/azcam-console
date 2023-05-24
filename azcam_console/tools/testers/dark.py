@@ -116,7 +116,8 @@ class Dark(Tester):
             exposure.expose(self.exposure_time, "dark", "dark image")
 
         # finish
-        azcam.utils.restore_imagepars(impars, currentfolder)
+        azcam.utils.restore_imagepars(impars)
+        azcam.utils.curdir(currentfolder)
         azcam.log("Dark sequence finished")
 
         return

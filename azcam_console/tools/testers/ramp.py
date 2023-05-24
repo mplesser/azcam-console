@@ -78,7 +78,8 @@ class Ramp(Tester):
         azcam.db.tools["exposure"].expose(base_et, "ramp", "ramp image 2")
 
         # finish
-        azcam.utils.restore_imagepars(impars, currentfolder)
+        azcam.utils.restore_imagepars(impars)
+        azcam.utils.curdir(currentfolder)
 
         return
 

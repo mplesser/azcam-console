@@ -149,7 +149,8 @@ class Linearity(Tester):
             azcam.db.tools["exposure"].expose(exptime, self.exposure_type, "Linearity flat")
 
         # finish
-        azcam.utils.restore_imagepars(impars, currentfolder)
+        azcam.utils.restore_imagepars(impars)
+        azcam.utils.curdir(currentfolder)
         azcam.log("Linearity sequence finished")
 
         return

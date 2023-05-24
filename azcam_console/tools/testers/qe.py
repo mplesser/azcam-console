@@ -184,7 +184,8 @@ class Qe(Tester):
 
         # finish
         instrument.delete_keyword("REFCUR")
-        azcam.utils.restore_imagepars(impars, currentfolder)
+        azcam.utils.restore_imagepars(impars)
+        azcam.utils.curdir(currentfolder)
 
         return
 
