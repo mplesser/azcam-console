@@ -15,6 +15,9 @@ dependencies = [
     "pypdf2",
 ]
 
+[tool.flit.module]
+name = "azcam_console"
+
 [project.urls]
 Documentation = "https://mplesser.github.io/azcam/"
 Repository = "https://github.com/mplesser/azcam/"
