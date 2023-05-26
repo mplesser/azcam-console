@@ -17,6 +17,7 @@ import azcam
 import azcam_console
 import azcam_console.tools.console_tools
 import azcam_console.tools.testers
+from azcam_console.tools.focus import FocusConsole
 from azcam.scripts import loadscripts
 import azcam_console.shortcuts
 
@@ -78,6 +79,7 @@ display = Ds9Display()
 from azcam_console.tools import create_console_tools
 
 create_console_tools()
+focus = FocusConsole()
 
 # ****************************************************************
 # testers
