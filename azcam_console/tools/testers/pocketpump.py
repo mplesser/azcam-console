@@ -45,7 +45,7 @@ class PocketPump(Tester):
 
         # save pars to be changed
         impars = {}
-        azcam.utils.save_imagepars(impars)
+        azcam.db.parameters.save_imagepars(impars)
 
         azcam.db.parameters.set_par("imageroot", "pocketpump.")  # for automatic data analysis
         azcam.db.parameters.set_par("imageincludesequencenumber", 1)  # use sequence numbers
@@ -54,7 +54,7 @@ class PocketPump(Tester):
         azcam.db.parameters.set_par("imagetest", 0)
 
         # create and move to new subfolder
-        currentfolder, newfolder = azcam.utils.make_file_folder("pocketpump")
+        currentfolder, newfolder = azcam_console.utils.make_file_folder("pocketpump")
         azcam.db.parameters.set_par("imagefolder", newfolder)
 
         # set wavelength so exposure time is correct
@@ -78,7 +78,7 @@ class PocketPump(Tester):
         except Exception as message:
             azcam.db.parameters.set_par("TimingFile", timingfile_org)
             azcam.db.tools["exposure"].reset()
-            azcam.utils.restore_imagepars(impars)
+            azcam.db.parameters.restore_imagepars(impars)
             azcam.utils.curdir(currentfolder)
             raise message
 
@@ -114,7 +114,7 @@ class PocketPump(Tester):
         except Exception as message:
             azcam.db.parameters.set_par("TimingFile", timingfile_org)
             azcam.db.tools["exposure"].reset()
-            azcam.utils.restore_imagepars(impars)
+            azcam.db.parameters.restore_imagepars(impars)
             azcam.utils.curdir(currentfolder)
             return message
 
@@ -128,14 +128,14 @@ class PocketPump(Tester):
         except Exception as message:
             azcam.db.parameters.set_par("TimingFile", timingfile_org)
             azcam.db.tools["exposure"].reset()
-            azcam.utils.restore_imagepars(impars)
+            azcam.db.parameters.restore_imagepars(impars)
             azcam.utils.curdir(currentfolder)
             raise message
 
         # finish
         azcam.db.parameters.set_par("TimingFile", timingfile_org)
         azcam.db.tools["exposure"].reset()
-        azcam.utils.restore_imagepars(impars)
+        azcam.db.parameters.restore_imagepars(impars)
         azcam.utils.curdir(currentfolder)
         azcam.log("PocketPump sequence finished")
 
@@ -148,11 +148,13 @@ class PocketPump(Tester):
 
         azcam.log("Acquiring PocketPump sequence")
 
-        exposure, instrument, server = azcam.utils.get_tools(["exposure", "instrument", "server"])
+        exposure, instrument, server = azcam_console.utils.get_tools(
+            ["exposure", "instrument", "server"]
+        )
 
         # save pars to be changed
         impars = {}
-        azcam.utils.save_imagepars(impars)
+        azcam.db.parameters.save_imagepars(impars)
 
         azcam.db.parameters.set_par("imageroot", "pocketpump.")  # for automatic data analysis
         azcam.db.parameters.set_par("imageincludesequencenumber", 1)  # use sequence numbers
@@ -161,7 +163,7 @@ class PocketPump(Tester):
         azcam.db.parameters.set_par("imagetest", 0)
 
         # create and move to new subfolder
-        currentfolder, newfolder = azcam.utils.make_file_folder("pocketpump")
+        currentfolder, newfolder = azcam_console.utils.make_file_folder("pocketpump")
         azcam.db.parameters.set_par("imagefolder", newfolder)
 
         # set wavelength so exposure time is correct
@@ -191,7 +193,7 @@ class PocketPump(Tester):
         try:
             exposure.expose(0, "zero", "pocketpump first bias")
         except Exception as message:
-            azcam.utils.restore_imagepars(impars)
+            azcam.db.parameters.restore_imagepars(impars)
             azcam.utils.curdir(currentfolder)
             raise message
 
@@ -210,7 +212,7 @@ class PocketPump(Tester):
         try:
             exposure.expose(0, "zero", "pocketpump second bias")
         except Exception as message:
-            azcam.utils.restore_imagepars(impars)
+            azcam.db.parameters.restore_imagepars(impars)
             azcam.utils.curdir(currentfolder)
             raise message
 
@@ -220,12 +222,12 @@ class PocketPump(Tester):
             exposure.expose(et, self.exposure_type, "pocket pump reference flat")
 
         except Exception as message:
-            azcam.utils.restore_imagepars(impars)
+            azcam.db.parameters.restore_imagepars(impars)
             azcam.utils.curdir(currentfolder)
             raise message
 
         # finish
-        azcam.utils.restore_imagepars(impars)
+        azcam.db.parameters.restore_imagepars(impars)
         azcam.utils.curdir(currentfolder)
         azcam.log("PocketPump sequence finished")
 

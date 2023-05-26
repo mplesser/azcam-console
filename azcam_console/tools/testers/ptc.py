@@ -83,14 +83,14 @@ class Ptc(Tester):
 
         azcam.log("Acquiring PTC sequence")
 
-        exposure, instrument = azcam.utils.get_tools(["exposure", "instrument"])
+        exposure, instrument = azcam_console.utils.get_tools(["exposure", "instrument"])
 
         # save pars to be changed
         impars = {}
-        azcam.utils.save_imagepars(impars)
+        azcam.db.parameters.save_imagepars(impars)
 
         # create new subfolder
-        currentfolder, newfolder = azcam.utils.make_file_folder("ptc")
+        currentfolder, newfolder = azcam_console.utils.make_file_folder("ptc")
         azcam.db.parameters.set_par("imagefolder", newfolder)
 
         # set wavelength
@@ -173,7 +173,7 @@ class Ptc(Tester):
             instrument.delete_keyword("REFCUR")
         except Exception:
             pass
-        azcam.utils.restore_imagepars(impars)
+        azcam.db.parameters.restore_imagepars(impars)
         azcam.utils.curdir(currentfolder)
         azcam.log("PTC sequence finished")
 
@@ -197,7 +197,7 @@ class Ptc(Tester):
 
         if self.overscan_correct or self.resample > 1:
             # create analysis subfolder
-            startingfolder, subfolder = azcam.utils.make_file_folder(subfolder)
+            startingfolder, subfolder = azcam_console.utils.make_file_folder(subfolder)
 
             # copy all image files to analysis folder
             azcam.log("Making copy of image files for analysis")
@@ -214,7 +214,7 @@ class Ptc(Tester):
         self.NumExt, self.first_ext, self.last_ext = azcam.fits.get_extensions(firstfile)
 
         # get ROI
-        self.roi = azcam.utils.get_image_roi()
+        self.roi = azcam_console.utils.get_image_roi()
 
         # Overscan correct all images
         if self.overscan_correct:

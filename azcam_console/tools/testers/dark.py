@@ -76,14 +76,14 @@ class Dark(Tester):
 
         azcam.log("Acquiring dark sequence")
 
-        exposure, tempcon = azcam.utils.get_tools(["exposure", "tempcon"])
+        exposure, tempcon = azcam_console.utils.get_tools(["exposure", "tempcon"])
 
         # save pars to be changed
         impars = {}
-        azcam.utils.save_imagepars(impars)
+        azcam.db.parameters.save_imagepars(impars)
 
         # create new subfolder
-        currentfolder, newfolder = azcam.utils.make_file_folder("dark")
+        currentfolder, newfolder = azcam_console.utils.make_file_folder("dark")
         azcam.db.parameters.set_par("imagefolder", newfolder)
 
         # clear device
@@ -116,7 +116,7 @@ class Dark(Tester):
             exposure.expose(self.exposure_time, "dark", "dark image")
 
         # finish
-        azcam.utils.restore_imagepars(impars)
+        azcam.db.parameters.restore_imagepars(impars)
         azcam.utils.curdir(currentfolder)
         azcam.log("Dark sequence finished")
 
@@ -144,7 +144,7 @@ class Dark(Tester):
 
         # copy files to analysis subfolder
         azcam.log("Making copy of image files for analysis")
-        startingfolder, subfolder = azcam.utils.make_file_folder(subfolder)
+        startingfolder, subfolder = azcam_console.utils.make_file_folder(subfolder)
         for filename in glob.glob(os.path.join(startingfolder, "*.fits")):
             shutil.copy(filename, subfolder)
         currentfolder = azcam.utils.curdir(subfolder)  # move to analysis folder
@@ -154,7 +154,7 @@ class Dark(Tester):
 
         # get gain and ROI
         self.system_gain = azcam.db.tools["gain"].get_system_gain()
-        self.roi = azcam.utils.get_image_roi()
+        self.roi = azcam_console.utils.get_image_roi()
 
         # get bias image
         zerofilename = rootname + f"{StartingSequence:04d}"

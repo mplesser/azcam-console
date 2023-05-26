@@ -81,14 +81,14 @@ class Qe(Tester):
 
         azcam.log("Acquiring QE sequence")
 
-        exposure, instrument = azcam.utils.get_tools(["exposure", "instrument"])
+        exposure, instrument = azcam_console.utils.get_tools(["exposure", "instrument"])
 
         # save pars to be changed
         impars = {}
-        azcam.utils.save_imagepars(impars)
+        azcam.db.parameters.save_imagepars(impars)
 
         # create new subfolder
-        currentfolder, subfolder = azcam.utils.make_file_folder("qe")
+        currentfolder, subfolder = azcam_console.utils.make_file_folder("qe")
         azcam.log(f"QE folder is {subfolder}")
         azcam.db.parameters.set_par("imagefolder", subfolder)
 
@@ -184,7 +184,7 @@ class Qe(Tester):
 
         # finish
         instrument.delete_keyword("REFCUR")
-        azcam.utils.restore_imagepars(impars)
+        azcam.db.parameters.restore_imagepars(impars)
         azcam.utils.curdir(currentfolder)
 
         return
@@ -241,7 +241,7 @@ class Qe(Tester):
         startingfolder = azcam.utils.curdir()
         if self.overscan_correct or self.zero_correct or self.include_dark_images:
             # create analysis subfolder
-            startingfolder, subfolder = azcam.utils.make_file_folder(subfolder)
+            startingfolder, subfolder = azcam_console.utils.make_file_folder(subfolder)
 
             # copy all image files to analysis folder
             azcam.log("Making copy of image files for analysis")

@@ -110,10 +110,10 @@ class Fe55(Tester):
 
         # save pars to be changed
         impars = {}
-        azcam.utils.save_imagepars(impars)
+        azcam.db.parameters.save_imagepars(impars)
 
         # create new subfolder
-        currentfolder, newfolder = azcam.utils.make_file_folder("fe55")
+        currentfolder, newfolder = azcam_console.utils.make_file_folder("fe55")
         azcam.db.parameters.set_par("imagefolder", newfolder)
 
         # clear device
@@ -148,7 +148,7 @@ class Fe55(Tester):
             azcam.db.tools["exposure"].expose(self.exposure_time, "dark", "dark image")
 
         # finish
-        azcam.utils.restore_imagepars(impars)
+        azcam.db.parameters.restore_imagepars(impars)
         azcam.utils.curdir(currentfolder)
         azcam.log("Fe-55 finished")
 
@@ -176,7 +176,7 @@ class Fe55(Tester):
 
         if self.overscan_correct or self.zero_correct:
             # create analysis subfolder
-            startingfolder, subfolder = azcam.utils.make_file_folder(subfolder)
+            startingfolder, subfolder = azcam_console.utils.make_file_folder(subfolder)
 
             # copy all image files to analysis folder
             azcam.log("Making copy of image files for analysis")
@@ -192,7 +192,7 @@ class Fe55(Tester):
         SequenceNumber = StartingSequence
 
         # get noise roi
-        nroi = azcam.utils.get_image_roi()[1]
+        nroi = azcam_console.utils.get_image_roi()[1]
         self.noise_dn = []
         self.read_noise = []
 

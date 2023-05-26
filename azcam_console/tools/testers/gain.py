@@ -87,13 +87,13 @@ class Gain(Tester):
 
         # save pars to be changed
         impars = {}
-        azcam.utils.save_imagepars(impars)
+        azcam.db.parameters.save_imagepars(impars)
 
         # create new subfolder
         if self.overwrite:
             if os.path.exists("gain"):
                 shutil.rmtree("gain")
-        currentfolder, subfolder = azcam.utils.make_file_folder("gain")
+        currentfolder, subfolder = azcam_console.utils.make_file_folder("gain")
         azcam.db.parameters.set_par("imagefolder", subfolder)
 
         self.imagefolder = subfolder
@@ -150,7 +150,7 @@ class Gain(Tester):
             azcam.log("Image 2 finished")
 
         # finish
-        azcam.utils.restore_imagepars(impars)
+        azcam.db.parameters.restore_imagepars(impars)
         azcam.utils.curdir(currentfolder)
         azcam.log("Gain sequence finished")
 
@@ -175,7 +175,7 @@ class Gain(Tester):
         NumExt = max(1, NumExt)
 
         # get ROI
-        self.roi = azcam.utils.get_image_roi()
+        self.roi = azcam_console.utils.get_image_roi()
         if len(self.roi) == 1:
             self.roi.append(self.roi[0])
 
@@ -314,7 +314,7 @@ class Gain(Tester):
             ffci_sdev = [0]
 
         # get ROI
-        self.roi = azcam.utils.get_image_roi()
+        self.roi = azcam_console.utils.get_image_roi()
 
         # get zero mean and sigma
         zmean = azcam.fits.mean(Zero, self.roi[1])

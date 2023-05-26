@@ -74,10 +74,10 @@ class Linearity(Tester):
 
         # save pars to be changed
         impars = {}
-        azcam.utils.save_imagepars(impars)
+        azcam.db.parameters.save_imagepars(impars)
 
         # create new subfolder
-        currentfolder, newfolder = azcam.utils.make_file_folder("linearity")
+        currentfolder, newfolder = azcam_console.utils.make_file_folder("linearity")
         azcam.log(f"Linearity folder is {newfolder}")
         azcam.db.parameters.set_par("imagefolder", newfolder)
 
@@ -149,7 +149,7 @@ class Linearity(Tester):
             azcam.db.tools["exposure"].expose(exptime, self.exposure_type, "Linearity flat")
 
         # finish
-        azcam.utils.restore_imagepars(impars)
+        azcam.db.parameters.restore_imagepars(impars)
         azcam.utils.curdir(currentfolder)
         azcam.log("Linearity sequence finished")
 
@@ -172,7 +172,7 @@ class Linearity(Tester):
 
         if self.overscan_correct or self.zero_correct:
             # create analysis subfolder
-            startingfolder, subfolder = azcam.utils.make_file_folder(subfolder)
+            startingfolder, subfolder = azcam_console.utils.make_file_folder(subfolder)
 
             # copy all image files to analysis folder
             azcam.log("Making copy of image files for analysis")
@@ -226,7 +226,7 @@ class Linearity(Tester):
                 nextfile = os.path.join(currentfolder, rootname + "%04d" % SequenceNumber) + ".fits"
                 loop += 1
 
-        self.roi = azcam.utils.get_image_roi()
+        self.roi = azcam_console.utils.get_image_roi()
 
         zerofilename = rootname + "%04d" % StartingSequence
         zerofilename = azcam.utils.make_image_filename(zerofilename)

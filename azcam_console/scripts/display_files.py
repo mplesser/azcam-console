@@ -6,7 +6,7 @@ import os
 import sys
 
 import azcam
-from azcam.utils import beep
+from azcam_console.utils import beep
 
 
 def display_files():

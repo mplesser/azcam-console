@@ -48,13 +48,13 @@ class DetCal(Tester):
 
         # save pars to be changed
         impars = {}
-        azcam.utils.save_imagepars(impars)
+        azcam.db.parameters.save_imagepars(impars)
 
         # create new subfolder
         if self.overwrite:
             if os.path.exists("detcal"):
                 shutil.rmtree("detcal")
-        startingfolder, subfolder = azcam.utils.make_file_folder("detcal")
+        startingfolder, subfolder = azcam_console.utils.make_file_folder("detcal")
         azcam.db.parameters.set_par("imagefolder", subfolder)
         azcam.utils.curdir(subfolder)
 
@@ -65,7 +65,7 @@ class DetCal(Tester):
 
         # get gain and ROI
         self.system_gain = azcam.db.tools["gain"].get_system_gain()
-        self.roi = azcam.utils.get_image_roi()
+        self.roi = azcam_console.utils.get_image_roi()
 
         self.system_gain = azcam.db.tools["gain"].system_gain
         self.zero_mean = azcam.db.tools["gain"].zero_mean
@@ -144,7 +144,7 @@ class DetCal(Tester):
         self.valid = True
 
         # finish
-        azcam.utils.restore_imagepars(impars)
+        azcam.db.parameters.restore_imagepars(impars)
         azcam.utils.curdir(startingfolder)
         azcam.log("detector calibration sequence finished")
 
