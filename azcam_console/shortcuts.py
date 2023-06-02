@@ -4,12 +4,13 @@ CLI shortcuts for azcam-console.
 
 
 import azcam
+import azcam_console
 
 
 def bf():
     """Shortcut for file_browser()."""
 
-    folder = azcam.utils.file_browser("", "folder", "Select folder")
+    folder = azcam_console.utils.file_browser("", "folder", "Select folder")
     if folder == []:
         return
     if isinstance(folder, list):

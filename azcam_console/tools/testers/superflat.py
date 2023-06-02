@@ -44,7 +44,7 @@ class Superflat(Tester):
 
         # save pars to be changed
         impars = {}
-        azcam.utils.save_imagepars(impars)
+        azcam.db.parameters.save_imagepars(impars)
         currentfolder = azcam.utils.curdir()
 
         # set wavelength
@@ -84,7 +84,7 @@ class Superflat(Tester):
             azcam.db.parameters.set_par("imagetest", 0)  # turn off TestImage
 
             # create new subfolder
-            currentfolder, newfolder = azcam.utils.make_file_folder("superflat", 1, 1)
+            currentfolder, newfolder = azcam_console.utils.make_file_folder("superflat", 1, 1)
             azcam.db.parameters.set_par("imagefolder", newfolder)
 
             for loop in range(self.number_images_acquire[setnum]):
@@ -99,7 +99,7 @@ class Superflat(Tester):
                 )
 
             # finish this set
-            azcam.utils.restore_imagepars(impars)
+            azcam.db.parameters.restore_imagepars(impars)
             azcam.utils.curdir(currentfolder)
 
         # finish
@@ -126,7 +126,7 @@ class Superflat(Tester):
 
         if self.overscan_correct or self.zero_correct:
             # create analysis subfolder
-            startingfolder, subfolder = azcam.utils.make_file_folder("analysis")
+            startingfolder, subfolder = azcam_console.utils.make_file_folder("analysis")
 
             # copy all image files to analysis folder
             azcam.log("Making copy of image files for analysis")

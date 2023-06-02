@@ -93,7 +93,7 @@ class Metrology(Tester):
         self.end_time = None
         self.date = None
 
-    def find_file(self, filename):
+    def _find_file_starting(self, filename):
         """
         Find a filename starting with filename.
         """
@@ -123,7 +123,7 @@ class Metrology(Tester):
         azcam.log("Analyzing metrology data")
 
         if filename is None:
-            filename = self.find_file("sn")
+            filename = self._find_file_starting("sn")
 
         # read data
         self.read_data(filename)

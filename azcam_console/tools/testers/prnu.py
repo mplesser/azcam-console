@@ -50,10 +50,10 @@ class Prnu(Tester):
 
         # save pars to be changed
         impars = {}
-        azcam.utils.save_imagepars(impars)
+        azcam.db.parameters.save_imagepars(impars)
 
         # create new subfolder
-        currentfolder, newfolder = azcam.utils.make_file_folder("prnu")
+        currentfolder, newfolder = azcam_console.utils.make_file_folder("prnu")
         azcam.db.parameters.set_par("imagefolder", newfolder)
 
         # clear device
@@ -90,7 +90,7 @@ class Prnu(Tester):
             )
 
         # finish
-        azcam.utils.restore_imagepars(impars)
+        azcam.db.parameters.restore_imagepars(impars)
         azcam.utils.curdir(currentfolder)
         azcam.log("PRNU sequence finished")
 
@@ -112,7 +112,7 @@ class Prnu(Tester):
 
         if self.overscan_correct or self.zero_correct:
             # create analysis subfolder
-            startingfolder, subfolder = azcam.utils.make_file_folder(subfolder)
+            startingfolder, subfolder = azcam_console.utils.make_file_folder(subfolder)
 
             # copy all image files to analysis folder
             azcam.log("Making copy of image files for analysis")

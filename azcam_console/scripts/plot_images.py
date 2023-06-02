@@ -33,7 +33,7 @@ def plot_images(folder="."):
         for filename in filenames:
             if not filename.endswith(".fits"):
                 continue
-            azcam.utils.beep(FreqYES, DurYES)
+            azcam_console.utils.beep(FreqYES, DurYES)
             f = os.path.join(root, filename)
 
             azcam.db.tools["display"].display(f)

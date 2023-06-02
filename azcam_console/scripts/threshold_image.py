@@ -11,6 +11,7 @@ import scipy.optimize
 
 import azcam
 from azcam.image import Image
+import azcam_console
 import azcam_console.plot
 
 
@@ -19,7 +20,7 @@ def threshold_image(filename="test.fits"):
         "threshold_image", "filename", "prompt", "Enter image filename", filename
     )
     if filename == ".":
-        reply = azcam.utils.file_browser("", [("image files", ("*.fits"))])
+        reply = azcam_console.utils.file_browser("", [("image files", ("*.fits"))])
         filename = reply[0]
     if not os.path.isabs(filename):
         filename = azcam.utils.make_image_filename(filename)

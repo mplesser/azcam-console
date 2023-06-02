@@ -46,10 +46,10 @@ class Bias(Tester):
 
         # save pars to be changed
         impars = {}
-        azcam.utils.save_imagepars(impars)
+        azcam.db.parameters.save_imagepars(impars)
 
         # create new subfolder
-        currentfolder, newfolder = azcam.utils.make_file_folder("bias")
+        currentfolder, newfolder = azcam_console.utils.make_file_folder("bias")
         azcam.db.parameters.set_par("imagefolder", newfolder)
 
         # clear device
@@ -71,7 +71,7 @@ class Bias(Tester):
                 time.sleep(self.delay)
 
         # finish
-        azcam.utils.restore_imagepars(impars)
+        azcam.db.parameters.restore_imagepars(impars)
         azcam.utils.curdir(currentfolder)
 
         azcam.log("Bias sequence finished")
@@ -105,7 +105,7 @@ class Bias(Tester):
         sequence_number = starting_sequence
 
         # ROI is  for mean and sdev
-        self.roi = azcam.utils.get_image_roi()
+        self.roi = azcam_console.utils.get_image_roi()
 
         # get first filename
         zerofilename = rootname + f"{starting_sequence:04d}"

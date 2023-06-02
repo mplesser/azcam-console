@@ -1,6 +1,7 @@
 import json
 
 import azcam
+import azcam_console
 from azcam.tools import Tools
 
 from .report import Report
@@ -76,7 +77,7 @@ class Tester(Tools, Report):
         """
 
         if filename == "prompt":
-            f = azcam.utils.file_browser(
+            f = azcam_console.utils.file_browser(
                 self.data_file, [("data files", ("*.txt"))], Label="Select data file"
             )
             if f is not None and f != "":

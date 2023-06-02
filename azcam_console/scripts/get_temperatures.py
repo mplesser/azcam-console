@@ -4,6 +4,7 @@ import time
 
 import azcam
 import azcam_console.plot
+import azcam_console
 
 
 def get_temperatures(delay=10.0, logfile="get_temperatures.log", plottemps=1):
@@ -29,7 +30,7 @@ def get_temperatures(delay=10.0, logfile="get_temperatures.log", plottemps=1):
         logfile,
     )
     if logfile == ".":
-        reply = azcam.utils.file_browser(logfile, [("all files", ("*.*"))])
+        reply = azcam_console.utils.file_browser(logfile, [("all files", ("*.*"))])
         logfile = reply[0]
 
     plottemps = azcam.db.parameters.get_script_par(

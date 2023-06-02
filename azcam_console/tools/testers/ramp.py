@@ -43,12 +43,12 @@ class Ramp(Tester):
         """
 
         # create new subfolder
-        currentfolder, newfolder = azcam.utils.make_file_folder("ramp")
+        currentfolder, newfolder = azcam_console.utils.make_file_folder("ramp")
         azcam.db.parameters.set_par("imagefolder", newfolder)
 
         # save pars to be changed
         impars = {}
-        azcam.utils.save_imagepars(impars)
+        azcam.db.parameters.save_imagepars(impars)
 
         # flush detector
         azcam.db.tools["exposure"].test(0)
@@ -78,7 +78,7 @@ class Ramp(Tester):
         azcam.db.tools["exposure"].expose(base_et, "ramp", "ramp image 2")
 
         # finish
-        azcam.utils.restore_imagepars(impars)
+        azcam.db.parameters.restore_imagepars(impars)
         azcam.utils.curdir(currentfolder)
 
         return
@@ -97,7 +97,7 @@ class Ramp(Tester):
         CurrentFolder = azcam.utils.curdir()
 
         # get ROI
-        self.roi = azcam.utils.get_image_roi()
+        self.roi = azcam_console.utils.get_image_roi()
 
         # bias image
         zerofilename = rootname + "%04d" % StartingSequence
