@@ -64,7 +64,7 @@ else:
 # ****************************************************************
 parfile = os.path.join(azcam.db.datafolder, "parameters", f"parameters_console_mock.ini")
 azcam.db.parameters.read_parfile(parfile)
-azcam.db.parameters.update_pars(0, "azcamconsole")
+azcam.db.parameters.update_pars("azcamconsole")
 
 # logging
 logfile = os.path.join(azcam.db.datafolder, "logs", "console.log")
@@ -116,7 +116,7 @@ if azcam.db.wd is None:
 
 # par file
 azcam.db.parameters.read_parfile(parfile)
-azcam.db.parameters.update_pars(0, "azcamconsole")
+azcam.db.parameters.update_pars("azcamconsole")
 
 # cli commands
 from azcam.cli import *

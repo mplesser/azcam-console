@@ -86,7 +86,7 @@ class ParametersConsole(Parameters):
         default: typing.Any = None,
     ) -> typing.Any:
         """
-        Return a parameter from the par_dict database, or prompt as needed.
+        Return a parameter from a par_dict database, or prompt as needed.
         The new value is saved in the database.
 
         :param str par_dict_id: Parameter dictionary name in par_dict
@@ -122,7 +122,7 @@ class ParametersConsole(Parameters):
 
     def set_script_par(self, par_dict_id, attribute, value) -> None:
         """
-        Set a parameter from the par_dict database.
+        Set a parameter in a par_dict database.
 
         :param str par_dict_id: Parameter dictionary name in par_dict
         :param str attribute: Name of attribute, used as dictionary key
