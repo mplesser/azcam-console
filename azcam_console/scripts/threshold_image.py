@@ -16,7 +16,7 @@ import azcam_console.plot
 
 
 def threshold_image(filename="test.fits"):
-    filename = azcam.db.parameters.get_script_par(
+    filename = azcam.db.parameters.get_local_par(
         "threshold_image", "filename", "prompt", "Enter image filename", filename
     )
     if filename == ".":

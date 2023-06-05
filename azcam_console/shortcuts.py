@@ -49,7 +49,7 @@ def gf_console():
 def sav_console():
     """Shortcut for parfile_write() saving current folder in database."""
 
-    azcam.db.parameters.set_script_par("azcamconsole", "wd", azcam.utils.curdir())
+    azcam.db.parameters.set_local_par("azcamconsole", "wd", azcam.utils.curdir())
     azcam.db.parameters.update_par_dict("azcamconsole")
     azcam.db.parameters.write_parfile()
 

@@ -9,8 +9,7 @@ import azcam
 
 
 def test_controller(cycles=10):
-
-    cycles = azcam.db.parameters.get_script_par(
+    cycles = azcam.db.parameters.get_local_par(
         "test_controller", "cycles", "prompt", "Enter number of test cycles", cycles
     )
     cycles = int(cycles)

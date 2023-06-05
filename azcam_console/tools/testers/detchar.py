@@ -53,7 +53,7 @@ class DetChar(Tools, Report):
         azcam.db.parameters.set_par("imagefolder", imagefolder)
 
         # save folder
-        azcam.db.parameters.set_script_par("azcamconsole", "wd", azcam.utils.curdir())
+        azcam.db.parameters.set_local_par("azcamconsole", "wd", azcam.utils.curdir())
         azcam.db.parameters.write_parfile()
 
         return

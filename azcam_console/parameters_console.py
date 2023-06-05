@@ -77,7 +77,7 @@ class ParametersConsole(Parameters):
 
         return None
 
-    def get_script_par(
+    def get_local_par(
         self,
         par_dict_id: typing.Dict,
         attribute: typing.Any,
@@ -116,11 +116,11 @@ class ParametersConsole(Parameters):
             pass  # value passsed is used
 
         # save
-        self.set_script_par(par_dict_id, attribute, value)
+        self.set_local_par(par_dict_id, attribute, value)
 
         return value
 
-    def set_script_par(self, par_dict_id, attribute, value) -> None:
+    def set_local_par(self, par_dict_id, attribute, value) -> None:
         """
         Set a parameter in a par_dict database.
 
