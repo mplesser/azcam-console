@@ -8,9 +8,9 @@ import azcam
 import azcam.utils
 import azcam.fits
 import azcam.image
-import azcam.console.plot
-from azcam.console.plot import plt
-from azcam.testers.basetester import Tester
+import azcam_console.plot
+from azcam_console.plot import plt
+from azcam_console.testers.basetester import Tester
 
 
 class Dark(Tester):
@@ -89,14 +89,14 @@ class Dark(Tester):
 
         azcam.log("Acquiring dark sequence")
 
-        exposure, tempcon = azcam.console.utils.get_tools(["exposure", "tempcon"])
+        exposure, tempcon = azcam_console.utils.get_tools(["exposure", "tempcon"])
 
         # save pars to be changed
         impars = {}
         azcam.db.parameters.save_imagepars(impars)
 
         # create new subfolder
-        currentfolder, newfolder = azcam.console.utils.make_file_folder("dark")
+        currentfolder, newfolder = azcam_console.utils.make_file_folder("dark")
         azcam.db.parameters.set_par("imagefolder", newfolder)
 
         # clear device
@@ -170,13 +170,13 @@ class Dark(Tester):
 
         # copy files to analysis subfolder
         azcam.log("Making copy of image files for analysis")
-        startingfolder, subfolder = azcam.console.utils.make_file_folder(subfolder)
+        startingfolder, subfolder = azcam_console.utils.make_file_folder(subfolder)
         for filename in glob.glob(os.path.join(startingfolder, "*.fits")):
             shutil.copy(filename, subfolder)
         currentfolder = azcam.utils.curdir(subfolder)  # move to analysis folder
 
         # analyze a sequence
-        _, StartingSequence = azcam.console.utils.find_file_in_sequence(rootname)
+        _, StartingSequence = azcam_console.utils.find_file_in_sequence(rootname)
 
         # get gain
         self.system_gain = azcam.db.tools["gain"].get_system_gain()
@@ -414,11 +414,11 @@ class Dark(Tester):
         # plot dark image
         fig = plt.figure()
         fignum = fig.number
-        azcam.console.plot.move_window(fignum)
-        azcam.console.plot.plot_image(self.dark_image, "sdev", 10.0)
+        azcam_console.plot.move_window(fignum)
+        azcam_console.plot.plot_image(self.dark_image, "sdev", 10.0)
         plt.title("Combined Dark Image")
         plt.show()
-        azcam.console.plot.save_figure(fignum, self.darkimage_plot)
+        azcam_console.plot.save_figure(fignum, self.darkimage_plot)
 
         for chan in range(self._numchans):
             # plt.subplot(plotconfig[0], plotconfig[1], chan + 1)
@@ -436,7 +436,7 @@ class Dark(Tester):
         # plot cummulative histogram
         fig = plt.figure()
         fignum = fig.number
-        azcam.console.plot.move_window(fignum)
+        azcam_console.plot.move_window(fignum)
         plt.hist(
             (self.validdata * self.units_scale),
             bins="auto",
@@ -500,12 +500,12 @@ class Dark(Tester):
             ]
         )
         plt.show()
-        azcam.console.plot.save_figure(fignum, self.cumm_hist_plot)
+        azcam_console.plot.save_figure(fignum, self.cumm_hist_plot)
 
         # plot total histogram
         fig = plt.figure()
         fignum = fig.number
-        azcam.console.plot.move_window(fignum)
+        azcam_console.plot.move_window(fignum)
         plt.hist(
             (self.validdata * self.units_scale),
             bins="auto",
@@ -524,7 +524,7 @@ class Dark(Tester):
         )
         plt.title("Dark Signal Histogram")
         plt.show()
-        azcam.console.plot.save_figure(fignum, self.total_hist_plot)
+        azcam_console.plot.save_figure(fignum, self.total_hist_plot)
 
         return
 

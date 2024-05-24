@@ -10,8 +10,8 @@ import azcam
 import azcam.utils
 import azcam.fits
 import azcam.exceptions
-import azcam.console.plot
-from azcam.testers.basetester import Tester
+import azcam_console.plot
+from azcam_console.testers.basetester import Tester
 
 
 class Ptc(Tester):
@@ -95,14 +95,14 @@ class Ptc(Tester):
 
         azcam.log("Acquiring PTC sequence")
 
-        exposure, instrument = azcam.console.utils.get_tools(["exposure", "instrument"])
+        exposure, instrument = azcam_console.utils.get_tools(["exposure", "instrument"])
 
         # save pars to be changed
         impars = {}
         azcam.db.parameters.save_imagepars(impars)
 
         # create new subfolder
-        currentfolder, subfolder = azcam.console.utils.make_file_folder("ptc")
+        currentfolder, subfolder = azcam_console.utils.make_file_folder("ptc")
         azcam.db.parameters.set_par("imagefolder", subfolder)
 
         # set wavelength
@@ -212,7 +212,7 @@ class Ptc(Tester):
 
         if self.overscan_correct or self.resample > 1:
             # create analysis subfolder
-            startingfolder, subfolder = azcam.console.utils.make_file_folder(subfolder)
+            startingfolder, subfolder = azcam_console.utils.make_file_folder(subfolder)
 
             # copy all image files to analysis folder
             azcam.log("Making copy of image files for analysis")
@@ -225,7 +225,7 @@ class Ptc(Tester):
         currentfolder = azcam.utils.curdir()
         self.analysis_folder = currentfolder  # save for other tasks
 
-        firstfile, starting_seq_num = azcam.console.utils.find_file_in_sequence(
+        firstfile, starting_seq_num = azcam_console.utils.find_file_in_sequence(
             rootname
         )
         seq_num = starting_seq_num
@@ -235,7 +235,7 @@ class Ptc(Tester):
         )
 
         # get ROI
-        self.roi = azcam.console.utils.get_image_roi()
+        self.roi = azcam_console.utils.get_image_roi()
 
         # Overscan correct all images
         if self.overscan_correct:
@@ -456,12 +456,12 @@ class Ptc(Tester):
         large_font = 18
         MediumFont = 16
         small_font = 14
-        plotstyle = azcam.console.plot.style_dot
+        plotstyle = azcam_console.plot.style_dot
 
         # setup PTC plot
-        fig_ptc = azcam.console.plot.plt.figure()
+        fig_ptc = azcam_console.plot.plt.figure()
         fignum_ptc = fig_ptc.number
-        azcam.console.plot.move_window(fignum_ptc)
+        azcam_console.plot.move_window(fignum_ptc)
         fig_ptc.suptitle("Photon Transfer Curve", fontsize=large_font)
         fig_ptc.subplots_adjust(
             left=pleft,
@@ -471,17 +471,17 @@ class Ptc(Tester):
             wspace=wspace,
             hspace=hspace,
         )
-        fig_ptc = azcam.console.plot.plt.subplot(1, 1, 1)
+        fig_ptc = azcam_console.plot.plt.subplot(1, 1, 1)
         fig_ptc.grid(1)
 
-        azcam.console.plot.plt.xlabel("Mean Signal [DN]", fontsize=MediumFont)
+        azcam_console.plot.plt.xlabel("Mean Signal [DN]", fontsize=MediumFont)
         if logplot:
-            azcam.console.plot.plt.ylabel("Noise [DN]", fontsize=MediumFont)
+            azcam_console.plot.plt.ylabel("Noise [DN]", fontsize=MediumFont)
         else:
-            azcam.console.plot.plt.ylabel(
+            azcam_console.plot.plt.ylabel(
                 r"$\rm{Variance\ [DN^2]}$", fontsize=MediumFont
             )
-        ax = azcam.console.plot.plt.gca()
+        ax = azcam_console.plot.plt.gca()
         for label in ax.yaxis.get_ticklabels():
             label.set_fontsize(small_font)
         for label in ax.xaxis.get_ticklabels():
@@ -489,9 +489,9 @@ class Ptc(Tester):
             label.set_fontsize(small_font)
 
         # setup gain plot
-        fig_gain = azcam.console.plot.plt.figure()
+        fig_gain = azcam_console.plot.plt.figure()
         fignum_gain = fig_gain.number
-        azcam.console.plot.move_window(fignum_gain)
+        azcam_console.plot.move_window(fignum_gain)
         fig_gain.suptitle("System Gain", fontsize=large_font)
         fig_gain.subplots_adjust(
             left=pleft,
@@ -501,11 +501,11 @@ class Ptc(Tester):
             wspace=wspace,
             hspace=hspace,
         )
-        fig_gain = azcam.console.plot.plt.subplot(1, 1, 1)
+        fig_gain = azcam_console.plot.plt.subplot(1, 1, 1)
         fig_gain.grid(1)
-        azcam.console.plot.plt.ylabel(r"$\rm{Gain\ [e^{-}/DN]}$", fontsize=MediumFont)
-        azcam.console.plot.plt.xlabel("Mean Signal [DN]", fontsize=MediumFont)
-        ax = azcam.console.plot.plt.gca()
+        azcam_console.plot.plt.ylabel(r"$\rm{Gain\ [e^{-}/DN]}$", fontsize=MediumFont)
+        azcam_console.plot.plt.xlabel("Mean Signal [DN]", fontsize=MediumFont)
+        ax = azcam_console.plot.plt.gca()
         for label in ax.xaxis.get_ticklabels():
             label.set_rotation(45)
             label.set_fontsize(small_font)
@@ -532,46 +532,46 @@ class Ptc(Tester):
                 var.append(s[i] * s[i])
 
             # ptc plot
-            azcam.console.plot.plt.figure(fignum_ptc)
+            azcam_console.plot.plt.figure(fignum_ptc)
             if logplot:
                 if self.style1 == "":
-                    azcam.console.plot.plt.loglog(
+                    azcam_console.plot.plt.loglog(
                         m,
                         sdev,
                         plotstyle[chan % self.num_chans],
                         markersize=marksize,
                     )
                 else:
-                    azcam.console.plot.plt.loglog(
+                    azcam_console.plot.plt.loglog(
                         m,
                         sdev,
                         self.style1,
                         markersize=marksize,
                     )
-                azcam.console.plot.plt.ylim(1)
-                azcam.console.plot.plt.xlim(1)
+                azcam_console.plot.plt.ylim(1)
+                azcam_console.plot.plt.xlim(1)
             else:
                 if self.style1 == "":
-                    azcam.console.plot.plt.plot(
+                    azcam_console.plot.plt.plot(
                         m,
                         var,
                         plotstyle[chan % self.num_chans],
                         markersize=marksize,
                     )
                 else:
-                    azcam.console.plot.plt.plot(
+                    azcam_console.plot.plt.plot(
                         m,
                         var,
                         self.style1,
                         markersize=marksize,
                     )
-                azcam.console.plot.plt.ylim(0)
-                azcam.console.plot.plt.xlim(0, 65000)
+                azcam_console.plot.plt.ylim(0)
+                azcam_console.plot.plt.xlim(0, 65000)
 
             # plot full well line
             if self.min_fullwell != -1:
-                ax = azcam.console.plot.plt.gca()
-                azcam.console.plot.plt.plot(
+                ax = azcam_console.plot.plt.gca()
+                azcam_console.plot.plt.plot(
                     [self.min_fullwell, self.min_fullwell],
                     ax.get_ylim(),
                     "r--",
@@ -594,12 +594,12 @@ class Ptc(Tester):
                         polycoeffs = numpy.polyfit(xx, yy, fitorder)
                     yfit = numpy.polyval(polycoeffs, xx)
                     if self.log_plot:
-                        azcam.console.plot.plt.loglog(xx, yfit, "r--", linewidth=1)
+                        azcam_console.plot.plt.loglog(xx, yfit, "r--", linewidth=1)
                     else:
-                        azcam.console.plot.plt.plot(xx, yfit, "r--", linewidth=1)
+                        azcam_console.plot.plt.plot(xx, yfit, "r--", linewidth=1)
                     self.slope = 1.0 / polycoeffs[0]
                     s = f"Gain = {self.slope:0.2f} [e/DN]"
-                    azcam.console.plot.plt.annotate(
+                    azcam_console.plot.plt.annotate(
                         s,
                         xy=(0.04, 0.9 - 0.07 * chan),
                         xycoords="axes fraction",
@@ -622,16 +622,16 @@ class Ptc(Tester):
                 self.ptc_residuals.append(r / self.means_bychan[0][i])
 
             # gain plot
-            azcam.console.plot.plt.figure(fignum_gain)
+            azcam_console.plot.plt.figure(fignum_gain)
             if self.style2 == "":
-                azcam.console.plot.plt.plot(
+                azcam_console.plot.plt.plot(
                     m,
                     g,
                     plotstyle[chan % self.num_chans],
                     markersize=marksize,
                 )
             else:
-                azcam.console.plot.plt.plot(
+                azcam_console.plot.plt.plot(
                     m,
                     g,
                     self.style2,
@@ -640,22 +640,22 @@ class Ptc(Tester):
 
             # set axes
             if self.gain_range != []:
-                azcam.console.plot.plt.ylim(self.gain_range[0], self.gain_range[1])
+                azcam_console.plot.plt.ylim(self.gain_range[0], self.gain_range[1])
             else:
                 gmin = max(0, gmedian / 2.0)
                 gmax = gmedian * 2.0
-                azcam.console.plot.plt.ylim(gmin, gmax)
+                azcam_console.plot.plt.ylim(gmin, gmax)
 
-            azcam.console.plot.plt.xlim(0, 65000)
+            azcam_console.plot.plt.xlim(0, 65000)
 
             # one pass only for single channel mode
             if self.ext_analyze != -1:
                 break
 
         # save plots
-        azcam.console.plot.plt.show()
-        azcam.console.plot.save_figure(fignum_ptc, "ptc.png")
-        azcam.console.plot.save_figure(fignum_gain, "gain.png")
+        azcam_console.plot.plt.show()
+        azcam_console.plot.save_figure(fignum_ptc, "ptc.png")
+        azcam_console.plot.save_figure(fignum_gain, "gain.png")
 
         return
 

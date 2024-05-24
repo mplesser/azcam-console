@@ -8,9 +8,9 @@ IPython config needs:
 """
 
 import azcam
-from azcam.tools import Tools
-import azcam.console
-from azcam.observe.observe_common import ObserveCommon
+from azcam.tools.tools import Tools
+import azcam_console.console
+from azcam_console.observe.observe_common import ObserveCommon
 
 
 class ObserveCli(Tools, ObserveCommon):
@@ -88,7 +88,7 @@ class ObserveCli(Tools, ObserveCommon):
             script_file = azcam.db.parameters.get_local_par(
                 "observe", "script_file", "default", "Enter script file name", ""
             )
-            script_file = azcam.console.utils.file_browser(
+            script_file = azcam_console.utils.file_browser(
                 script_file, [("script files", ("*.txt"))], Label="Select script file"
             )
             if script_file is not None and script_file != "":

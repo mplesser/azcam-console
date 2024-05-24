@@ -1,7 +1,7 @@
 """
 Used to bring commands into the current namespace.
 
-Usage:  `from azcam.cli import *`
+Usage:  `from azcam_console.cli import *`
 
 `azcam` as well as items in `db.cli` are 
 added to __all__ here for import into the CLI namespace.

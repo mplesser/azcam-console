@@ -2,4 +2,4 @@
 Testers for sensor characterization.
 """
 
-from azcam.testers.testers import load_testers
+from azcam_console.testers.testers import load_testers

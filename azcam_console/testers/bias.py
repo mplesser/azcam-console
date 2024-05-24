@@ -9,9 +9,9 @@ import azcam
 import azcam.utils
 import azcam.fits
 import azcam.image
-import azcam.console.utils
-from azcam.console.plot import plt, save_figure
-from azcam.testers.basetester import Tester
+import azcam_console.utils
+from azcam_console.plot import plt, save_figure
+from azcam_console.testers.basetester import Tester
 
 
 class Bias(Tester):
@@ -93,7 +93,7 @@ class Bias(Tester):
         azcam.db.parameters.save_imagepars(impars)
 
         # create subfolder
-        currentfolder, subfolder = azcam.console.utils.make_file_folder("bias")
+        currentfolder, subfolder = azcam_console.utils.make_file_folder("bias")
         azcam.db.parameters.set_par("imagefolder", subfolder)
         azcam.db.parameters.set_par("imageroot", "bias.")
         azcam.db.parameters.set_par("imageincludesequencenumber", 1)
@@ -141,13 +141,13 @@ class Bias(Tester):
         self.debiased_filename = "debiased.fits"
 
         startingfolder = azcam.utils.curdir()
-        nextfile, starting_sequence = azcam.console.utils.find_file_in_sequence(
+        nextfile, starting_sequence = azcam_console.utils.find_file_in_sequence(
             rootname
         )
         sequence_number = starting_sequence
 
         # ROI for stats
-        self.roi = azcam.console.utils.get_image_roi()
+        self.roi = azcam_console.utils.get_image_roi()
 
         # all images must have same image sections
         numext, first_ext, last_ext = azcam.fits.get_extensions(nextfile)
@@ -243,7 +243,7 @@ class Bias(Tester):
         fig, ax = plt.subplots()
         fignum = fig.number
         plt.title("Bias Noise Histogram")
-        azcam.console.plot.move_window(fignum)
+        azcam_console.plot.move_window(fignum)
         ax = plt.gca()
         min1 = self.sdev_image.min()
         max1 = self.sdev_image.max()
@@ -279,7 +279,7 @@ class Bias(Tester):
         fig, ax = plt.subplots()
         fignum = fig.number
         plt.title("Cummulative Noise Histogram")
-        azcam.console.plot.move_window(fignum)
+        azcam_console.plot.move_window(fignum)
         ax = plt.gca()
         f1 = numpy.cumsum(counts) * step
         plt.plot(self.bins[:-1], f1)
@@ -309,7 +309,7 @@ class Bias(Tester):
         fig, ax = plt.subplots()
         fignum = fig.number
         plt.title("Bias Means Histogram")
-        azcam.console.plot.move_window(fignum)
+        azcam_console.plot.move_window(fignum)
         ax = plt.gca()
         min1 = self.mean_image.min()
         max1 = self.mean_image.max()
@@ -336,7 +336,7 @@ class Bias(Tester):
         fig, ax = plt.subplots()
         fignum = fig.number
         plt.title("Mean Image")
-        azcam.console.plot.move_window(fignum)
+        azcam_console.plot.move_window(fignum)
         im = plt.imshow(
             self.mean_image,
             cmap="gray",
@@ -352,7 +352,7 @@ class Bias(Tester):
         fig, ax = plt.subplots()
         fignum = fig.number
         plt.title("Median Image")
-        azcam.console.plot.move_window(fignum)
+        azcam_console.plot.move_window(fignum)
         im = plt.imshow(
             self.median_image,
             cmap="gray",
@@ -368,7 +368,7 @@ class Bias(Tester):
         fig, ax = plt.subplots()
         fignum = fig.number
         plt.title("Noise (sdev) Image")
-        azcam.console.plot.move_window(fignum)
+        azcam_console.plot.move_window(fignum)
         im = plt.imshow(
             self.sdev_image,
             cmap="gray",

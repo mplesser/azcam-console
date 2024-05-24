@@ -4,7 +4,7 @@ from astropy.io import fits as pyfits
 import azcam
 import azcam.utils
 import azcam.fits
-from azcam.testers.basetester import Tester
+from azcam_console.testers.basetester import Tester
 
 
 class Eper(Tester):

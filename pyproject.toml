@@ -11,11 +11,6 @@ dependencies = [
     "numpy",
     "astropy",
     "matplotlib",
-    "psutil",
-    "fastapi",
-    "uvicorn",
-    "jinja2",
-    "requests",
     "pyside6",
     "pdfkit",
     "markdown",
@@ -32,3 +27,9 @@ Repository = "https://github.com/mplesser/azcam-console/"
 [build-system]
 requires = ["flit_core >=3.2,<4"]
 build-backend = "flit_core.buildapi"
+
+[tool.flit.module]
+name = "azcam_console"
+
+[project.scripts]
+azcamobserve = "azcam_console.observe.__main__:main"

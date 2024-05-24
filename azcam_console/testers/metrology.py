@@ -10,8 +10,8 @@ from scipy.interpolate import griddata
 
 import azcam
 import azcam.utils
-import azcam.console.plot
-from azcam.testers.basetester import Tester
+import azcam_console.plot
+from azcam_console.testers.basetester import Tester
 
 
 class Metrology(Tester):
@@ -309,10 +309,10 @@ class Metrology(Tester):
         ]
         grid_z = griddata((self.x, self.y), zz, (grid_x, grid_y), method="cubic")
 
-        fig = azcam.console.plot.plt.figure()
+        fig = azcam_console.plot.plt.figure()
         fignum = fig.number
-        azcam.console.plot.move_window(fignum)
-        ax = azcam.console.plot.plt.axes(projection="3d")
+        azcam_console.plot.move_window(fignum)
+        ax = azcam_console.plot.plt.axes(projection="3d")
         ax.plot_surface(
             grid_x,
             grid_y,
@@ -328,7 +328,7 @@ class Metrology(Tester):
         ax.set_xlabel("X [mm]")
         ax.set_ylabel("Y [mm]")
         ax.set_zlabel("Z [mm]")
-        azcam.console.plot.plt.title("Surface Plot with Best Fit Plane")
+        azcam_console.plot.plt.title("Surface Plot with Best Fit Plane")
         ax.view_init(elev=25.0, azim=-55)  # improve perspective
 
         # least squares plane plot on surface plot
@@ -350,14 +350,14 @@ class Metrology(Tester):
         )
         ax.set_zlim(zmin, zmax)
 
-        azcam.console.plot.save_figure(fignum, self.SurfacePlot)
+        azcam_console.plot.save_figure(fignum, self.SurfacePlot)
 
         # height histogram plot
-        fig = azcam.console.plot.plt.figure()
+        fig = azcam_console.plot.plt.figure()
         fignum = fig.number
-        azcam.console.plot.move_window(fignum)
-        azcam.console.plot.plt.title("Height Histogram Plot")
-        azcam.console.plot.plt.hist(
+        azcam_console.plot.move_window(fignum)
+        azcam_console.plot.plt.title("Height Histogram Plot")
+        azcam_console.plot.plt.hist(
             self.z,
             bins="auto",
             facecolor="green",
@@ -365,7 +365,7 @@ class Metrology(Tester):
             histtype="stepfilled",
             rwidth=0.8,
         )
-        ax = azcam.console.plot.plt.gca()
+        ax = azcam_console.plot.plt.gca()
         ax.set_xlabel("Z (mm)")
         ax.xaxis.set_major_formatter(FormatStrFormatter("%.03f"))
         ax.set_ylabel("Points")
@@ -388,7 +388,7 @@ class Metrology(Tester):
             names = ["Z-mid"]
             colors = ["b", "r", "r"]
         for i, xline in enumerate(xlines):
-            azcam.console.plot.plt.axvline(x=xline, linewidth=1, color=colors[i])
+            azcam_console.plot.plt.axvline(x=xline, linewidth=1, color=colors[i])
             ypos = 0.9 * ax.get_ylim()[1]
             if names[i] in ["Z_nom", "Z-L", "Z-U"]:
                 ypos = 0.9 * ax.get_ylim()[1]
@@ -404,14 +404,14 @@ class Metrology(Tester):
                 fontsize=12,
             )
 
-        azcam.console.plot.save_figure(fignum, self.HistogramHeightPlot)
+        azcam_console.plot.save_figure(fignum, self.HistogramHeightPlot)
 
         # flatness histogram plot
-        fig = azcam.console.plot.plt.figure()
+        fig = azcam_console.plot.plt.figure()
         fignum = fig.number
-        azcam.console.plot.move_window(fignum)
-        azcam.console.plot.plt.title("Flatness Histogram Plot")
-        azcam.console.plot.plt.hist(
+        azcam_console.plot.move_window(fignum)
+        azcam_console.plot.plt.title("Flatness Histogram Plot")
+        azcam_console.plot.plt.hist(
             self.flatnessresiduals,
             bins="auto",
             facecolor="green",
@@ -419,7 +419,7 @@ class Metrology(Tester):
             histtype="stepfilled",
             rwidth=0.8,
         )
-        ax = azcam.console.plot.plt.gca()
+        ax = azcam_console.plot.plt.gca()
         ax.set_xlabel("Relative Z (mm)")
         ax.xaxis.set_major_formatter(FormatStrFormatter("%.03f"))
         ax.set_ylabel("Points")
@@ -430,7 +430,7 @@ class Metrology(Tester):
         names = ["FSpec-L", "FSpec-U"]
         colors = ["r", "r"]
         for i, xline in enumerate(xlines):
-            azcam.console.plot.plt.axvline(x=xline, linewidth=1, color=colors[i])
+            azcam_console.plot.plt.axvline(x=xline, linewidth=1, color=colors[i])
             ypos = 0.9 * ax.get_ylim()[1]
             ax.text(
                 xline,
@@ -442,21 +442,21 @@ class Metrology(Tester):
                 fontsize=12,
             )
 
-        azcam.console.plot.save_figure(fignum, self.HistogramFlatnessPlot)
+        azcam_console.plot.save_figure(fignum, self.HistogramFlatnessPlot)
 
         # color Z value plot
-        fig = azcam.console.plot.plt.figure()
+        fig = azcam_console.plot.plt.figure()
         fignum = fig.number
-        azcam.console.plot.move_window(fignum)
-        # ax = azcam.console.plot.plt.gca()
-        ax = azcam.console.plot.plt.gca()
+        azcam_console.plot.move_window(fignum)
+        # ax = azcam_console.plot.plt.gca()
+        ax = azcam_console.plot.plt.gca()
         ax.set_xlabel("X [mm]")
         ax.set_ylabel("Y [mm]")
-        azcam.console.plot.plt.title("Color Z Plot")
-        # azcam.console.plot.plt.scatter(self.x, self.y, s=40, c=self.z, marker="s", lw=0)
+        azcam_console.plot.plt.title("Color Z Plot")
+        # azcam_console.plot.plt.scatter(self.x, self.y, s=40, c=self.z, marker="s", lw=0)
         N = int(len(self.z) ** 0.5)
         self.z2 = self.z.reshape(N, N)
-        azcam.console.plot.plt.imshow(
+        azcam_console.plot.plt.imshow(
             self.z2,
             extent=(
                 numpy.amin(self.x),
@@ -467,16 +467,16 @@ class Metrology(Tester):
             interpolation="quadric",
             cmap="viridis",
         )
-        azcam.console.plot.plt.axis("equal")
+        azcam_console.plot.plt.axis("equal")
 
-        cb = azcam.console.plot.plt.colorbar(format="%.03f")
+        cb = azcam_console.plot.plt.colorbar(format="%.03f")
         cb.set_label("Height [mm]")
         labels = []
         if 0:
             for lab in self.z:
                 labels.append("%.03f" % float(lab))
             for label, x1, y1 in zip(labels, self.x, self.y):
-                azcam.console.plot.plt.annotate(
+                azcam_console.plot.plt.annotate(
                     label,
                     xy=(x1, y1),
                     textcoords="data",
@@ -485,44 +485,44 @@ class Metrology(Tester):
                     bbox=dict(boxstyle="round,pad=0", fc="yellow", alpha=0.3),
                     fontsize=6,
                 )
-        azcam.console.plot.save_figure(fignum, self.ColorZPlot)
+        azcam_console.plot.save_figure(fignum, self.ColorZPlot)
 
         # box and whisker plot
-        fig, ax = azcam.console.plot.plt.subplots()
+        fig, ax = azcam_console.plot.plt.subplots()
         fignum = fig.number
-        azcam.console.plot.move_window(fignum)
+        azcam_console.plot.move_window(fignum)
         ax.set_ylabel("Z [mm]")
         ax.yaxis.set_major_formatter(FormatStrFormatter("%.03f"))
-        azcam.console.plot.plt.title("Box and Whisker Plot")
+        azcam_console.plot.plt.title("Box and Whisker Plot")
         ax.boxplot(self.z, notch=True)
-        azcam.console.plot.plt.xticks([])
-        azcam.console.plot.save_figure(fignum, self.WiskerPlot)
+        azcam_console.plot.plt.xticks([])
+        azcam_console.plot.save_figure(fignum, self.WiskerPlot)
 
         # show standard drift
         if self.standard_correct:
-            fig = azcam.console.plot.plt.figure()
+            fig = azcam_console.plot.plt.figure()
             fignum = fig.number
-            azcam.console.plot.move_window(fignum)
-            ax = azcam.console.plot.plt.gca()
-            azcam.console.plot.plt.title("Z-Standard Drift")
+            azcam_console.plot.move_window(fignum)
+            ax = azcam_console.plot.plt.gca()
+            azcam_console.plot.plt.title("Z-Standard Drift")
             ax.set_xlabel("Row")
             ax.set_ylabel("Z [microns]")
             ax.xaxis.set_major_locator(
-                azcam.console.plot.plt.MaxNLocator(integer=True)
+                azcam_console.plot.plt.MaxNLocator(integer=True)
             )  # integer row numbers
             drift_1 = self.standard1_z - self.standard_zheight
-            azcam.console.plot.plt.plot(drift_1)
+            azcam_console.plot.plt.plot(drift_1)
             drift_2 = self.standard2_z - self.standard_zheight
-            azcam.console.plot.plt.plot(drift_2)
+            azcam_console.plot.plt.plot(drift_2)
             drift_3 = self.standard3_z - self.standard_zheight
-            azcam.console.plot.plt.plot(drift_3)
+            azcam_console.plot.plt.plot(drift_3)
             drift_4 = self.standard4_z - self.standard_zheight
-            azcam.console.plot.plt.plot(drift_4)
+            azcam_console.plot.plt.plot(drift_4)
             drift_mean = self.zstandard - self.standard_zheight
-            azcam.console.plot.plt.plot(drift_mean)
-            azcam.console.plot.save_figure(fignum, self.StandardPlot)
+            azcam_console.plot.plt.plot(drift_mean)
+            azcam_console.plot.save_figure(fignum, self.StandardPlot)
 
-        azcam.console.plot.plt.show()
+        azcam_console.plot.plt.show()
 
         return
 

@@ -17,9 +17,9 @@ from PySide6.QtWidgets import QApplication, QFileDialog, QMainWindow, QTableWidg
 from PySide6.QtCore import QCoreApplication
 
 import azcam
-from azcam.tools import Tools
-from azcam.observe.observe_common import ObserveCommon
-from azcam.observe.observe_qt.observe_gui_ui import Ui_observe
+from azcam.tools.tools import Tools
+from azcam_console.observe.observe_common import ObserveCommon
+from azcam_console.observe.observe_qt.observe_gui_ui import Ui_observe
 
 
 class GenericWorker(QtCore.QObject):
@@ -102,7 +102,7 @@ class ObserveQt(ObserveCommon, Tools, QMainWindow):
         self.timer.timeout.connect(self._watchdog)
         self.timer.start(500)
 
-        # get parameters from parfile
+        # get parameters from parfile or command line
         try:
             self.script_file = azcam.db.parameters.get_local_par(
                 "observe", "script_file", "default", "", "observing_script.txt"

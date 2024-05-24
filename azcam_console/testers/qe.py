@@ -13,8 +13,8 @@ import azcam
 import azcam.utils
 import azcam.fits
 import azcam.image
-import azcam.console.plot
-from azcam.testers.basetester import Tester
+import azcam_console.plot
+from azcam_console.testers.basetester import Tester
 
 
 class QE(Tester):
@@ -89,7 +89,7 @@ class QE(Tester):
 
         azcam.log("Acquiring QE sequence")
 
-        exposure, instrument, detcal = azcam.console.utils.get_tools(
+        exposure, instrument, detcal = azcam_console.utils.get_tools(
             ["exposure", "instrument", "detcal"]
         )
 
@@ -98,7 +98,7 @@ class QE(Tester):
         azcam.db.parameters.save_imagepars(impars)
 
         # create new subfolder
-        currentfolder, subfolder = azcam.console.utils.make_file_folder("qe")
+        currentfolder, subfolder = azcam_console.utils.make_file_folder("qe")
         azcam.db.parameters.set_par("imagefolder", subfolder)
 
         # clear device
@@ -213,7 +213,7 @@ class QE(Tester):
         startingfolder = azcam.utils.curdir()
         if self.overscan_correct or self.zero_correct or self.include_dark_images:
             # create analysis subfolder
-            startingfolder, subfolder = azcam.console.utils.make_file_folder(subfolder)
+            startingfolder, subfolder = azcam_console.utils.make_file_folder(subfolder)
 
             # copy all image files to analysis folder
             azcam.log("Making copy of image files for analysis")
@@ -226,7 +226,7 @@ class QE(Tester):
         else:
             subfolder = startingfolder
 
-        _, StartingSequence = azcam.console.utils.find_file_in_sequence(rootname)
+        _, StartingSequence = azcam_console.utils.find_file_in_sequence(rootname)
         SequenceNumber = StartingSequence
 
         # get gain
@@ -461,9 +461,9 @@ class QE(Tester):
         hspace = 0.2
 
         # make figure
-        fig = azcam.console.plot.plt.figure()
+        fig = azcam_console.plot.plt.figure()
         fignum = fig.number
-        azcam.console.plot.move_window(fignum)
+        azcam_console.plot.move_window(fignum)
         if self.plot_title == "":
             fig.text(
                 0.55,
@@ -488,15 +488,15 @@ class QE(Tester):
             wspace=wspace,
             hspace=hspace,
         )
-        ax = azcam.console.plot.plt.gca()
+        ax = azcam_console.plot.plt.gca()
         ax.grid(1)
-        azcam.console.plot.plt.xlabel("Wavelength [nm]", fontsize=bigfont)
-        azcam.console.plot.plt.ylabel("Measured QE", fontsize=bigfont)
+        azcam_console.plot.plt.xlabel("Wavelength [nm]", fontsize=bigfont)
+        azcam_console.plot.plt.ylabel("Measured QE", fontsize=bigfont)
 
-        ax.yaxis.set_major_locator(azcam.console.plot.plt.MaxNLocator(11))
+        ax.yaxis.set_major_locator(azcam_console.plot.plt.MaxNLocator(11))
         x = 2 * max(self.wavelengths) - min(self.wavelengths) + 1
         x = int(x / 100.0)
-        ax.xaxis.set_major_locator(azcam.console.plot.plt.MaxNLocator(x))
+        ax.xaxis.set_major_locator(azcam_console.plot.plt.MaxNLocator(x))
 
         if self.mean_temp != -999:
             labels = [f"Mean Temp = {self.mean_temp:.0f} C"]
@@ -514,17 +514,17 @@ class QE(Tester):
         for w in waves:
             qevals.append(self.qe[w])
         if self.use_errorbars:
-            azcam.console.plot.plt.errorbar(
+            azcam_console.plot.plt.errorbar(
                 waves, [x * 100.0 for x in qevals], yerr=3.0, marker="o", ls=""
             )
         else:
-            azcam.console.plot.plt.plot(waves, [x * 100.0 for x in qevals], "bo-")
+            azcam_console.plot.plt.plot(waves, [x * 100.0 for x in qevals], "bo-")
 
         if len(self.plot_limits) == 2:
-            azcam.console.plot.plt.xlim(self.plot_limits[0][0], self.plot_limits[0][1])
-            azcam.console.plot.plt.ylim(self.plot_limits[1][0], self.plot_limits[1][1])
+            azcam_console.plot.plt.xlim(self.plot_limits[0][0], self.plot_limits[0][1])
+            azcam_console.plot.plt.ylim(self.plot_limits[1][0], self.plot_limits[1][1])
         elif len(self.plot_limits) == 1:
-            azcam.console.plot.plt.xlim(self.plot_limits[0][0], self.plot_limits[0][1])
+            azcam_console.plot.plt.xlim(self.plot_limits[0][0], self.plot_limits[0][1])
         else:
             pass
 
@@ -534,13 +534,13 @@ class QE(Tester):
                 if self.qe_specs[wave] > 0:
                     x = wave
                     y = self.qe_specs[wave] * 100.0
-                    azcam.console.plot.plt.plot(
+                    azcam_console.plot.plt.plot(
                         x, y, ls="", marker="_", markersize=5, color="red"
                     )
 
         # save figure
-        azcam.console.plot.plt.show()
-        azcam.console.plot.save_figure(fignum, "qe.png")
+        azcam_console.plot.plt.show()
+        azcam_console.plot.save_figure(fignum, "qe.png")
 
         return
 

@@ -7,8 +7,8 @@ import numpy
 import azcam
 import azcam.utils
 import azcam.fits
-import azcam.console
-from azcam.testers.basetester import Tester
+import azcam_console.console
+from azcam_console.testers.basetester import Tester
 
 
 class DetCal(Tester):
@@ -58,7 +58,7 @@ class DetCal(Tester):
         if self.overwrite:
             if os.path.exists("detcal"):
                 shutil.rmtree("detcal")
-        startingfolder, subfolder = azcam.console.utils.make_file_folder("detcal")
+        startingfolder, subfolder = azcam_console.utils.make_file_folder("detcal")
         azcam.db.parameters.set_par("imagefolder", subfolder)
         azcam.utils.curdir(subfolder)
 
@@ -71,7 +71,7 @@ class DetCal(Tester):
 
         # get gain and ROI
         self.system_gain = azcam.db.tools["gain"].get_system_gain()
-        self.roi = azcam.console.utils.get_image_roi()
+        self.roi = azcam_console.utils.get_image_roi()
 
         self.system_gain = azcam.db.tools["gain"].system_gain
         self.zero_mean = azcam.db.tools["gain"].zero_mean

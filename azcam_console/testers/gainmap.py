@@ -9,9 +9,9 @@ import azcam
 import azcam.utils
 import azcam.fits
 import azcam.image
-import azcam.console.utils
-import azcam.console.plot
-from azcam.testers.basetester import Tester
+import azcam_console.utils
+import azcam_console.plot
+from azcam_console.testers.basetester import Tester
 
 
 class GainMap(Tester):
@@ -92,7 +92,7 @@ class GainMap(Tester):
         if self.overwrite:
             if os.path.exists("gainmap"):
                 shutil.rmtree("gainmap")
-        currentfolder, subfolder = azcam.console.utils.make_file_folder("gainmap")
+        currentfolder, subfolder = azcam_console.utils.make_file_folder("gainmap")
         azcam.db.parameters.set_par("imagefolder", subfolder)
         self.imagefolder = subfolder
 
@@ -153,7 +153,7 @@ class GainMap(Tester):
 
         # get list of bias images
         rootname = "bias."
-        _, starting_sequence = azcam.console.utils.find_file_in_sequence(rootname)
+        _, starting_sequence = azcam_console.utils.find_file_in_sequence(rootname)
         sequence_number = starting_sequence
         self.bias_filenames = []
         while True:
@@ -169,7 +169,7 @@ class GainMap(Tester):
 
         # get list of all flat images
         rootname = "gainmap."
-        _, starting_sequence = azcam.console.utils.find_file_in_sequence(rootname)
+        _, starting_sequence = azcam_console.utils.find_file_in_sequence(rootname)
         sequence_number = starting_sequence
         self.flat_filenames = []
         while True:
@@ -237,17 +237,17 @@ class GainMap(Tester):
         azcam.log(f"Median gain is {self.gain_median:0.02f}")
         azcam.log(f"Gain sdev is {self.gain_sdev:0.02f}")
 
-        azcam.console.plot.plt.imshow(
+        azcam_console.plot.plt.imshow(
             self.gainmap_image,
             cmap="gray",
             origin="lower",
             vmin=self.gain_mean - self.gain_sdev,
             vmax=self.gain_mean + self.gain_sdev,
         )
-        azcam.console.plot.plt.title("Gain Map")
-        fignum = azcam.console.plot.plt.gcf().number
-        azcam.console.plot.save_figure(fignum, self.gainmap_plotfile)
-        azcam.console.plot.move_window(fignum)
+        azcam_console.plot.plt.title("Gain Map")
+        fignum = azcam_console.plot.plt.gcf().number
+        azcam_console.plot.save_figure(fignum, self.gainmap_plotfile)
+        azcam_console.plot.move_window(fignum)
 
         # create gainmap FITS file
         hdul = pyfits.HDUList()

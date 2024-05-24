@@ -3,7 +3,7 @@ import os
 import azcam
 import azcam.utils
 import azcam.exceptions
-from azcam.testers.basetester import Tester
+from azcam_console.testers.basetester import Tester
 
 
 class PocketPump(Tester):
@@ -62,7 +62,7 @@ class PocketPump(Tester):
         azcam.db.parameters.set_par("imagetest", 0)
 
         # create and move to new subfolder
-        currentfolder, newfolder = azcam.console.utils.make_file_folder("pocketpump")
+        currentfolder, newfolder = azcam_console.utils.make_file_folder("pocketpump")
         azcam.db.parameters.set_par("imagefolder", newfolder)
 
         # set wavelength so exposure time is correct
@@ -156,7 +156,7 @@ class PocketPump(Tester):
 
         azcam.log("Acquiring PocketPump sequence")
 
-        exposure, instrument, server = azcam.console.utils.get_tools(
+        exposure, instrument, server = azcam_console.utils.get_tools(
             ["exposure", "instrument", "server"]
         )
 
@@ -177,7 +177,7 @@ class PocketPump(Tester):
         azcam.db.parameters.set_par("imagetest", 0)
 
         # create and move to new subfolder
-        currentfolder, newfolder = azcam.console.utils.make_file_folder("pocketpump")
+        currentfolder, newfolder = azcam_console.utils.make_file_folder("pocketpump")
         azcam.db.parameters.set_par("imagefolder", newfolder)
 
         # set wavelength so exposure time is correct

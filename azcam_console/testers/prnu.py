@@ -8,9 +8,9 @@ import numpy
 import azcam
 import azcam.utils
 import azcam.fits
-import azcam.console.utils
+import azcam_console.utils
 import azcam.image
-from azcam.testers.basetester import Tester
+from azcam_console.testers.basetester import Tester
 
 
 class Prnu(Tester):
@@ -57,7 +57,7 @@ class Prnu(Tester):
         azcam.db.parameters.save_imagepars(impars)
 
         # create new subfolder
-        currentfolder, subfolder = azcam.console.utils.make_file_folder("prnu")
+        currentfolder, subfolder = azcam_console.utils.make_file_folder("prnu")
         azcam.db.parameters.set_par("imagefolder", subfolder)
 
         # clear device
@@ -144,7 +144,7 @@ class Prnu(Tester):
 
         if self.overscan_correct or self.zero_correct:
             # create analysis subfolder
-            startingfolder, subfolder = azcam.console.utils.make_file_folder(subfolder)
+            startingfolder, subfolder = azcam_console.utils.make_file_folder(subfolder)
 
             # copy all image files to analysis folder
             azcam.log("Making copy of image files for analysis")
@@ -158,7 +158,7 @@ class Prnu(Tester):
             subfolder = startingfolder
 
         currentfolder = azcam.utils.curdir()
-        _, StartingSequence = azcam.console.utils.find_file_in_sequence(rootname)
+        _, StartingSequence = azcam_console.utils.find_file_in_sequence(rootname)
         SequenceNumber = StartingSequence
 
         # bias image (first in sequence)

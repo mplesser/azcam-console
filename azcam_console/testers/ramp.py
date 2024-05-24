@@ -7,8 +7,8 @@ from astropy.io import fits as pyfits
 import azcam
 import azcam.utils
 import azcam.fits
-import azcam.console.plot
-from azcam.testers.basetester import Tester
+import azcam_console.plot
+from azcam_console.testers.basetester import Tester
 
 
 class Ramp(Tester):
@@ -45,7 +45,7 @@ class Ramp(Tester):
         """
 
         # create new subfolder
-        currentfolder, newfolder = azcam.console.utils.make_file_folder("ramp")
+        currentfolder, newfolder = azcam_console.utils.make_file_folder("ramp")
         azcam.db.parameters.set_par("imagefolder", newfolder)
 
         # save pars to be changed
@@ -97,13 +97,13 @@ class Ramp(Tester):
         rootname = "ramp."
         self.MaxRow = MaxRow
 
-        _, StartingSequence = azcam.console.utils.find_file_in_sequence(rootname)
+        _, StartingSequence = azcam_console.utils.find_file_in_sequence(rootname)
         SequenceNumber = StartingSequence
 
         CurrentFolder = azcam.utils.curdir()
 
         # get ROI
-        self.roi = azcam.console.utils.get_image_roi()
+        self.roi = azcam_console.utils.get_image_roi()
 
         # bias image
         zerofilename = rootname + "%04d" % StartingSequence
@@ -243,10 +243,10 @@ class Ramp(Tester):
         wspace = None
         hspace = None
         marksize = 5
-        plotstyle = azcam.console.plot.style_dot
+        plotstyle = azcam_console.plot.style_dot
 
         # setup PTC figure
-        f1 = azcam.console.plot.plt.figure(1)
+        f1 = azcam_console.plot.plt.figure(1)
         f1.clf()  # clear old data
         f1.text(
             0.5,
@@ -263,14 +263,14 @@ class Ramp(Tester):
             wspace=wspace,
             hspace=hspace,
         )
-        fig1 = azcam.console.plot.plt.subplot(1, 1, 1)
+        fig1 = azcam_console.plot.plt.subplot(1, 1, 1)
         fig1.xaxis.grid(1, which="both")  # log lines
         fig1.yaxis.grid(1)
 
         # axes
-        azcam.console.plot.plt.xlabel("Mean Signal [DN]", fontsize=mediumfont)
-        azcam.console.plot.plt.ylabel("Noise [DN]", fontsize=mediumfont)
-        ax = azcam.console.plot.plt.gca()
+        azcam_console.plot.plt.xlabel("Mean Signal [DN]", fontsize=mediumfont)
+        azcam_console.plot.plt.ylabel("Noise [DN]", fontsize=mediumfont)
+        ax = azcam_console.plot.plt.gca()
         for label in ax.yaxis.get_ticklabels():
             label.set_fontsize(smallfont)
         for label in ax.xaxis.get_ticklabels():
@@ -278,7 +278,7 @@ class Ramp(Tester):
             label.set_fontsize(smallfont)
 
         # setup gain figure
-        fig2 = azcam.console.plot.plt.figure(2)
+        fig2 = azcam_console.plot.plt.figure(2)
         fig2.clf()  # clear old data
         fig2.text(
             0.5,
@@ -297,7 +297,7 @@ class Ramp(Tester):
         )
 
         # ax1 is mean at bottom, ax2 is row number on top
-        ax1 = azcam.console.plot.plt.subplot(1, 1, 1)
+        ax1 = azcam_console.plot.plt.subplot(1, 1, 1)
         ax1.grid(1)
         ax1.set_ylabel(r"$\rm{Gain\ [e^{-}/DN]}$", fontsize=mediumfont)
         ax1.set_xlabel(r"$\rm{Mean\ [DN]}$", fontsize=mediumfont)
@@ -329,28 +329,28 @@ class Ramp(Tester):
                 mm.append(max(m))
 
             # ptc plot
-            azcam.console.plot.plt.figure(1)
+            azcam_console.plot.plt.figure(1)
             if self.logplot:
-                azcam.console.plot.plt.loglog(
+                azcam_console.plot.plt.loglog(
                     m,
                     sdev,
                     plotstyle[chan % self.num_chans],
                     markersize=marksize,
                 )
-                azcam.console.plot.plt.ylim(1)
-                azcam.console.plot.plt.xlim(1, 100000)
+                azcam_console.plot.plt.ylim(1)
+                azcam_console.plot.plt.xlim(1, 100000)
             else:
-                azcam.console.plot.plt.plot(
+                azcam_console.plot.plt.plot(
                     m,
                     sdev,
                     plotstyle[chan % self.num_chans],
                     markersize=marksize,
                 )
-                azcam.console.plot.plt.ylim(0)
-                azcam.console.plot.plt.xlim(0, 65000)
+                azcam_console.plot.plt.ylim(0)
+                azcam_console.plot.plt.xlim(0, 65000)
 
             # Gain plot
-            azcam.console.plot.plt.figure(2)
+            azcam_console.plot.plt.figure(2)
             ax2.plot(
                 list(range(self.num_points)),
                 g,
@@ -365,7 +365,7 @@ class Ramp(Tester):
                 break
 
         # save plots
-        azcam.console.plot.save_figure(1, "RampPtc.png")
-        azcam.console.plot.save_figure(2, "RampGain.png")
+        azcam_console.plot.save_figure(1, "RampPtc.png")
+        azcam_console.plot.save_figure(2, "RampGain.png")
 
         return

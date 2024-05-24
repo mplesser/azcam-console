@@ -11,17 +11,18 @@ from PySide6.QtWidgets import QApplication
 
 import azcam
 import azcam.utils
-import azcam.console
-from azcam.console.tools import create_console_tools
-from azcam.observe.observe_qt.observe_qt import ObserveQt
+import azcam_console.console
+from azcam_console.tools import create_console_tools
+from azcam_console.observe.observe_qt.observe_qt import ObserveQt
 
 
 def main():
     """
     Start observe GUI as a command.
     Usage examples:
-      python -m azcam.observe
-      ipython -m azcam.observe --
+      python -m azcam_console.observe
+      ipython -m azcam_console.observe --
+      azcamobserve --
     """
 
     # app setup

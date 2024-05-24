@@ -8,8 +8,8 @@ from astropy.io import fits as pyfits
 import azcam
 import azcam.utils
 import azcam.fits
-import azcam.console.utils
-from azcam.testers.basetester import Tester
+import azcam_console.utils
+from azcam_console.testers.basetester import Tester
 
 
 class Gain(Tester):
@@ -98,7 +98,7 @@ class Gain(Tester):
         if self.overwrite:
             if os.path.exists("gain"):
                 shutil.rmtree("gain")
-        currentfolder, subfolder = azcam.console.utils.make_file_folder("gain")
+        currentfolder, subfolder = azcam_console.utils.make_file_folder("gain")
         azcam.db.parameters.set_par("imagefolder", subfolder)
 
         self.imagefolder = subfolder
@@ -175,7 +175,7 @@ class Gain(Tester):
         rootname = "ptc."
 
         # bias image
-        _, StartingSequence = azcam.console.utils.find_file_in_sequence(rootname)
+        _, StartingSequence = azcam_console.utils.find_file_in_sequence(rootname)
         zerofilename = rootname + f"{StartingSequence:04d}"
         zerofilename = azcam.utils.make_image_filename(zerofilename)
         SequenceNumber = StartingSequence
@@ -184,7 +184,7 @@ class Gain(Tester):
         NumExt = max(1, NumExt)
 
         # get ROI
-        self.roi = azcam.console.utils.get_image_roi()
+        self.roi = azcam_console.utils.get_image_roi()
         if len(self.roi) == 1:
             self.roi.append(self.roi[0])
 
@@ -324,7 +324,7 @@ class Gain(Tester):
             ffci_sdev = [0]
 
         # get ROI
-        self.roi = azcam.console.utils.get_image_roi()
+        self.roi = azcam_console.utils.get_image_roi()
 
         # get zero mean and sigma
         zmean = azcam.fits.mean(Zero, self.roi[1])

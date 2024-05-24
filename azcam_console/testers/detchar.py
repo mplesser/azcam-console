@@ -4,8 +4,8 @@ import subprocess
 
 import azcam
 import azcam.utils
-from azcam.testers.report import Report
-from azcam.tools import Tools
+from azcam_console.testers.report import Report
+from azcam.tools.tools import Tools
 
 
 class DetChar(Tools, Report):
@@ -134,7 +134,7 @@ class DetChar(Tools, Report):
 
         # copy files to new folder and archive
         azcam.log(f"copying dataset to {idstring}")
-        currentfolder, newfolder = azcam.console.utils.make_file_folder(idstring)
+        currentfolder, newfolder = azcam_console.utils.make_file_folder(idstring)
 
         copy_files = glob.glob("*.pdf")
         for f in copy_files:
