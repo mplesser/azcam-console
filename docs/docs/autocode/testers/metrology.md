@@ -1,3 +1,0 @@
-# **Metrology**
-
-::: azcam.testers.metrology

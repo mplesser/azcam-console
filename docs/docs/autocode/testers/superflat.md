@@ -1,3 +1,0 @@
-# **Superflat**
-
-::: azcam.testers.superflat

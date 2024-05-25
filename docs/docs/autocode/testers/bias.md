@@ -1,3 +1,0 @@
-# **Bias**
-
-::: azcam.testers.bias

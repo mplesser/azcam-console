@@ -1,6 +1,6 @@
 # AzCam Console
 
-*azcam-console* is a python package which supports the AzCam acquisition and analysis system in a terminal window. The description refers to the *azcam* package.
+*azcam-console* is a python package which supports the AzCam acquisition and analysis system in a terminal window.
 
 AzCam is a software framework for the acquisition and analysis of image data from scientific imaging systems as well as the control of instrumentation. It is intended to be customized for specific hardware, observational, and data reduction requirements.
 

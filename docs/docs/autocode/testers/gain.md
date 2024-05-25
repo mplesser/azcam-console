@@ -1,3 +1,0 @@
-# **Gain**
-
-::: azcam.testers.gain

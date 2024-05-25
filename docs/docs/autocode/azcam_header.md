@@ -1,3 +1,0 @@
-# Header Class
-
-::: azcam.header

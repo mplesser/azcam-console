@@ -1,3 +1,0 @@
-# **Defects**
-
-::: azcam.testers.defects

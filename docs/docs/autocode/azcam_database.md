@@ -1,3 +1,0 @@
-# Database Class
-
-::: azcam.database

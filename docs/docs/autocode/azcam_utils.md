@@ -1,3 +1,0 @@
-# Utility Methods
-
-::: azcam.utils
