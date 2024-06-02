@@ -1,5 +1,5 @@
 """
-*azcam.console* is imported to define console mode, create the azcamconsole parameters dictionary, and define a logger.
+*azcam_console.console* is imported to define console mode, create the azcamconsole parameters dictionary, and define a logger.
 """
 
 import azcam
