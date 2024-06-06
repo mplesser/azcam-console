@@ -429,7 +429,8 @@ class Defects(Tester):
         azcam_console.plot.save_figure(fignum, "PixelRejectionMask")
 
         # write mask as FITS
-        defectsmask = azcam.image.Image(self.template)  # just a template
+        # defectsmask = azcam.image.Image(self.template)  # just a template
+        defectsmask = azcam.image.Image()
         defectsmask.assemble(1)
         # defectsmask.buffer=numpy.ma.getmask(self.DefectsMask).astype('uint8')
         defectsmask.buffer = self.defects_mask.astype("uint8")

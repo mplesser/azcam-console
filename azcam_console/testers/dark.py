@@ -268,7 +268,7 @@ class Dark(Tester):
         # trim and assemble dark for histogram
         self.dark_image.assemble(1)
 
-        # scale darkimage by exposure time and binning to get electrons per pixel
+        # scale darkimage by exposure time and binning to get electrons per pixel per second
         self.dark_image.buffer = self.dark_image.buffer / binned / exptime
 
         # save scaled image
@@ -284,9 +284,9 @@ class Dark(Tester):
             if not azcam.db.tools["defects"].valid:
                 azcam.db.tools["defects"].make_edge_mask(self.dark_image.buffer)
             self.masked_image = numpy.ma.masked_where(
-                azcam.db.tools["defects"].defects_mask,
+                azcam.db.tools["defects"].edge_mask,
                 self.dark_image.buffer,
-            )
+            )  # was defects mask
         else:
             self.masked_image = numpy.ma.masked_invalid(self.dark_image.buffer)
 
