@@ -66,10 +66,10 @@ class TempCon(Tools, ObjectHeaderMethods):
         Reset tempcon tool.
         """
 
-        if not self.enabled:
+        if not self.is_enabled:
             return
 
-        if not self.initialized:
+        if not self.is_initialized:
             self.initialize()
 
         self.set_control_temperature()

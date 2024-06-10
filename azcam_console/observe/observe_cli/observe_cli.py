@@ -25,7 +25,7 @@ class ObserveCli(Tools, ObserveCommon):
         Tools.__init__(self, "observe")
         ObserveCommon.__init__(self)
 
-        self.initialized = 0
+        self.is_initialized = 0
 
     def initialize(self):
         """
@@ -66,7 +66,7 @@ class ObserveCli(Tools, ObserveCommon):
         for i, x in enumerate(self.column_order):
             self.column_number[i] = x
 
-        self.initialized = 1
+        self.is_initialized = 1
 
         return
 
@@ -80,7 +80,7 @@ class ObserveCli(Tools, ObserveCommon):
         :return: None
         """
 
-        if not self.initialized:
+        if not self.is_initialized:
             self.initialize()
 
         # get inputs

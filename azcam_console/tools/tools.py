@@ -29,10 +29,10 @@ class Tools(object):
             self.description = description
 
         #: 1 when tool is enabled
-        self.enabled: int = 1
+        self.is_enabled: int = 1
 
         #: 1 when tool has been initialized
-        self.initialized: int = 0
+        self.is_initialized: int = 0
 
         #: 1 when tool has been reset
         self.is_reset: int = 0
@@ -51,14 +51,14 @@ class Tools(object):
         Initialize the tool.
         """
 
-        if self.initialized:
+        if self.is_initialized:
             return
 
-        if not self.enabled:
+        if not self.is_enabled:
             azcam.exceptions.warning(f"{self.description} is not enabled")
             return
 
-        self.initialized = 1
+        self.is_initialized = 1
 
         return
 
