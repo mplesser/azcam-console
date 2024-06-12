@@ -15,14 +15,14 @@ Or download the latest version from from github <https://github.com/mplesser/azc
 ## Links
 
   - Main links
+    - [AzCamConsole documentation](https://azcam-console.readthedocs.io) - this document
     - [AzCam documentation](https://azcam.readthedocs.io)
     - [GitHub repos](https://github.com/mplesser)
 
   - Code details and links
-    - [azcamconsole](azcamconsole.md)
     - [Code Docs](autocode.md)
     - [Observing scripts](observe.md)
-    - Focus Command -- [console](autocode/focus_console.md)
+    - [Focus Command -- console](autocode/focus_console.md)
 
 ## Tools
 
@@ -34,7 +34,7 @@ There are three main operational modes of AzCam:
 
   1. A server, usually called *azcamserver*, which communicates directly or indirectly with system hardware.
 
-  2. A console, usually called [azcamconsole](azcamconsole.md), which is typically implemented as an IPython command line interface that communicates with *azcamserver* over a socket connection.  It is used to acquire and analyze image data through the command line and python code. The `azcam-console` package is optional and must be installed seperately from *azcam* itself.
+  2. A console, usually called *azcamconsole*, which is typically implemented as an IPython command line interface that communicates with *azcamserver* over a socket connection.  It is used to acquire and analyze image data through the command line and python code.
 
   3. Applications, which are usually client programs that communicate with *azcamserver* over sockets or the web API.
 
@@ -58,10 +58,9 @@ print(f"Current wavelength is {wavelength}")
 exposure.expose(2., 'flat', "a 450 nm flat field image")
 ```
 
-Both *azcamserver* and *azcamconsole* may also be called in a manner similar to:
+*azcamconsole* may also be called in a manner similar to:
 
 ```python
-python -m azcam_itl.server -i -- -system LVM
 python -m azcam_itl.console - -- -system LVM
 or
 ipython -m azcam_itl.server -i -- -system LVM
@@ -83,15 +82,9 @@ instrument.set_wavelength(450)
 exposure.expose(2., 'flat', "a 450 nm flat field image")
 ```
 
-## AzcamConsole
-
-*azcamconsole* is a console application for *azcam*. It usually runs in an IPython window and is used to both acquire and analyze data in a python scripting environment.
-
-See [azcamconsole](azcamconsole.md).
-
 ## Testers
 
-The *testers* subpackage contains classes which are used to acquire and analyze sensor data for the purpose of characterizing sensor performance. The *testers* subpackage is part of the optional *azcam-console* package.
+The *testers* subpackage contains classes which are used to acquire and analyze sensor data for the purpose of characterizing sensor performance.
 
 See [testers](testers.md).
 
