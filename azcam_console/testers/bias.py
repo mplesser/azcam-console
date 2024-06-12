@@ -94,6 +94,7 @@ class Bias(Tester):
 
         # create subfolder
         currentfolder, subfolder = azcam_console.utils.make_file_folder("bias")
+        azcam.utils.curdir(subfolder)
         azcam.db.parameters.set_par("imagefolder", subfolder)
         azcam.db.parameters.set_par("imageroot", "bias.")
         azcam.db.parameters.set_par("imageincludesequencenumber", 1)

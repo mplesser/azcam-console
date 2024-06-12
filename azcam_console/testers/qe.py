@@ -103,7 +103,7 @@ class QE(Tester):
 
         # clear device
         azcam.db.tools["exposure"].test(0)
-        imname = exposure.get_filename()
+        imname = "test.fits"
         bin1 = int(azcam.fits.get_keyword(imname, "CCDBIN1"))
         bin2 = int(azcam.fits.get_keyword(imname, "CCDBIN2"))
         binning = bin1 * bin2

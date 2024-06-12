@@ -69,7 +69,7 @@ class Defects(Tester):
 
     def analyze(self):
         """
-        Find dark defects in a flat/superflat image.
+        Report on defects from dark and superflat analysis.
         """
 
         if self.grade_bright_defects == 0 and self.grade_dark_defects == 0:
@@ -429,8 +429,8 @@ class Defects(Tester):
         azcam_console.plot.save_figure(fignum, "PixelRejectionMask")
 
         # write mask as FITS
-        # defectsmask = azcam.image.Image(self.template)  # just a template
-        defectsmask = azcam.image.Image()
+        defectsmask = azcam.image.Image(self.template)  # just a template
+        # defectsmask = azcam.image.Image()
         defectsmask.assemble(1)
         # defectsmask.buffer=numpy.ma.getmask(self.DefectsMask).astype('uint8')
         defectsmask.buffer = self.defects_mask.astype("uint8")

@@ -62,7 +62,7 @@ class Prnu(Tester):
 
         # clear device
         azcam.db.parameters.set_par("imagetest", 1)
-        imname = azcam.db.tools["exposure"].get_filename()
+        imname = "test.fits"
         azcam.db.tools["exposure"].test(0)
         bin1 = int(azcam.fits.get_keyword(imname, "CCDBIN1"))
         bin2 = int(azcam.fits.get_keyword(imname, "CCDBIN2"))

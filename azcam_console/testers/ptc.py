@@ -118,8 +118,8 @@ class Ptc(Tester):
             azcam.log(f"Current wavelength is {wave1} nm")
 
         # clear device
-        imname = azcam.db.tools["exposure"].get_filename()
         azcam.db.tools["exposure"].test(0)
+        imname = "test.fits"
         bin1 = int(azcam.fits.get_keyword(imname, "CCDBIN1"))
         bin2 = int(azcam.fits.get_keyword(imname, "CCDBIN2"))
         binning = bin1 * bin2

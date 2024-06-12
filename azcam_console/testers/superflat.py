@@ -52,7 +52,13 @@ class Superflat(Tester):
         # save pars to be changed
         impars = {}
         azcam.db.parameters.save_imagepars(impars)
-        currentfolder = azcam.utils.curdir()
+        currentfolder, subfolder = azcam_console.utils.make_file_folder("superflat")
+        azcam.db.parameters.set_par("imageroot", "superflat.")
+        azcam.db.parameters.set_par("imageincludesequencenumber", 1)
+        azcam.db.parameters.set_par("imageautoname", 0)
+        azcam.db.parameters.set_par("imageautoincrementsequencenumber", 1)
+        azcam.db.parameters.set_par("imagetest", 0)
+        azcam.db.parameters.set_par("imagefolder", subfolder)
 
         # set wavelength
         if self.wavelength > 0:
@@ -63,8 +69,8 @@ class Superflat(Tester):
                 azcam.db.tools["instrument"].set_wavelength(wave)
 
         # clear device
-        imname = azcam.db.tools["exposure"].get_filename()
         azcam.db.tools["exposure"].test(0)
+        imname = "test.fits"
         bin1 = int(azcam.fits.get_keyword(imname, "CCDBIN1"))
         bin2 = int(azcam.fits.get_keyword(imname, "CCDBIN2"))
         binning = bin1 * bin2
@@ -88,18 +94,6 @@ class Superflat(Tester):
             azcam.log("Using exposure_time")
         else:
             raise azcam.exceptions.AzcamError("could not determine exposure times")
-
-        azcam.db.parameters.set_par("imageroot", "superflat.")
-        azcam.db.parameters.set_par("imageincludesequencenumber", 1)
-        azcam.db.parameters.set_par("imageautoname", 0)
-        azcam.db.parameters.set_par("imageautoincrementsequencenumber", 1)
-        azcam.db.parameters.set_par("imagetest", 0)
-
-        # create new subfolder
-        currentfolder, subfolder = azcam_console.utils.make_file_folder(
-            "superflat", 1, 0
-        )
-        azcam.db.parameters.set_par("imagefolder", subfolder)
 
         for loop in range(self.number_images_acquire):
             azcam.log(
