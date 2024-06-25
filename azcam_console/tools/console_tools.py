@@ -139,16 +139,16 @@ class ConsoleTools(Tools):
         return lines
 
 
-class ServerConnection(object):
+class ServerConnection(Tools):
     """
     Server connection tool for consoles.
     Usually implemented as the "server" tool.
     """
 
     def __init__(self) -> None:
+        super().__init__("server")
         self.remserver = azcam.sockets.SocketInterface()
         self.connected = False
-        azcam.db.tools["server"] = self
 
     def connect(self, host="localhost", port=2402):
         """
