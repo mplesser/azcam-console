@@ -77,6 +77,7 @@ def setup():
 
     # display
     display = Ds9Display()
+    display.initialize()
 
     # console tools
     from azcam_console.tools import create_console_tools
