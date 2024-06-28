@@ -77,22 +77,6 @@ class ParametersConsole(Parameters):
             return
         return None
 
-    def _get_par_hook(self, parameter, subdict):
-        """
-        Return the value of a parameter for console special cases.
-        """
-
-        value = None
-
-        return value
-
-    def _set_par_hook(self, parameter, value, subdict):
-        """
-        Sets the value of a parameter for console special cases.
-        """
-
-        return None
-
     def get_local_par(
         self,
         par_dict_id: dict,
