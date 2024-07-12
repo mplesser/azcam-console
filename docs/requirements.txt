@@ -1,0 +1,4 @@
+azcam
+mkdocs-autorefs
+mkdocs-material
+mkdocstrings-python
