@@ -12,18 +12,18 @@ import azcam.utils
 import azcam.fits
 
 
-def get_cds(self):
+def get_cds():
     """
     Get the controller CDS values.
     """
 
-    reply = azcam.db.tools["server"].command("controller.get_cds")
+    tokens = azcam.db.tools["server"].command("controller.get_cds")
 
-    if not reply:
+    if not tokens:
         return
 
     # make lists
-    tokens = azcam.utils.parse(reply)
+    # tokens = azcam.utils.parse(reply)
     taps = []
     gains = []
     offsets = []
@@ -36,7 +36,7 @@ def get_cds(self):
     return taps, gains, offsets
 
 
-def set_cds(self, taps, gains, offsets):
+def set_cds(taps, gains, offsets):
     """
     Set the controller CDS values.
     :param offsets:
@@ -45,77 +45,76 @@ def set_cds(self, taps, gains, offsets):
     """
 
     # make CDS list
-    cds = []
+    cdslist = []
 
     for i, _ in enumerate(taps):
-        s = "%s, %.01f, %05d" % (taps[i], gains[i], offsets[i])
-        cds.append(s)
+        s = f'"{taps[i]}, {gains[i]:.01f}, {int(offsets[i])}"'
+        cdslist.append(s)
 
-    azcam.db.tools["server"].command(f"controller.update_cds {cds}")
-    azcam.db.tools["server"].command("controller.update_cds")
+    cds = " ".join(cdslist)
+
+    azcam.db.tools["server"].command(f"controller.update_cds '{cds}'")
 
     return
 
 
-def set_biaslevels(self, imagefilename="test.fits", cycles=1, goal=1000):
+def set_biaslevels(imagefilename="test.fits", goal=1000):
     """
     Set controller bias levels from zero image.
     :param goal:
-    :param cycles:
     :param imagefilename:
     """
 
-    for _ in range(cycles):
-        taps, gains, offsets = get_cds()
-        l1 = len(offsets)
+    taps, gains, offsets = get_cds()
+    l1 = len(offsets)
 
-        # get FITS image means
-        imagemeans = azcam.fits.mean(imagefilename)
+    # get FITS image means
+    imagemeans = azcam.fits.mean(imagefilename)
 
-        # remap tap order
-        tapmeans = l1 * [0.0]
-        if l1 == 16:
-            tapmeans[15] = imagemeans[15]
-            tapmeans[14] = imagemeans[14]
-            tapmeans[13] = imagemeans[13]
-            tapmeans[12] = imagemeans[12]
-            tapmeans[11] = imagemeans[11]
-            tapmeans[10] = imagemeans[10]
-            tapmeans[9] = imagemeans[9]
-            tapmeans[8] = imagemeans[8]  # im9
+    # remap tap order
+    tapmeans = l1 * [0.0]
+    if l1 == 16:
+        tapmeans[15] = imagemeans[15]
+        tapmeans[14] = imagemeans[14]
+        tapmeans[13] = imagemeans[13]
+        tapmeans[12] = imagemeans[12]
+        tapmeans[11] = imagemeans[11]
+        tapmeans[10] = imagemeans[10]
+        tapmeans[9] = imagemeans[9]
+        tapmeans[8] = imagemeans[8]
 
-            tapmeans[0] = imagemeans[7]  # im8
-            tapmeans[1] = imagemeans[6]
-            tapmeans[2] = imagemeans[5]
-            tapmeans[3] = imagemeans[4]
-            tapmeans[4] = imagemeans[3]
-            tapmeans[5] = imagemeans[2]
-            tapmeans[6] = imagemeans[1]
-            tapmeans[7] = imagemeans[0]  # im1
-        elif l1 == 8:
-            tapmeans[0] = imagemeans[0]  # im8
-            tapmeans[1] = imagemeans[1]
-            tapmeans[2] = imagemeans[2]
-            tapmeans[3] = imagemeans[3]
-            tapmeans[4] = imagemeans[4]
-            tapmeans[5] = imagemeans[5]
-            tapmeans[6] = imagemeans[6]
-            tapmeans[7] = imagemeans[7]  # im1
-        else:
-            tapmeans = []
+        tapmeans[0] = imagemeans[7]
+        tapmeans[1] = imagemeans[6]
+        tapmeans[2] = imagemeans[5]
+        tapmeans[3] = imagemeans[4]
+        tapmeans[4] = imagemeans[3]
+        tapmeans[5] = imagemeans[2]
+        tapmeans[6] = imagemeans[1]
+        tapmeans[7] = imagemeans[0]
+    elif l1 == 8:
+        tapmeans[0] = imagemeans[0]
+        tapmeans[1] = imagemeans[1]
+        tapmeans[2] = imagemeans[2]
+        tapmeans[3] = imagemeans[3]
+        tapmeans[4] = imagemeans[4]
+        tapmeans[5] = imagemeans[5]
+        tapmeans[6] = imagemeans[6]
+        tapmeans[7] = imagemeans[7]
+    else:
+        tapmeans = []
 
-        newoffsets = []
-        for chan, m in enumerate(tapmeans):
-            newvalue = goal + (offsets[chan] - m)
-            newoffsets.append(newvalue)
+    newoffsets = []
+    for chan, m in enumerate(tapmeans):
+        newvalue = offsets[chan] - m + goal
+        newoffsets.append(int(newvalue))
 
-        if len(newoffsets) > 0:
-            set_cds(taps, gains, newoffsets)
+    if len(newoffsets) > 0:
+        set_cds(taps, gains, newoffsets)
 
-    return
+    return newoffsets
 
 
-def set_offsets(self, offset=1000):
+def set_offsets(offset=1000):
     """
     Set all channels to the same bias offset.
     :param offset:

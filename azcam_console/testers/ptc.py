@@ -182,10 +182,10 @@ class Ptc(Tester):
             # make exposure
             for _ in range(self.flush_before_exposure):
                 exposure.test(0)
-            exposure.expose(et, self.exposure_type, "Frame 1")
+            exposure.expose(et, self.exposure_type, "Frame1")
             filename = os.path.basename(exposure.get_filename())
 
-            exposure.expose(et, self.exposure_type, "Frame 2")
+            exposure.expose(et, self.exposure_type, "Frame2")
 
         # close
         azcam.utils.restore_imagepars(impars)
