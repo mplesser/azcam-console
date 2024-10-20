@@ -16,6 +16,7 @@ import azcam.utils
 from azcam.scripts.scripts import loadscripts
 
 import azcam_console.console
+from azcam_console.tools import create_console_tools
 import azcam_console.shortcuts
 import azcam_console.tools.console_tools
 from azcam_console.tools.focus import FocusConsole
@@ -27,11 +28,6 @@ try:
     datafolder = sys.argv[i + 1]
 except ValueError:
     datafolder = None
-try:
-    i = sys.argv.index("-observe")
-    load_observe = 1
-except ValueError:
-    load_observe = 0
 try:
     i = sys.argv.index("-cmdport")
     cmdport = int(sys.argv[i + 1])
@@ -80,8 +76,6 @@ def setup():
     display.initialize()
 
     # console tools
-    from azcam_console.tools import create_console_tools
-
     create_console_tools()
     focus = FocusConsole()
 
@@ -90,13 +84,6 @@ def setup():
     # ****************************************************************
     azcam.log("Loading azcam_console.scripts")
     loadscripts(["azcam_console.scripts"])
-
-    # ****************************************************************
-    # observe
-    # ****************************************************************
-    # azcam.log("Loading observe")
-    # from azcam_console.observe.observe_cli.observe_cli import ObserveCli
-    # observe = ObserveCli()
 
     # try to connect to azcamserver
     connected = azcam.db.tools["server"].connect(port=cmdport)  # default host and port
