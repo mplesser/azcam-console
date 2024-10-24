@@ -163,7 +163,7 @@ class Defects(Tester):
 
         return
 
-    def mask_edges(self, masked_array, edge_size=-1):
+    def mask_edges(self, masked_array: numpy.array, edge_size: int = -1):
         """
         Mask the edges of the input masked array.
 
@@ -201,7 +201,7 @@ class Defects(Tester):
 
         return masked_array
 
-    def mask_defects(self, masked_image):
+    def mask_defects(self, masked_image: numpy.array):
         """
         Apply defects mask to input masked image.
 
@@ -227,7 +227,7 @@ class Defects(Tester):
 
         return masked_image
 
-    def read_defects_mask(self, filename=""):
+    def read_defects_mask(self, filename: str = ""):
         """
         Read a defects mask (FITS format).
         """
