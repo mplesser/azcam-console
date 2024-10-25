@@ -1,4 +1,4 @@
 mkdocs-autorefs
 mkdocs-material
 mkdocstrings-python
-azcam @ git+https://github.com/mpleser/azcam@main
+azcam @ git+https://github.com/mplesser/azcam@main
