@@ -40,7 +40,7 @@ class Prnu(Tester):
 
         # outputs
         self.prnu_file = ""
-        self.Prnus = {}  # PRNU at each image in sequence {wavelength:PRNU}
+        self.prnus = {}  # PRNU at each image in sequence {wavelength:PRNU}
 
         self.data_file = "prnu.txt"
         self.report_file = "prnu"
@@ -228,7 +228,7 @@ class Prnu(Tester):
             # account for signal shot noise
             prnu = math.sqrt(stdev**2 - mean) / mean
 
-            self.Prnus[wavelength] = float(prnu)
+            self.prnus[wavelength] = float(prnu)
             if self.allowable_deviation_from_mean != -1:
                 if prnu <= self.allowable_deviation_from_mean:
                     GRADE = "PASS"
@@ -268,7 +268,7 @@ class Prnu(Tester):
             "data_file": self.data_file,
             "grade": self.grade,
             "allowable_deviation_from_mean": self.allowable_deviation_from_mean,
-            "Prnus": self.Prnus,
+            "Prnus": self.prnus,
             "grades": self.grades,
         }
 
@@ -312,10 +312,10 @@ class Prnu(Tester):
         s = "|:---|:---:|"
         lines.append(s)
 
-        waves = list(self.Prnus.keys())
+        waves = list(self.prnus.keys())
         waves.sort()
         for wave in waves:
-            s = f"|{wave:04d}|{(100.0 * self.Prnus[wave]):7.01f}|"
+            s = f"|{wave:04d}|{(100.0 * self.prnus[wave]):7.01f}|"
             lines.append(s)
 
         # Make report files

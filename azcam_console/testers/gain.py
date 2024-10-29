@@ -270,13 +270,13 @@ class Gain(Tester):
         self.dataset = {
             "data_file": self.data_file,
             "grade": self.grade,
-            "system_noise_correction": self.system_noise_correction,
-            "system_gain": self.system_gain,
-            "noise": self.noise,
-            "mean": self.mean,
-            "sdev": self.sdev,
-            "zero_mean": self.zero_mean,
-            "sensitivity": self.sensitivity,
+            "system_noise_correction": [float(x) for x in self.system_noise_correction],
+            "system_gain": [float(x) for x in self.system_gain],
+            "noise": [float(x) for x in self.noise],
+            "mean": [float(x) for x in self.mean],
+            "sdev": [float(x) for x in self.sdev],
+            "zero_mean": [float(x) for x in self.zero_mean],
+            "sensitivity": [float(x) for x in self.sensitivity],
         }
 
         # write output files
