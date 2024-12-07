@@ -355,7 +355,11 @@ class ExposureConsole(ConsoleTools):
         Get the current image title.
         """
 
-        return azcam.db.tools["server"].command(f"{self.objname}.get_image_title")
+        title = azcam.db.tools["server"].command(f"{self.objname}.get_image_title")
+        if type(title) == list:
+            title = " ".join(title)
+
+        return title
 
     def set_image_title(self, title: str) -> Optional[str]:
         """

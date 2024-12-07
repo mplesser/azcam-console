@@ -51,6 +51,10 @@ class ParametersConsole(Parameters):
         except azcam.exceptions.AzcamError:
             return
         _, value = azcam.utils.get_datatype(reply)
+
+        if type(value) == list:
+            value = " ".join(value)
+
         return value
 
     def set_par(self, parameter: str, value: typing.Any = None, subdict=None) -> None:
