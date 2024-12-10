@@ -31,7 +31,6 @@ class TempCon(Tools, ObjectHeaderMethods):
 
         # control temperature number (which temp is regulated)
         self.control_temperature = -999.0
-        self.control_temperature_number = 0
 
         # system temperatures
         self.temperature_ids = [0]
