@@ -27,7 +27,7 @@ class TempconConsole(ConsoleTools):
             temperature_id: temperature sensor identifier
         """
 
-        return azcam.db.tools["server"].command(
+        return azcam.db.server.command(
             f"{self.objname}.set_control_temperature {control_temperature} {temperature_id}"
         )
 
@@ -40,7 +40,7 @@ class TempconConsole(ConsoleTools):
             control_temperature: control temperature
         """
 
-        reply = azcam.db.tools["server"].command(
+        reply = azcam.db.server.command(
             f"{self.objname}.get_control_temperature {temperature_id}"
         )
 
@@ -53,7 +53,7 @@ class TempconConsole(ConsoleTools):
             temperatures: list of temperatures read
         """
 
-        reply = azcam.db.tools["server"].command(f"{self.objname}.get_temperatures")
+        reply = azcam.db.server.command(f"{self.objname}.get_temperatures")
 
         return [float(x) for x in reply]
 
@@ -66,7 +66,7 @@ class TempconConsole(ConsoleTools):
             temperature: temperature read
         """
 
-        reply = azcam.db.tools["server"].command(
+        reply = azcam.db.server.command(
             f"{self.objname}.get_temperature {temperature_id}"
         )
 

@@ -23,4 +23,4 @@ class ControllerConsole(ConsoleTools):
             state: 1 to open shutter or 0 to close
         """
 
-        return azcam.db.tools["server"].command(f"{self.objname}.set_shutter {state}")
+        return azcam.db.server.command(f"{self.objname}.set_shutter {state}")

@@ -14,6 +14,7 @@ import azcam.utils
 import azcam_console.console
 from azcam_console.tools import create_console_tools
 from azcam_console.observe.observe_qt.observe_qt import ObserveQt
+from azcam_console.server_comm import ServerCommunication
 
 
 def main():
@@ -49,8 +50,10 @@ def main():
     azcam.db.parameters.read_parfile(parfile)
 
     create_console_tools()
-    server = azcam.db.tools["server"]
-    server.connect(port=port)
+    azcam.db.server = ServerCommunication()
+    azcam.db.cli["server"] = azcam.db.server
+
+    azcam.db.server.connect(port=port)
 
     logfile = os.path.join(azcam.db.datafolder, "logs", "console.log")
     azcam.db.logger.start_logging(logfile=logfile)

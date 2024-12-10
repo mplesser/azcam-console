@@ -11,7 +11,7 @@ def test_filters(cycles: int = 2, filter_id: int = 0):
 
     cycles = int(cycles)
 
-    filters = azcam.db.tools["server"].command(f"instrument.get_filters {filter_id}")
+    filters = azcam.db.server.command(f"instrument.get_filters {filter_id}")
     print(f"Available filters are: {filters}")
 
     for filter_name in filters:

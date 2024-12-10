@@ -17,7 +17,7 @@ def get_cds():
     Get the controller CDS values.
     """
 
-    tokens = azcam.db.tools["server"].command("controller.get_cds")
+    tokens = azcam.db.server.command("controller.get_cds")
 
     if not tokens:
         return
@@ -53,7 +53,7 @@ def set_cds(taps, gains, offsets):
 
     cds = " ".join(cdslist)
 
-    azcam.db.tools["server"].command(f"controller.update_cds '{cds}'")
+    azcam.db.server.command(f"controller.update_cds '{cds}'")
 
     return
 

@@ -16,7 +16,7 @@ def test_controller(cycles=10):
 
     # test board communication
     print("Testing low-level datalink board level communication...")
-    reply = azcam.db.tools["server"].command("controller.test_datalink")
+    reply = azcam.db.server.command("controller.test_datalink")
     print("--> Board communication is communication OK")
 
     # reset

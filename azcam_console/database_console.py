@@ -9,6 +9,7 @@ temporary data for this current process.
 
 from azcam.database import AzcamDatabase
 from azcam_console.parameters_console import ParametersConsole
+from azcam_console.server_comm import ServerCommunication
 
 
 class AzcamDatabaseConsole(AzcamDatabase):
@@ -17,3 +18,5 @@ class AzcamDatabaseConsole(AzcamDatabase):
     """
 
     parameters: ParametersConsole
+
+    server: ServerCommunication

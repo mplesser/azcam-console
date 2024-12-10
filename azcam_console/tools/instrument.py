@@ -26,14 +26,14 @@ class InstrumentConsole(ConsoleTools):
         Useful for clients to determine which type of comparison exposures are supported.
         """
 
-        return azcam.db.tools["server"].command(f"{self.objname}.get_all_comps")
+        return azcam.db.server.command(f"{self.objname}.get_all_comps")
 
     def get_comps(self):
         """
         Return a list of the active comparison lamps.
         """
 
-        return azcam.db.tools["server"].command(f"{self.objname}.get_comps")
+        return azcam.db.server.command(f"{self.objname}.get_comps")
 
     def set_comps(self, comp_names=None):
         """
@@ -41,23 +41,21 @@ class InstrumentConsole(ConsoleTools):
         comp_names is a single string or a list of strings to be set as active.
         """
 
-        return azcam.db.tools["server"].command(
-            f"{self.objname}.set_comps {comp_names}"
-        )
+        return azcam.db.server.command(f"{self.objname}.set_comps {comp_names}")
 
     def comps_on(self):
         """
         Turn on active comparisons.
         """
 
-        return azcam.db.tools["server"].command(f"{self.objname}.comps_on")
+        return azcam.db.server.command(f"{self.objname}.comps_on")
 
     def comps_off(self):
         """
         Turn off active comparisons.
         """
 
-        return azcam.db.tools["server"].command(f"{self.objname}.comps_off")
+        return azcam.db.server.command(f"{self.objname}.comps_off")
 
     # ***************************************************************************
     # filters
@@ -67,9 +65,7 @@ class InstrumentConsole(ConsoleTools):
         Return a list of all available/loaded filters.
         """
 
-        return azcam.db.tools["server"].command(
-            f"{self.objname}.get_filters {filter_id}"
-        )
+        return azcam.db.server.command(f"{self.objname}.get_filters {filter_id}")
 
     def set_filter(self, filter_name: str, filter_id: int = 0) -> Optional[str]:
         """
@@ -79,7 +75,7 @@ class InstrumentConsole(ConsoleTools):
         :param filter_id: filter ID flag
         """
 
-        return azcam.db.tools["server"].command(
+        return azcam.db.server.command(
             f"{self.objname}.set_filter {filter_name} {filter_id}"
         )
 
@@ -90,9 +86,7 @@ class InstrumentConsole(ConsoleTools):
         :param filter_id: filter ID flag (use negative value for a list of all filters)
         """
 
-        return azcam.db.tools["server"].command(
-            f"{self.objname}.get_filter {filter_id}"
-        )
+        return azcam.db.server.command(f"{self.objname}.get_filter {filter_id}")
 
     # ***************************************************************************
     # wavelengths
@@ -108,7 +102,7 @@ class InstrumentConsole(ConsoleTools):
         :param nd: neutral density value to set
         """
 
-        return azcam.db.tools["server"].command(
+        return azcam.db.server.command(
             f"{self.objname}.set_wavelength {wavelength} {wavelength_id}"
         )
 
@@ -120,9 +114,7 @@ class InstrumentConsole(ConsoleTools):
         """
 
         reply = float(
-            azcam.db.tools["server"].command(
-                f"{self.objname}.get_wavelength {wavelength_id}"
-            )
+            azcam.db.server.command(f"{self.objname}.get_wavelength {wavelength_id}")
         )
 
         return reply
@@ -145,7 +137,7 @@ class InstrumentConsole(ConsoleTools):
         :param focus_type: focus type (absolute or step)
         """
 
-        azcam.db.tools["server"].command(
+        azcam.db.server.command(
             f"{self.objname}.set_focus {focus_value} {focus_id} {focus_type}"
         )
 
@@ -161,7 +153,7 @@ class InstrumentConsole(ConsoleTools):
         :param focus_id: focus sensor ID flag
         """
 
-        reply = azcam.db.tools["server"].command(f"{self.objname}.get_focus {focus_id}")
+        reply = azcam.db.server.command(f"{self.objname}.get_focus {focus_id}")
 
         return float(reply)
 
@@ -170,7 +162,7 @@ class InstrumentConsole(ConsoleTools):
         Return a list of all instrument pressures.
         """
 
-        reply = azcam.db.tools["server"].command(f"{self.objname}.get_pressures")
+        reply = azcam.db.server.command(f"{self.objname}.get_pressures")
         if type(reply) == str:
             reply = reply.split(" ")
 
@@ -185,7 +177,7 @@ class InstrumentConsole(ConsoleTools):
 
         """
 
-        return azcam.db.tools["server"].command(
+        return azcam.db.server.command(
             f"{self.objname}.set_shutter {state} {shutter_id}"
         )
 
@@ -199,7 +191,7 @@ class InstrumentConsole(ConsoleTools):
             mean_power: measured mean power in Watts/cm2
         """
 
-        reply = azcam.db.tools["server"].command(
+        reply = azcam.db.server.command(
             f"{self.objname}.get_power {wavelength} {power_id}"
         )
 
@@ -210,7 +202,7 @@ class InstrumentConsole(ConsoleTools):
         Return a list of all instrument currents.
         """
 
-        reply = azcam.db.tools["server"].command(f"{self.objname}.get_currents")
+        reply = azcam.db.server.command(f"{self.objname}.get_currents")
 
         return [float(x) for x in reply]
 
@@ -228,7 +220,7 @@ class InstrumentConsole(ConsoleTools):
             current: measured curent in amps
         """
 
-        reply = azcam.db.tools["server"].command(
+        reply = azcam.db.server.command(
             f"{self.objname}.get_current  {shutter_state} {diode_id}"
         )
 

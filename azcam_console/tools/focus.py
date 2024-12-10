@@ -34,7 +34,7 @@ class FocusConsole(ConsoleTools):
         Initialize focus routine.
         """
 
-        return azcam.db.tools["server"].command(f"{self.objname}.initialize")
+        return azcam.db.server.command(f"{self.objname}.initialize")
 
     def reset(self):
         """
@@ -47,14 +47,14 @@ class FocusConsole(ConsoleTools):
         self.detector_shift = 10
         self.set_pars_called = 0
 
-        return azcam.db.tools["server"].command(f"{self.objname}.reset")
+        return azcam.db.server.command(f"{self.objname}.reset")
 
     def abort(self):
         """
         Abort focus exposure.
         """
 
-        return azcam.db.tools["server"].command(f"{self.objname}.abort")
+        return azcam.db.server.command(f"{self.objname}.abort")
 
     def set_pars(
         self,
@@ -78,7 +78,7 @@ class FocusConsole(ConsoleTools):
         self.focus_step = float(focus_step)
         self.detector_shift = int(detector_shift)
 
-        azcam.db.tools["server"].command(
+        azcam.db.server.command(
             f"{self.objname}.set_pars {self.exposure_time} {self.number_exposures} {self.focus_step} {self.detector_shift}"
         )
 
@@ -127,7 +127,7 @@ class FocusConsole(ConsoleTools):
                     )
                 )
 
-        azcam.db.tools["server"].command(
+        azcam.db.server.command(
             f"{self.objname}.run {self.exposure_time} {self.number_exposures} {self.focus_step} {self.detector_shift}"
         )
 

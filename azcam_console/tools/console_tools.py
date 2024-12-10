@@ -2,10 +2,11 @@
 *azcam_console.tools.console_tools* contains the `ConsoleTools` base tool class.
 """
 
-from typing import Any, Optional
+from typing import Optional
 
 import azcam
 import azcam.exceptions
+import azcam.server
 import azcam.sockets
 from azcam.tools.tools import Tools
 
@@ -33,14 +34,14 @@ class ConsoleTools(Tools):
         Initialize this tool.
         """
 
-        return azcam.db.tools["server"].command(f"{self.objname}.initialize")
+        return azcam.db.server.command(f"{self.objname}.initialize")
 
     def reset(self) -> None:
         """
         Reset this tool.
         """
 
-        return azcam.db.tools["server"].command(f"{self.objname}.reset")
+        return azcam.db.server.command(f"{self.objname}.reset")
 
     def update_header(self):
         """
@@ -48,7 +49,7 @@ class ConsoleTools(Tools):
         This command usually reads hardware to get the lastest keyword values.
         """
 
-        return azcam.db.tools["server"].command(f"{self.objname}.update_header")
+        return azcam.db.server.command(f"{self.objname}.update_header")
 
     def read_header(self):
         """
@@ -58,7 +59,7 @@ class ConsoleTools(Tools):
             list of header lines: [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
         """
 
-        return azcam.db.tools["server"].command(f"{self.objname}.read_header")
+        return azcam.db.server.command(f"{self.objname}.read_header")
 
     def set_keyword(
         self,
@@ -84,7 +85,7 @@ class ConsoleTools(Tools):
 
         s = f"{self.objname}.set_keyword {keyword} {value} {comment} {typestring}"
 
-        return azcam.db.tools["server"].command(s)
+        return azcam.db.server.command(s)
 
     def get_keyword(self, keyword: str) -> str:
         """
@@ -97,7 +98,7 @@ class ConsoleTools(Tools):
             list of [keyword, comment, type]
         """
 
-        return azcam.db.tools["server"].command(f"{self.objname}.get_keyword {keyword}")
+        return azcam.db.server.command(f"{self.objname}.get_keyword {keyword}")
 
     def delete_keyword(self, keyword: str) -> Optional[str]:
         """
@@ -107,9 +108,7 @@ class ConsoleTools(Tools):
             keyword: name of keyword
         """
 
-        return azcam.db.tools["server"].command(
-            f"{self.objname}.delete_keyword {keyword}"
-        )
+        return azcam.db.server.command(f"{self.objname}.delete_keyword {keyword}")
 
     def get_keywords(self) -> list:
         """
@@ -119,7 +118,7 @@ class ConsoleTools(Tools):
             list of all keywords
         """
 
-        return azcam.db.tools["server"].command(f"{self.objname}.get_keywords")
+        return azcam.db.server.command(f"{self.objname}.get_keywords")
 
     def get_string(self) -> str:
         """
@@ -139,78 +138,6 @@ class ConsoleTools(Tools):
         return lines
 
 
-class ServerConnection(Tools):
-    """
-    Server connection tool for consoles.
-    Usually implemented as the "server" tool.
-    """
-
-    def __init__(self) -> None:
-        super().__init__("server")
-        self.remserver = azcam.sockets.SocketInterface()
-        self.connected = False
-
-    def connect(self, host="localhost", port=2402):
-        """
-        Connect to azcamserver.
-        """
-
-        self.host = host
-        self.port = port
-
-        self.remserver.host = host
-        self.remserver.port = port
-
-        if self.remserver.open():
-            connected = True
-            self.remserver.command("register console")
-        else:
-            connected = False
-
-        self.connected = connected
-
-        return connected
-
-    def command(self, command):
-        """
-        Send a command to a server process using the 'server' object in the database.
-        This command traps all errors and returns exceptions and as error string.
-
-        Returns None or a string.
-        """
-
-        # get tokenized reply - check for comm error
-        try:
-            reply = self.remserver.command(command)
-        except azcam.exceptions.AzcamError as e:
-            if e.error_code == 2:
-                raise
-                # raise azcam.exceptions.AzcamError("could not connect to server")
-            else:
-                raise
-
-        if command in ["exposure.get_status"]:
-            return reply[0][3:]
-
-        # status for socket communications is OK or ERROR
-        if reply[0] == "ERROR":
-            # raise azcam.exceptions.AzcamError(f"command error: {' '.join(reply[1:])}")
-            raise azcam.exceptions.AzcamError(f"command error: {reply}")
-        elif reply[0] == "OK":
-            if len(reply) == 1:
-                return None
-            elif len(reply) == 2:
-                return reply[1]
-            else:
-                return reply[1:]
-        else:
-            raise azcam.exceptions.AzcamError(
-                f"invalid server response: { ' '.join(reply)}"
-            )
-
-        return  # can't get here
-
-
 def create_console_tools() -> None:
     """
     Creates the console tools.
@@ -222,7 +149,6 @@ def create_console_tools() -> None:
     from azcam_console.tools.telescope import TelescopeConsole
     from azcam_console.tools.tempcon import TempconConsole
 
-    server = ServerConnection()
     exposure = ExposureConsole()
     controller = ControllerConsole()
     instrument = InstrumentConsole()

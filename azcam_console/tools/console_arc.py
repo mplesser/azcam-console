@@ -16,7 +16,7 @@ def stop_idle(self):
     """
 
     s = "controller.stop_idle"
-    azcam.db.tools["server"].command(s)
+    azcam.db.server.command(s)
 
     return
 
@@ -27,12 +27,14 @@ def start_idle(self):
     """
 
     s = "controller.start_idle"
-    azcam.db.tools["server"].command(s)
+    azcam.db.server.command(s)
 
     return
 
 
-def set_bias_number(self, board_number: int, dac_number: int, board_type: str, dac_value: int):
+def set_bias_number(
+    self, board_number: int, dac_number: int, board_type: str, dac_value: int
+):
     """
     Sets a bias value.
     Args:
@@ -43,12 +45,14 @@ def set_bias_number(self, board_number: int, dac_number: int, board_type: str, d
     """
 
     s = f"controller.set_bias_number {board_number} {dac_number} {board_type} {dac_value}"
-    azcam.db.tools["server"].command(s)
+    azcam.db.server.command(s)
 
     return
 
 
-def write_controller_memory(self, mem_type: str, board_number: int, address: int, value: int):
+def write_controller_memory(
+    self, mem_type: str, board_number: int, address: int, value: int
+):
     """
     Write a word to a DSP memory location.
     Args:
@@ -59,7 +63,7 @@ def write_controller_memory(self, mem_type: str, board_number: int, address: int
     """
 
     s = f"controller.write_memory {mem_type} {board_number} {address} {value}"
-    azcam.db.tools["server"].command(s)
+    azcam.db.server.command(s)
 
     return
 
@@ -76,7 +80,7 @@ def read_controller_memory(self, mem_type: str, board_number: int, address: int)
     """
 
     s = f"controller.read_memory {mem_type} {board_number} {address}"
-    reply = azcam.db.tools["server"].command(s)
+    reply = azcam.db.server.command(s)
 
     return int(reply)
 
@@ -94,7 +98,7 @@ def board_command(self, command, board_number, arg1=-1, arg2=-1, arg3=-1, arg4=-
     """
 
     s = f"controller.board_command {command} {board_number} {arg1} {arg2} {arg3} {arg4}"
-    reply = azcam.db.tools["server"].command(s)
+    reply = azcam.db.server.command(s)
 
     return reply
 
