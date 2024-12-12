@@ -12,9 +12,8 @@ from PySide6.QtWidgets import QApplication
 import azcam
 import azcam.utils
 import azcam_console.console
-from azcam_console.tools import create_console_tools
+from azcam_console.tools.console_tools import create_console_tools
 from azcam_console.observe.observe_qt.observe_qt import ObserveQt
-from azcam_console.server_comm import ServerCommunication
 
 
 def main():
@@ -50,8 +49,6 @@ def main():
     azcam.db.parameters.read_parfile(parfile)
 
     create_console_tools()
-    azcam.db.server = ServerCommunication()
-    azcam.db.cli["server"] = azcam.db.server
 
     azcam.db.server.connect(port=port)
 

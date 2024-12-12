@@ -6,14 +6,16 @@ from typing import Optional
 
 import azcam
 import azcam.exceptions
-import azcam.server
+import azcam_console.console
 import azcam.sockets
 from azcam.tools.tools import Tools
+
+from azcam_console.server_comm import ServerCommunication
 
 
 class ConsoleTools(Tools):
     """
-    Common methods included in most console tools.
+    Common methods for most console tools and server communication.
     """
 
     def __init__(self, name: str) -> None:
@@ -154,5 +156,8 @@ def create_console_tools() -> None:
     instrument = InstrumentConsole()
     tempcon = TempconConsole()
     telescope = TelescopeConsole()
+
+    azcam.db.server = ServerCommunication()
+    azcam.db.cli["server"] = azcam.db.server
 
     return
