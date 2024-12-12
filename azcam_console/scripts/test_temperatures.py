@@ -18,7 +18,7 @@ def test_temperatures(number_cycles: int = 10):
 
     for loop in range(number_cycles):
 
-        temps = azcam.db.tools["tempcon"].get_temperatures()
+        temps = azcam.db.api.get_temperatures()
 
         tempstring = repr(temps)
 

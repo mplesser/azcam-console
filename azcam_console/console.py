@@ -9,12 +9,10 @@ from azcam_console.database_console import AzcamDatabaseConsole
 
 
 def setup_console():
+
+    azcam.mode = "console"
     azcam.db = AzcamDatabaseConsole()  # overwrite default db
-
-    # parameters
     azcam.db.parameters = ParametersConsole()
-
-    # logging
     azcam.db.logger = AzCamLogger()
     azcam.log = azcam.db.logger.log  # to allow azcam.log()
 

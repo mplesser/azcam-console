@@ -28,9 +28,7 @@ class ExposureConsole(ConsoleTools):
         * 1 => instrument shutter.
         """
 
-        return azcam.db.server.command(
-            f"{self.objname}.set_shutter {state} {shutter_id}"
-        )
+        return azcam.db.api.set_shutter(state, shutter_id)
 
     def abort(self) -> None:
         """

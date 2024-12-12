@@ -15,12 +15,27 @@ class ControllerConsole(ConsoleTools):
     def __init__(self) -> None:
         super().__init__("controller")
 
-    def set_shutter(self, state: int = 0):
+    def set_shutter(self, state: int = 0, shutter_id: int = 0):
         """
         Open or close a shutter.
 
         Args:
             state: 1 to open shutter or 0 to close
+            shutter_id: shutter ID flag
+
+                * 0 => controller default shutter.
+                * 1 => instrument default shutter.
         """
 
-        return azcam.db.server.command(f"{self.objname}.set_shutter {state}")
+        return azcam.db.api.command(f"set_shutter {state} {shutter_id}")
+
+    def set_shutter(self, state: int = 0, shutter_id: int = 0):
+        """
+        Open or close a shutter.
+
+        :param state:
+        :param shutter_id: Shutter ID flag
+
+          * 0 => controller default shutter.
+          * 1 => instrument default shutter.
+        """

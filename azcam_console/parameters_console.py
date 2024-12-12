@@ -45,7 +45,7 @@ class ParametersConsole(Parameters):
             subdict = self.default_pardict_name
 
         try:
-            reply = azcam.db.server.command(f"parameters.get_par {parameter} {subdict}")
+            reply = azcam.db.api.command(f"get_par {parameter} {subdict}")
         except azcam.exceptions.AzcamError:
             return
         _, value = azcam.utils.get_datatype(reply)
@@ -72,7 +72,7 @@ class ParametersConsole(Parameters):
             subdict = self.default_pardict_name
 
         try:
-            azcam.db.server.command(f"parameters.set_par {parameter} {value} {subdict}")
+            azcam.db.api.command(f"set_par {parameter} {value} {subdict}")
         except azcam.exceptions.AzcamError:
             return
         return None
@@ -155,6 +155,6 @@ class ParametersConsole(Parameters):
         self.write_parfile()
 
         if azcam.db.server.connected:
-            azcam.db.server.command("parameters.save_pars")
+            azcam.db.api.command("save_pars")
 
         return

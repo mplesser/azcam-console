@@ -177,9 +177,7 @@ class InstrumentConsole(ConsoleTools):
 
         """
 
-        return azcam.db.server.command(
-            f"{self.objname}.set_shutter {state} {shutter_id}"
-        )
+        return azcam.db.api.set_shutter(state, shutter_id)
 
     def get_power(self, wavelength: float, power_id: int = 0) -> float:
         """
