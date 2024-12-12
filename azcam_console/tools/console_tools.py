@@ -11,6 +11,7 @@ import azcam.sockets
 from azcam.tools.tools import Tools
 
 from azcam_console.server_comm import ServerCommunication
+from azcam_console.api import API
 
 
 class ConsoleTools(Tools):
@@ -159,5 +160,9 @@ def create_console_tools() -> None:
 
     azcam.db.server = ServerCommunication()
     azcam.db.cli["server"] = azcam.db.server
+
+    # api
+    azcam.db.api = API()
+    azcam.db.cli["api"] = azcam.db.api
 
     return
