@@ -1,6 +1,7 @@
 import typing
 
 import azcam
+import azcam.exceptions
 import azcam.utils
 
 
@@ -17,10 +18,18 @@ class API(object):
         Send a command to azcamserver API and return the reply.
         """
 
-        if command.startswith("api"):
-            cmd = command
+        tokens = command.split(".")
+        if len(tokens) == 1:
+            cmd = f"api.{tokens[0]}"
+
+        elif len(tokens) == 2 and tokens[1] == "api":
+            cmd = command  # "api.apicommand"
+
+        elif len(tokens) == 2:
+            cmd = command  # object.method"
+
         else:
-            cmd = f"api.{command}"
+            raise azcam.exceptions.AzcamError(f"Invalid command: {command}")
 
         reply = azcam.db.server.command(cmd)
 

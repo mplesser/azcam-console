@@ -37,7 +37,8 @@ class ConsoleTools(Tools):
         Initialize this tool.
         """
 
-        return azcam.db.server.command(f"{self.objname}.initialize")
+        return azcam.db.api.command(f"{self.objname}.initialize")
+        # return azcam.db.server.command(f"{self.objname}.initialize")
 
     def reset(self) -> None:
         """

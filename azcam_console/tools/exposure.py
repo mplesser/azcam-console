@@ -39,7 +39,7 @@ class ExposureConsole(ConsoleTools):
 
         # send abort to server, error OK
         try:
-            azcam.db.server.command(f"{self.objname}.abort")
+            azcam.db.api.command(f"exposure.abort")
         except Exception as e:
             azcam.log(f"abort error: {e}")
 
@@ -51,19 +51,17 @@ class ExposureConsole(ConsoleTools):
         Usually implemented as the "exposure" tool.
         """
 
-        return azcam.db.server.command(f"{self.objname}.initialize")
+        return azcam.db.api.command(f"exposure.initialize")
 
     def reset(self) -> None:
         """
         Reset exposure.
         """
 
-        return azcam.db.server.command(f"{self.objname}.reset")
+        return azcam.db.api.command(f"exposure.reset")
 
     def test(self, exposure_time: float = -1, shutter_state: int = 0) -> Optional[str]:
-        return azcam.db.server.command(
-            f"{self.objname}.test {exposure_time} {shutter_state}"
-        )
+        return azcam.db.api.command(f"exposure.test {exposure_time} {shutter_state}")
 
     def expose(
         self, exposure_time: float = -1, image_type: str = "", image_title: str = ""
@@ -77,8 +75,8 @@ class ExposureConsole(ConsoleTools):
         :param image_title: image title, usually surrounded by double quotes
         """
 
-        return azcam.db.server.command(
-            f'{self.objname}.expose {exposure_time} {image_type} "{image_title}"'
+        return azcam.db.api.command(
+            f'exposure.expose {exposure_time} {image_type} "{image_title}"'
         )
 
     def expose1(
@@ -92,8 +90,8 @@ class ExposureConsole(ConsoleTools):
         :param image_title: image title, usually surrounded by double quotes
         """
 
-        return azcam.db.server.command(
-            f'{self.objname}.expose1 {exposure_time} {image_type} "{image_title}"'
+        return azcam.db.api.command(
+            f'exposure.expose1 {exposure_time} {image_type} "{image_title}"'
         )
 
     def begin(
@@ -108,8 +106,8 @@ class ExposureConsole(ConsoleTools):
         :param image_title: image title, usually surrounded by double quotes
         """
 
-        return azcam.db.server.command(
-            f'{self.objname}.begin {exposure_time} {image_type} "{image_title}"'
+        return azcam.db.api.command(
+            f'exposure.begin {exposure_time} {image_type} "{image_title}"'
         )
 
     def integrate(self) -> None:
@@ -118,7 +116,7 @@ class ExposureConsole(ConsoleTools):
         This is an advanced function.
         """
 
-        return azcam.db.server.command(f"{self.objname}.integrate")
+        return azcam.db.api.command(f"exposure.integrate")
 
     def readout(self) -> None:
         """
@@ -126,7 +124,7 @@ class ExposureConsole(ConsoleTools):
         This is an advanced function.
         """
 
-        return azcam.db.server.command(f"{self.objname}.readout")
+        return azcam.db.api.command(f"exposure.readout")
 
     def end(self) -> None:
         """
@@ -134,7 +132,7 @@ class ExposureConsole(ConsoleTools):
         This is an advanced function.
         """
 
-        return azcam.db.server.command(f"{self.objname}.end")
+        return azcam.db.api.command(f"exposure.end")
 
     def sequence(
         self, number_exposures: int = 1, flush_array: int = -1, delay=-1
@@ -153,8 +151,8 @@ class ExposureConsole(ConsoleTools):
         :param delay: delay between exposures in seconds (-1 => no change)
         """
 
-        return azcam.db.server.command(
-            f"{self.objname}.sequence {number_exposures} {flush_array} {delay}"
+        return azcam.db.api.command(
+            f"exposure.sequence {number_exposures} {flush_array} {delay}"
         )
 
     def sequence1(
@@ -174,8 +172,8 @@ class ExposureConsole(ConsoleTools):
         :param delay: delay between exposures in seconds (-1 => no change)
         """
 
-        return azcam.db.server.command(
-            f"{self.objname}.sequence1 {number_exposures} {flush_array} {delay}"
+        return azcam.db.api.command(
+            f"exposure.sequence1 {number_exposures} {flush_array} {delay}"
         )
 
     def guide(self, number_exposures: int = 1) -> Optional[str]:
@@ -185,7 +183,7 @@ class ExposureConsole(ConsoleTools):
         :param number_exposures: number of exposures to make, -1 loop forever
         """
 
-        return azcam.db.server.command(f"{self.objname}.guide {number_exposures}")
+        return azcam.db.api.command(f"exposure.guide {number_exposures}")
 
     def guide1(self, number_exposures: int = 1) -> Optional[str]:
         """
@@ -194,7 +192,7 @@ class ExposureConsole(ConsoleTools):
         :param number_exposures: number of exposures to make, -1 loop forever
         """
 
-        return azcam.db.server.command(f"{self.objname}.guide1 {number_exposures}")
+        return azcam.db.api.command(f"exposure.guide1 {number_exposures}")
 
     def flush(self, cycles: int = 1) -> Optional[str]:
         """
@@ -203,7 +201,7 @@ class ExposureConsole(ConsoleTools):
         :param cycles:  number of times to flush the detector.
         """
 
-        return azcam.db.server.command(f"{self.objname}.flush {cycles}")
+        return azcam.db.api.command(f"exposure.flush {cycles}")
 
     def start_readout(self):
         """
@@ -211,28 +209,28 @@ class ExposureConsole(ConsoleTools):
         Returns immediately, not waiting for readout to finish.
         """
 
-        return azcam.db.server.command(f"{self.objname}.start_readout")
+        return azcam.db.api.command(f"exposure.start_readout")
 
     def get_image_types(self) -> List[str]:
         """
         Return a list of valid image types.
         """
 
-        return azcam.db.server.command(f"{self.objname}.get_image_types")
+        return azcam.db.api.command(f"exposure.get_image_types")
 
     def roi_reset(self) -> Optional[str]:
         """
         Resets detector ROI values to full frame, current binning.
         """
 
-        return azcam.db.server.command(f"{self.objname}.roi_reset")
+        return azcam.db.api.command(f"exposure.roi_reset")
 
     def get_exposuretime(self) -> Union[str, float]:
         """
         Return current exposure time in seconds.
         """
 
-        reply = azcam.db.server.command(f"{self.objname}.get_exposuretime")
+        reply = azcam.db.api.command(f"exposure.get_exposuretime")
 
         return float(reply)
 
@@ -241,7 +239,7 @@ class ExposureConsole(ConsoleTools):
         Return current exposure time in seconds.
         """
 
-        reply = azcam.db.server.command(f"{self.objname}.get_exposuretime_remaining")
+        reply = azcam.db.api.command(f"exposure.get_exposuretime_remaining")
 
         return float(reply)
 
@@ -252,16 +250,14 @@ class ExposureConsole(ConsoleTools):
         :param exposure_time: exposure time in seconds.
         """
 
-        return azcam.db.server.command(
-            f"{self.objname}.set_exposuretime {exposure_time}"
-        )
+        return azcam.db.api.command(f"exposure.set_exposuretime {exposure_time}")
 
     def get_pixels_remaining(self) -> Union[str, int]:
         """
         Return current number of pixels remaing in readout.
         """
 
-        reply = azcam.db.server.command(f"{self.objname}.get_pixels_remaining")
+        reply = azcam.db.api.command(f"exposure.get_pixels_remaining")
 
         return int(reply)
 
@@ -272,7 +268,7 @@ class ExposureConsole(ConsoleTools):
         :param number_rows: number of rows to shift (positive is toward readout, negative is away)
         """
 
-        return azcam.db.server.command(f"{self.objname}.parshift {number_rows}")
+        return azcam.db.api.command(f"exposure.parshift {number_rows}")
 
     def tests(
         self,
@@ -294,8 +290,8 @@ class ExposureConsole(ConsoleTools):
 
         for _ in range(int(number_exposures)):
             try:
-                reply = azcam.db.server.command(
-                    f'{self.objname}.expose {exposure_time} {image_type} "test image"'
+                reply = azcam.db.api.command(
+                    f'exposure.expose {exposure_time} {image_type} "test image"'
                 )
             except Exception as e:
                 self.test_image = testflag
@@ -310,14 +306,14 @@ class ExposureConsole(ConsoleTools):
         Pause an exposure in progress (integration only).
         """
 
-        return azcam.db.server.command(f"{self.objname}.pause_exposure")
+        return azcam.db.api.command(f"exposure.pause_exposure")
 
     def resume_exposure(self) -> Optional[str]:
         """
         Resume a paused exposure.
         """
 
-        return azcam.db.server.command(f"{self.objname}.resume_exposure")
+        return azcam.db.api.command(f"exposure.resume_exposure")
 
     def get_filename(self) -> str:
         """
@@ -325,7 +321,7 @@ class ExposureConsole(ConsoleTools):
         :returns: imaeg filename
         """
 
-        return azcam.db.server.command(f"{self.objname}.get_filename")
+        return azcam.db.api.command(f"exposure.get_filename")
 
     def set_image_filename(self, filename: str) -> Optional[str]:
         """
@@ -336,14 +332,14 @@ class ExposureConsole(ConsoleTools):
         :param filename: image filename
         """
 
-        return azcam.db.server.command(f"{self.objname}.set_filename {filename}")
+        return azcam.db.api.command(f"exposure.set_filename {filename}")
 
     def get_image_title(self) -> str:
         """
         Get the current image title.
         """
 
-        title = azcam.db.server.command(f"{self.objname}.get_image_title")
+        title = azcam.db.api.command(f"exposure.get_image_title")
         if type(title) == list:
             title = " ".join(title)
 
@@ -357,14 +353,14 @@ class ExposureConsole(ConsoleTools):
         if len(title.split(" ")) > 1:
             title = f'"{title}"'
 
-        return azcam.db.server.command(f"{self.objname}.set_image_title {title}")
+        return azcam.db.api.command(f"exposure.set_image_title {title}")
 
     def get_roi(self) -> List:
         """
         Return detector ROI.
         """
 
-        reply = azcam.db.server.command(f"{self.objname}.get_roi")
+        reply = azcam.db.api.command(f"exposure.get_roi")
         reply_ints = [int(x) for x in reply]
 
         return reply_ints
@@ -385,8 +381,8 @@ class ExposureConsole(ConsoleTools):
         These values are for the entire focal plane, not just one detector.
         """
 
-        return azcam.db.server.command(
-            f"{self.objname}.set_roi {first_col} {last_col} {first_row} {last_row} {col_bin} {row_bin} {roi_number}"
+        return azcam.db.api.command(
+            f"exposure.set_roi {first_col} {last_col} {first_row} {last_row} {col_bin} {row_bin} {roi_number}"
         )
 
     def get_focalplane(self) -> List:
@@ -394,7 +390,7 @@ class ExposureConsole(ConsoleTools):
         Returns the current focal plane configuration.
         """
 
-        return azcam.db.server.command(f"{self.objname}.get_focalplane")
+        return azcam.db.api.command(f"exposure.get_focalplane")
 
     def set_focalplane(
         self,
@@ -420,8 +416,8 @@ class ExposureConsole(ConsoleTools):
         3 - flip x and y
         """
 
-        return azcam.db.server.command(
-            f"{self.objname}.set_focalplane {numdet_x} {numdet_y} {numamps_x} {numamps_y} '{amp_cfg}'"
+        return azcam.db.api.command(
+            f"exposure.set_focalplane {numdet_x} {numdet_y} {numamps_x} {numamps_y} '{amp_cfg}'"
         )
 
     def get_format(self) -> List:
@@ -429,7 +425,7 @@ class ExposureConsole(ConsoleTools):
         Return the current detector format parameters.
         """
 
-        return azcam.db.server.command(f"{self.objname}.get_format")
+        return azcam.db.api.command(f"exposure.get_format")
 
     def set_format(
         self,
@@ -457,21 +453,21 @@ class ExposureConsole(ConsoleTools):
         np_frametransfer is the rows to frame transfer shift.
         """
 
-        return azcam.db.server.command(
+        return azcam.db.api.command(
             (
-                f"{self.objname}.set_format {ns_total} {ns_predark} {ns_underscan} {ns_overscan} "
+                f"exposure.set_format {ns_total} {ns_predark} {ns_underscan} {ns_overscan} "
                 f"{np_total} {np_predark} {np_underscan} {np_overscan} {np_frametransfer}"
             )
         )
 
     def get_exposureflag(self):
-        return azcam.db.server.command(f"{self.objname}.get_exposureflag")
+        return azcam.db.api.command(f"exposure.get_exposureflag")
 
     def get_status(self):
         """
         Return JSON dictionary of a variety of system status data in one dictionary.
         """
 
-        status = azcam.db.server.command(f"{self.objname}.get_status")
+        status = azcam.db.api.command(f"exposure.get_status")
 
         return json.loads(status)

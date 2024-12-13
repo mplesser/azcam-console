@@ -27,9 +27,7 @@ class TempconConsole(ConsoleTools):
             temperature_id: temperature sensor identifier
         """
 
-        return azcam.db.server.command(
-            f"{self.objname}.set_control_temperature {control_temperature} {temperature_id}"
-        )
+        return azcam.db.api.set_control_temperature(control_temperature, temperature_id)
 
     def get_control_temperature(self, temperature_id: int = -1) -> Union[str, float]:
         """
@@ -40,11 +38,7 @@ class TempconConsole(ConsoleTools):
             control_temperature: control temperature
         """
 
-        reply = azcam.db.server.command(
-            f"{self.objname}.get_control_temperature {temperature_id}"
-        )
-
-        return float(reply)
+        return azcam.db.api.get_control_temperature(temperature_id)
 
     def get_temperatures(self) -> List[float]:
         """
@@ -53,9 +47,7 @@ class TempconConsole(ConsoleTools):
             temperatures: list of temperatures read
         """
 
-        reply = azcam.db.server.command(f"{self.objname}.get_temperatures")
-
-        return [float(x) for x in reply]
+        return azcam.db.api.get_temperatures()
 
     def get_temperature(self, temperature_id: int = 0) -> float:
         """
@@ -66,8 +58,4 @@ class TempconConsole(ConsoleTools):
             temperature: temperature read
         """
 
-        reply = azcam.db.server.command(
-            f"{self.objname}.get_temperature {temperature_id}"
-        )
-
-        return float(reply)
+        return azcam.db.api.get_temperature(temperature_id)

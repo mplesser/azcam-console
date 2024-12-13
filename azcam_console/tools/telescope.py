@@ -22,7 +22,7 @@ class TelescopeConsole(ConsoleTools):
             focus_id: focus sensor ID flag
         """
 
-        reply = azcam.db.server.command(f"{self.objname}.get_focus {focus_id}")
+        reply = azcam.db.api.command(f"telescope.get_focus {focus_id}")
 
         return float(reply)
 
@@ -41,8 +41,8 @@ class TelescopeConsole(ConsoleTools):
             focus_type: focus type (absolute or step)
         """
 
-        azcam.db.server.command(
-            f"{self.objname}.set_focus {focus_value} {focus_id} {focus_type}"
+        azcam.db.api.command(
+            f"telescope.set_focus {focus_value} {focus_id} {focus_type}"
         )
 
         return
