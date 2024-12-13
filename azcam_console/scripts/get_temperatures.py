@@ -28,8 +28,6 @@ def get_temperatures(delay=10.0, logfile="get_temperatures.log", plottemps=1):
     delay = azcam.utils.prompt("Enter delay time in seconds", delay)
     azcam.db.parameters.set_par("delay", delay, "get_temps")
 
-    return
-
     logfile = azcam.db.parameters.get_local_par(
         "get_temps",
         "logfile",
@@ -77,7 +75,7 @@ def get_temperatures(delay=10.0, logfile="get_temperatures.log", plottemps=1):
         if key == "q":
             break
 
-        curtemps = azcam.db.tools["tempcon"].get_temperatures()
+        curtemps = azcam.db.api.get_temperatures()
         ntemps = len(curtemps)
 
         temps.append(curtemps)

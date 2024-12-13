@@ -1,3 +1,3 @@
 """
-azcamconsole scripts
+azcam scripts
 """

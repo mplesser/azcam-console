@@ -81,7 +81,10 @@ class API(object):
 
         temps = self.command(f"get_temperatures")
 
-        reply = [float(x) for x in temps]
+        if type(temps) == list:
+            reply = [float(x) for x in temps]
+        else:
+            reply = [float(temps)]
 
         return reply
 
@@ -480,3 +483,60 @@ class API(object):
         """
 
         return self.command(f"get_image_types")
+
+    # *************************************************************************
+    #   instruments
+    # *************************************************************************
+
+    def get_filters(self, filter_id=0):
+        """
+        Return a list of all available/loaded filters.
+        """
+
+        return self.command(f"get_filters {filter_id}")
+
+    def set_filter(self, filter_name: str, filter_id: int = 0) -> typing.Optional[str]:
+        """
+        Set instrument filter position.
+
+        :param filter_name: filter value to set
+        :param filter_id: filter ID flag
+        """
+
+        return self.command(f"set_filter {filter_name} {filter_id}")
+
+    def get_filter(self, filter_id: int = 0) -> str:
+        """
+        Get instrument filter position.
+
+        :param filter_id: filter ID flag (use negative value for a list of all filters)
+        """
+
+        return self.command(f"get_filter {filter_id}")
+
+    # ***************************************************************************
+    # wavelengths
+    # ***************************************************************************
+    def set_wavelength(
+        self, wavelength: float, wavelength_id: int = 0, nd: int = -1
+    ) -> typing.Optional[str]:
+        """
+        Set wavelength, optionally changing neutral density.
+
+        :param wavelength: wavelength value, may be a string such as 'clear' or 'dark'
+        :param wavelength_id: wavelength ID flag
+        :param nd: neutral density value to set
+        """
+
+        return self.command(f"set_wavelength {wavelength} {wavelength_id}")
+
+    def get_wavelength(self, wavelength_id: int = 0) -> float:
+        """
+        Get instrument wavelength.
+
+        :param wavelength_id: wavelength ID flag  (use negative value for a list of all wavelengths)
+        """
+
+        reply = float(self.command(f"get_wavelength {wavelength_id}"))
+
+        return reply
