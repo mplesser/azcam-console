@@ -61,7 +61,6 @@ class ServerCommunication(object):
 
         # status for socket communications is OK or ERROR
         if reply[0] == "ERROR":
-            # raise azcam.exceptions.AzcamError(f"command error: {' '.join(reply[1:])}")
             raise azcam.exceptions.AzcamError(f"command error: {reply}")
         elif reply[0] == "OK":
             if len(reply) == 1:
