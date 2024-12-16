@@ -38,14 +38,13 @@ class ConsoleTools(Tools):
         """
 
         return azcam.db.api.command(f"{self.objname}.initialize")
-        # return azcam.db.server.command(f"{self.objname}.initialize")
 
     def reset(self) -> None:
         """
         Reset this tool.
         """
 
-        return azcam.db.server.command(f"{self.objname}.reset")
+        return azcam.db.api.command(f"{self.objname}.reset")
 
     def update_header(self):
         """
@@ -53,7 +52,7 @@ class ConsoleTools(Tools):
         This command usually reads hardware to get the lastest keyword values.
         """
 
-        return azcam.db.server.command(f"{self.objname}.update_header")
+        return azcam.db.api.command(f"{self.objname}.update_header")
 
     def read_header(self):
         """
@@ -63,7 +62,7 @@ class ConsoleTools(Tools):
             list of header lines: [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
         """
 
-        return azcam.db.server.command(f"{self.objname}.read_header")
+        return azcam.db.api.command(f"{self.objname}.read_header")
 
     def set_keyword(
         self,
@@ -89,7 +88,7 @@ class ConsoleTools(Tools):
 
         s = f"{self.objname}.set_keyword {keyword} {value} {comment} {typestring}"
 
-        return azcam.db.server.command(s)
+        return azcam.db.api.command(s)
 
     def get_keyword(self, keyword: str) -> str:
         """
@@ -102,7 +101,7 @@ class ConsoleTools(Tools):
             list of [keyword, comment, type]
         """
 
-        return azcam.db.server.command(f"{self.objname}.get_keyword {keyword}")
+        return azcam.db.api.command(f"{self.objname}.get_keyword {keyword}")
 
     def delete_keyword(self, keyword: str) -> Optional[str]:
         """
@@ -112,7 +111,7 @@ class ConsoleTools(Tools):
             keyword: name of keyword
         """
 
-        return azcam.db.server.command(f"{self.objname}.delete_keyword {keyword}")
+        return azcam.db.api.command(f"{self.objname}.delete_keyword {keyword}")
 
     def get_keywords(self) -> list:
         """
@@ -122,7 +121,7 @@ class ConsoleTools(Tools):
             list of all keywords
         """
 
-        return azcam.db.server.command(f"{self.objname}.get_keywords")
+        return azcam.db.api.command(f"{self.objname}.get_keywords")
 
     def get_string(self) -> str:
         """

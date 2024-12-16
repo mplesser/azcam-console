@@ -591,7 +591,7 @@ class ObserveCommon(object):
         elif cmd == "steptel":
             self.log("offsetting telescope in arcsecs - RA: %s, DEC: %s" % (ra, dec))
             try:
-                reply = azcam.db.server.command(f"telescope.offset {ra} {dec}")
+                reply = azcam.db.api.command(f"telescope.offset {ra} {dec}")
                 return "OK"
             except azcam.exceptions.AzcamError as e:
                 return f"ERROR {e}"
@@ -602,7 +602,7 @@ class ObserveCommon(object):
 
         elif cmd == "azcam":
             try:
-                reply = azcam.db.server.command(arg)
+                reply = azcam.db.api.command(arg)
                 return reply
             except azcam.exceptions.AzcamError as e:
                 return f"ERROR {e}"
@@ -655,12 +655,10 @@ class ObserveCommon(object):
                 try:
                     if self.azalt_mode:
                         self.log("Moving telescope now to Az: %s, Alt: %s" % (ra, dec))
-                        reply = azcam.db.server.command(
-                            f"telescope.move_azalt {ra} {dec}"
-                        )
+                        reply = azcam.db.api.command(f"telescope.move_azalt {ra} {dec}")
                     else:
                         self.log("Moving telescope now to RA: %s, DEC: %s" % (ra, dec))
-                        reply = azcam.db.server.command(f"telescope.move {ra} {dec}")
+                        reply = azcam.db.api.command(f"telescope.move {ra} {dec}")
                 except azcam.exceptions.AzcamError as e:
                     return f"ERROR {e}"
             else:
@@ -735,7 +733,7 @@ class ObserveCommon(object):
                                         % (raNext, decNext)
                                     )
                                     try:
-                                        reply = azcam.db.server.command(
+                                        reply = azcam.db.api.command(
                                             "telescope.move_start %s %s %s"
                                             % (raNext, decNext, epochNext)
                                         )
