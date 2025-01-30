@@ -34,7 +34,7 @@ class FocusConsole(ConsoleTools):
         Initialize focus routine.
         """
 
-        return azcam.db.api.command(f"focus.initialize")
+        return azcam.db.api.focus_initialize()
 
     def reset(self):
         """
@@ -47,14 +47,14 @@ class FocusConsole(ConsoleTools):
         self.detector_shift = 10
         self.set_pars_called = 0
 
-        return azcam.db.api.command(f"focus.reset")
+        return azcam.db.api.focus_reset()
 
     def abort(self):
         """
         Abort focus exposure.
         """
 
-        return azcam.db.api.command(f"focus.abort")
+        return azcam.db.api.focus_abort()
 
     def set_pars(
         self,
@@ -78,8 +78,11 @@ class FocusConsole(ConsoleTools):
         self.focus_step = float(focus_step)
         self.detector_shift = int(detector_shift)
 
-        azcam.db.api.command(
-            f"focus.set_pars {self.exposure_time} {self.number_exposures} {self.focus_step} {self.detector_shift}"
+        azcam.db.api.focus_set_pars(
+            self.exposure_time,
+            self.number_exposures,
+            self.focus_step,
+            self.detector_shift,
         )
 
         self.set_pars_called = 1
@@ -112,7 +115,7 @@ class FocusConsole(ConsoleTools):
                     azcam.utils.prompt("Exposure time (sec)", self.exposure_time)
                 )
             if number_exposures == "prompt":
-                self.number_exposures = float(
+                self.number_exposures = int(
                     azcam.utils.prompt("Number of exposures", self.number_exposures)
                 )
             if focus_step == "prompt":
@@ -121,14 +124,17 @@ class FocusConsole(ConsoleTools):
                 )
 
             if detector_shift == "prompt":
-                self.detector_shift = float(
+                self.detector_shift = int(
                     azcam.utils.prompt(
                         "Number detector rows to shift", self.detector_shift
                     )
                 )
 
-        azcam.db.api.command(
-            f"focus.run {self.exposure_time} {self.number_exposures} {self.focus_step} {self.detector_shift}"
+        azcam.db.api.focus_run(
+            self.exposure_time,
+            self.number_exposures,
+            self.focus_step,
+            self.detector_shift,
         )
 
         return
