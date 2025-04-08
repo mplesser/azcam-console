@@ -521,8 +521,8 @@ class Fe55(Tester):
                 c = int(c)
                 z.append(events[r][c])
             self.z.append(numpy.array(z))
-            coefs = numpy.lib.polyfit(self.event_data[chan][1], z, 1)
-            fit_y = numpy.lib.polyval(coefs, list(range(first_col, last_col + 1)))
+            coefs = numpy.polyfit(self.event_data[chan][1], z, 1)
+            fit_y = numpy.polyval(coefs, list(range(first_col, last_col + 1)))
             self.fit_yhcte.append(fit_y)
 
             hslope = coefs[0]
@@ -539,8 +539,8 @@ class Fe55(Tester):
                 r = int(r)
                 c = int(c)
                 z.append(events[r][c])
-            coefs = numpy.lib.polyfit(self.event_data[chan][0], z, 1)
-            fit_y = numpy.lib.polyval(coefs, list(range(first_row, last_row + 1)))
+            coefs = numpy.polyfit(self.event_data[chan][0], z, 1)
+            fit_y = numpy.polyval(coefs, list(range(first_row, last_row + 1)))
             self.fit_yvcte.append(fit_y)
 
             vslope = coefs[0]
