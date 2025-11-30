@@ -1,6 +1,6 @@
 [project]
 name = "azcam-console"
-version = "25.0"
+version = "25.1"
 description = "Acquisition and analysis package for scientific imaging"
 license = { file = "LICENSE" }
 readme = "README.md"
@@ -13,7 +13,6 @@ dependencies = [
     "numpy",
     "astropy",
     "matplotlib",
-    "pyside6",
     "pdfkit",
     "markdown",
     "pypdf",
@@ -32,6 +31,3 @@ build-backend = "flit_core.buildapi"
 
 [tool.flit.module]
 name = "azcam_console"
-
-[project.scripts]
-azcamobserve = "azcam_console.observe.__main__:main"

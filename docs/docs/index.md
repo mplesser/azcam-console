@@ -21,7 +21,6 @@ Or download the latest version from from github <https://github.com/mplesser/azc
 
   - Code details and links
     - [Code Docs](autocode.md)
-    - [Observing scripts](observe.md)
     - [Focus Command -- console](autocode/focus_console.md)
 
 ## Tools
