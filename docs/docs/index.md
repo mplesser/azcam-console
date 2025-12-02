@@ -41,7 +41,7 @@ While there are multiple pythonic ways to access the various tools in code, they
 
 Tools defined on the server side may or may not be available as remote commands from a client. 
 
-In *azcamconsole*, the available tools usually communication from the console to an *azcamserver* application over a socket interface.  These client-side tools may only expose a limited set of methods as compared to the server-side tools. So while the command `exposure.reset` may be available from a client the command `exposure.set_video_gain` may not be.  These less commonly used commands are still accessible, but only with lower level code such as `server.command("controller.set_video_gain 2")` where `server` is a client's server communication tool.
+In *azcamconsole*, the available tools usually communication from the console to an *azcamserver* application over a socket interface.  These client-side tools may only expose a limited set of methods as compared to the server-side tools. So while the command `exposure.reset` may be available from a client the command `exposure.set_video_gain` may not be.  These less commonly used commands are still accessible, but only with lower level code such as `server.command("controller.set_video_gain 2")` where `server` is a client's server communication tool (when allowed by the server configuration).
 
 As an specific example, the code below can be used to set the current system wavelength and take an exposure.  For this example, it is assumed here that the *azcam-itl* environment package has been installed.
 
@@ -61,8 +61,6 @@ exposure.expose(2., 'flat', "a 450 nm flat field image")
 
 ```python
 python -m azcam_itl.console - -- -system LVM
-or
-ipython -m azcam_itl.server -i -- -system LVM
 ```
 
 Other examples:
@@ -101,7 +99,6 @@ console or server applications as typing shortcuts. Shortcuts are intended for c
 and can be found in the `db.cli` dictionary (see `azcam.shortcuts`). Examples include:
 
   * *sav* - save the current parameters to the parameter file
-  * *pp* - toggle the command line printout of client commands and responses command.
   * *gf* - try and go to current image folder.
   * *sf* - try and set the image folder to the current directory.
   * *bf* - browse for a file or folder using a GUI.
