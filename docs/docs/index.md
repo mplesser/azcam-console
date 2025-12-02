@@ -8,9 +8,9 @@ AzCam is not appropriate for consumer-level cameras and is not intended to have 
 
 ## Installation
 
-`pip install azcam-console`
-
-Or download the latest version from from github <https://github.com/mplesser/azcam-console.git>
+- Move to azcam install folder such as `/azcam` or `~/azcam`.
+- `git clone https://github.com/mplesser/azcam-console`
+- pip install -e azcam-console
 
 ## Links
 

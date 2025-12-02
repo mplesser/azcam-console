@@ -54,5 +54,4 @@ watch:
 nav:
   - Home: 'index.md'
   - 'testers.md'
-  - 'observe.md'
   - 'autocode.md'
